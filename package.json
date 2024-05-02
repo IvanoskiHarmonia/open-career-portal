@@ -1,0 +1,15 @@
+{
+	"name": "careers-portal",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "npm start --prefix server & npm start --prefix client",
+		"install:client": "npm install --prefix client",
+		"install:server": "npm install --prefix server",
+		"client": "npm start --prefix client",
+		"server": "npm start --prefix server",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
+	},
+	"devDependencies": {
+		"concurrently": "^7.6.0"
+	}
+}
