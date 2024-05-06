@@ -1,29 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import Login from "./components/Login";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import JobDescription from "./components/JobDescription";
+import JobFields from "./components/JobFields";
 
 function App() {
-	const [data, setData] = useState(null);
-
-	useEffect(() => {
-		axios.get("/api/test").then((response) => {
-			setData(response.data);
-		});
-	}, []);
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p> {data} </p>
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-					Learn React
-				</a>
-			</header>
-		</div>
+		<GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+			<Login />
+			<div className="container mt-5 mb-5">
+				<JobDescription jobId={100} />
+				<JobFields />
+			</div>
+		</GoogleOAuthProvider>
 	);
 }
 
