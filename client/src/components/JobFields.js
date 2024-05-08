@@ -86,7 +86,6 @@ function JobFields() {
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData);
 
-		// Send form data to server
 		fetch("/api/job-application", {
 			method: "POST",
 			headers: {
@@ -95,7 +94,6 @@ function JobFields() {
 			body: JSON.stringify(data),
 		})
 			.then((response) => {
-				// Ensure we have a valid response object and check the status
 				if (!response.ok) {
 					throw new Error(`HTTP Error: ${response.status || "Unknown Status"}`);
 				}

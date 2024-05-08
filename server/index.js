@@ -7,9 +7,9 @@ app.use(express.json());
 
 app.use(
 	cors({
-		origin: "http://example.com", // Allow only specific domains
-		methods: "GET,POST", // Allow only these methods
-		allowedHeaders: "Content-Type,Authorization", // Specify allowed headers
+		origin: "http://example.com",
+		methods: "GET,POST",
+		allowedHeaders: "Content-Type,Authorization",
 	})
 );
 
