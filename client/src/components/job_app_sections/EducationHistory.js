@@ -2,92 +2,98 @@ import React, { useState } from "react";
 
 function EducationHistory() {
 	const [educationHistory, setEducationHistory] = useState([
-		{ schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", gpa: "" },
+		{ id: 1, schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", gpa: "" },
 	]);
 
 	const addEducationHistory = () => {
-		setEducationHistory([...educationHistory, { schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", gpa: "" }]);
+		const previous_id = educationHistory[educationHistory.length - 1].id;
+		setEducationHistory([
+			...educationHistory,
+			{ id: previous_id + 1, schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", gpa: "" },
+		]);
 	};
-	const handleEducationChange = (index, event) => {
-		const values = [...educationHistory];
-		values[index][event.target.name] = event.target.value;
-		setEducationHistory(values);
+
+	const handleEducationChange = (id, field, event) => {
+		const value = event.target.value;
+		setEducationHistory((prev) => prev.map((entry) => (entry.id === id ? { ...entry, [field]: value } : entry)));
 	};
+
+	function removeEducation(index) {
+		setEducationHistory((prev) => prev.filter((_, i) => i !== index));
+	}
 
 	return (
 		<section className="education-history">
 			<h4 className="mt-4">Education History</h4>
-			{educationHistory.map((item, index) => (
-				<div key={index} className="mt-3">
+			{educationHistory.map((item) => (
+				<div key={item.id} className="mt-3">
+					<button className="btn btn-danger float-right pt-0 pb-0" onClick={() => removeEducation(item.id)}>
+						X
+					</button>
 					<div className="form-group">
-						<label htmlFor={`school-name-${index}`}>School Name {index + 1}</label>
+						<label htmlFor={`school-name-${item.id}`}>School Name {item.id}</label>
 						<input
 							type="text"
-							id={`school-name-${index}`}
-							name="schoolName"
+							id={`school-name-${item.id}`}
+							name={`schoolName-${item.id}`}
+							value={item.schoolName || ""}
 							className="form-control"
-							value={item.schoolName}
-							onChange={(event) => handleEducationChange(index, event)}
-							required
+							onChange={(e) => handleEducationChange(item.id, "schoolName", e)}
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor={`degree-${index}`}>Degree</label>
+						<label htmlFor={`degree-${item.id}`}>Degree</label>
 						<input
 							type="text"
-							id={`degree-${index}`}
-							name="degree"
+							id={`degree-${item.id}`}
+							name={`degree-${item.id}`}
+							value={item.degree || ""}
 							className="form-control"
-							value={item.degree}
-							onChange={(event) => handleEducationChange(index, event)}
-							required
+							onChange={(e) => handleEducationChange(item.id, "degree", e)}
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor={`major-${index}`}>Major</label>
+						<label htmlFor={`major-${item.id}`}>Major</label>
 						<input
 							type="text"
-							id={`major-${index}`}
-							name="major"
+							id={`major-${item.id}`}
+							name={`major-${item.id}`}
+							value={item.major || ""}
 							className="form-control"
-							value={item.major}
-							onChange={(event) => handleEducationChange(index, event)}
-							required
+							onChange={(e) => handleEducationChange(item.id, "major", e)}
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor={`enrollment-date-${index}`}>Enrollment Date</label>
+						<label htmlFor={`enrollment-date-${item.id}`}>Enrollment Date</label>
 						<input
 							type="date"
-							id={`enrollment-date-${index}`}
-							name="enrollmentDate"
+							id={`enrollment-date-${item.id}`}
+							name={`enrollmentDate-${item.id}`}
+							value={item.enrollmentDate || ""}
 							className="form-control"
-							value={item.enrollmentDate}
-							onChange={(event) => handleEducationChange(index, event)}
-							required
+							onChange={(e) => handleEducationChange(item.id, "enrollmentDate", e)}
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor={`graduation-date-${index}`}>Graduation Date</label>
+						<label htmlFor={`graduation-date-${item.id}`}>Graduation Date</label>
 						<input
 							type="date"
-							id={`graduation-date-${index}`}
-							name="graduationDate"
+							id={`graduation-date-${item.id}`}
+							name={`graduationDate-${item.id}`}
+							value={item.graduationDate || ""}
 							className="form-control"
-							value={item.graduationDate}
-							onChange={(event) => handleEducationChange(index, event)}
-							required
+							onChange={(e) => handleEducationChange(item.id, "graduationDate", e)}
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor={`gpa-${index}`}>GPA</label>
+						<label htmlFor={`gpa-${item.id}`}>GPA</label>
 						<input
-							type="number"
-							id={`gpa-${index}`}
-							name="gpa"
+							type="text"
+							id={`gpa-${item.id}`}
+							name={`gpa-${item.id}`}
+							value={item.gpa || ""}
 							className="form-control"
-							value={item.gpa}
-							onChange={(event) => handleEducationChange(index, event)}
+							onChange={(e) => handleEducationChange(item.id, "gpa", e)}
 						/>
 					</div>
 				</div>

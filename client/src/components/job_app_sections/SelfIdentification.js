@@ -9,7 +9,7 @@ function SelfIdentificiation() {
 			<div className="form-group">
 				<label htmlFor="gender">What is your Gender? </label>
 				<Required />
-				<select id="gender" className="form-control" required>
+				<select id="gender" name="gender" autoComplete="gender" className="form-control" required>
 					<option value="">Select an option</option>
 					<option value="male">Male</option>
 					<option value="female">Female</option>
@@ -19,7 +19,7 @@ function SelfIdentificiation() {
 			<div className="form-group mt-2">
 				<label htmlFor="race-ethnicity-bg">What is your Race/Ethnic background? </label>
 				<Required />
-				<select id="race-ethnicity-bg" className="form-control" required>
+				<select id="race-ethnicity-bg" name="race-ethnicity-bg" autoComplete="race-ethnicity-bg" className="form-control" required>
 					<option value="">Select an option</option>
 					<option value="white">White</option>
 					<option value="hispanic">Hispanic or Latino</option>
@@ -35,20 +35,20 @@ function SelfIdentificiation() {
 				<label>Do you have a disability? </label>
 				<Required />
 				<div className="form-check">
-					<input className="form-check-input" type="radio" id="yes" name="disability" value="yes" required />
-					<label className="form-check-label" htmlFor="yes">
+					<input type="radio" className="form-check-input" id="yes-disability" name="disability" value="yes" required />
+					<label className="form-check-label" htmlFor="yes-disability">
 						Yes, I have a disability (or previously had a disability)
 					</label>
 				</div>
 				<div className="form-check">
-					<input className="form-check-input" type="radio" id="no" name="disability" value="no" />
-					<label className="form-check-label" htmlFor="no">
+					<input type="radio" className="form-check-input" id="no-disability" name="disability" value="no" />
+					<label className="form-check-label" htmlFor="no-disability">
 						No, I do not have a disability
 					</label>
 				</div>
 				<div className="form-check">
-					<input className="form-check-input" type="radio" id="optOut" name="disability" value="optOut" />
-					<label className="form-check-label" htmlFor="optOut">
+					<input type="radio" className="form-check-input" id="optOut-disability" name="disability" value="optOut" />
+					<label className="form-check-label" htmlFor="optOut-disability">
 						I do not wish to answer
 					</label>
 				</div>
@@ -58,20 +58,20 @@ function SelfIdentificiation() {
 				<label>Are you a veteran? </label>
 				<Required />
 				<div className="form-check">
-					<input className="form-check-input" type="radio" id="yes" name="veteran" value="yes" required />
-					<label className="form-check-label" htmlFor="yes">
+					<input type="radio" className="form-check-input" id="yes-veteran" name="veteran" value="yes" required />
+					<label className="form-check-label" htmlFor="yes-veteran">
 						Yes, I am a veteran
 					</label>
 				</div>
 				<div className="form-check">
-					<input className="form-check-input" type="radio" id="no" name="veteran" value="no" />
-					<label className="form-check-label" htmlFor="no">
+					<input type="radio" className="form-check-input" id="no-veteran" name="veteran" value="no" />
+					<label className="form-check-label" htmlFor="no-veteran">
 						No, I am not a veteran
 					</label>
 				</div>
 				<div className="form-check">
-					<input className="form-check-input" type="radio" id="optOut" name="veteran" value="optOut" />
-					<label className="form-check-label" htmlFor="optOut">
+					<input type="radio" className="form-check-input" id="optOut-veteran" name="veteran" value="optOut" />
+					<label className="form-check-label" htmlFor="optOut-veteran">
 						I do not wish to answer
 					</label>
 				</div>

@@ -51,34 +51,34 @@ test("submits the form with entered data", () => {
 	const countryDropdown = screen.getByLabelText("Country/Region");
 	fireEvent.change(countryDropdown, { target: { value: "United States" } });
 
-	const eligibilityRadio = screen.getByLabelText("Yes");
-	fireEvent.click(eligibilityRadio);
+	const usWorkEligibilityYesRadio = screen.getByLabelText("Yes", { selector: "#yes-usWorkEligibility" });
+	fireEvent.click(usWorkEligibilityYesRadio);
 
-	const relocateRadio = screen.getByLabelText("Yes");
+	const relocateRadio = screen.getByLabelText("Yes", { selector: "#yes-relocate" });
 	fireEvent.click(relocateRadio);
 
-	const felonyRadio = screen.getByLabelText("No");
+	const felonyRadio = screen.getByLabelText("No", { selector: "#no-felony" });
 	fireEvent.click(felonyRadio);
 
 	const felonyExplanationInput = screen.getByLabelText("If yes, please explain");
 	fireEvent.change(felonyExplanationInput, { target: { value: "N/A" } });
 
-	const backgroundCheckRadio = screen.getByLabelText("Yes");
+	const backgroundCheckRadio = screen.getByLabelText("Yes", { selector: "#yes-backgroundCheck" });
 	fireEvent.click(backgroundCheckRadio);
 
-	const drugTestRadio = screen.getByLabelText("Yes");
+	const drugTestRadio = screen.getByLabelText("Yes", { selector: "#yes-drugTest" });
 	fireEvent.click(drugTestRadio);
 
-	const overtimeRadio = screen.getByLabelText("Yes");
+	const overtimeRadio = screen.getByLabelText("Yes", { selector: "#yes-overtime" });
 	fireEvent.click(overtimeRadio);
 
-	const weekendsRadio = screen.getByLabelText("Yes");
+	const weekendsRadio = screen.getByLabelText("Yes", { selector: "#yes-weekends" });
 	fireEvent.click(weekendsRadio);
 
-	const travelRadio = screen.getByLabelText("Yes");
+	const travelRadio = screen.getByLabelText("Yes", { selector: "#yes-travel" });
 	fireEvent.click(travelRadio);
 
-	const remoteWorkRadio = screen.getByLabelText("Yes");
+	const remoteWorkRadio = screen.getByLabelText("Yes", { selector: "#yes-remote" });
 	fireEvent.click(remoteWorkRadio);
 
 	const companyNameInput = screen.getByLabelText("Company Name 1");
@@ -120,7 +120,7 @@ test("submits the form with entered data", () => {
 	const certificationsInput = screen.getByLabelText("Certifications");
 	fireEvent.change(certificationsInput, { target: { value: "Certification 1, Certification 2" } });
 
-	const relationshipInput = screen.getByLabelText("Relationship 1");
+	const relationshipInput = screen.getByLabelText("Reference 1 Relationship");
 	fireEvent.change(relationshipInput, { target: { value: "Manager" } });
 
 	const nameInput = screen.getByLabelText("Reference 1 Name");
@@ -149,10 +149,10 @@ test("submits the form with entered data", () => {
 	const raceDropdown = screen.getByLabelText("What is your Race/Ethnic background?");
 	fireEvent.change(raceDropdown, { target: { value: "White" } });
 
-	const disabilityRadio = screen.getByLabelText("No");
+	const disabilityRadio = screen.getByLabelText("No, I do not have a disability", { selector: "#no-disability" });
 	fireEvent.click(disabilityRadio);
 
-	const veteranRadio = screen.getByLabelText("Yes");
+	const veteranRadio = screen.getByLabelText("No, I am not a veteran", { selector: "#no-veteran" });
 	fireEvent.click(veteranRadio);
 
 	const yourNameInput = screen.getByLabelText("Your Name");
@@ -178,23 +178,43 @@ test("submits the form with entered data", () => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
+			personalFirstName: "John",
+			personalLastName: "Doe",
+			personalEmail: "john.doe@example.com",
+			personalPhoneNumber: "+1234567890",
+			personalAddress1: "123 Main St",
+			personalAddress2: "Apt 4B",
+			personalCity: "New York",
+			personalZipCode: "10001",
 			usWorkEligibility: "yes",
-			companyName: "ABC Corp",
-			jobTitle: "Software Engineer",
-			startDate: "2020-01-01",
-			endDate: "2022-01-01",
-			jobDescription: "Lorem ipsum dolor sit amet",
-			schoolName: "University of Example",
-			degree: "Bachelor of Science",
-			major: "Computer Science",
-			enrollmentDate: "2014-09-01",
-			graduationDate: "2018-05-01",
-			gpa: "3.8",
-			relationship: "Manager",
-			name: "Jane Smith",
-			email: "jane.smith@example.com",
-			phoneNumber: "+1234567890",
-			company: "XYZ Corp",
+			relocate: "yes",
+			felony: "no",
+			backgroundCheck: "yes",
+			drugTest: "yes",
+			overtime: "yes",
+			weekends: "yes",
+			travel: "yes",
+			remote: "yes",
+			"companyName-1": "ABC Corp",
+			"jobTitle-1": "Software Engineer",
+			"jobStartDate-1": "2020-01-01",
+			"jobEndDate-1": "2022-01-01",
+			"jobDescription-1": "Lorem ipsum dolor sit amet",
+			"schoolName-1": "University of Example",
+			"degree-1": "Bachelor of Science",
+			"major-1": "Computer Science",
+			"enrollmentDate-1": "2014-09-01",
+			"graduationDate-1": "2018-05-01",
+			"gpa-1": "3.8",
+			"reference-1": "Manager",
+			"reference-name-1": "Jane Smith",
+			"reference-email-1": "jane.smith@example.com",
+			"reference-phoneNumber-1": "+1234567890",
+			"reference-company-1": "XYZ Corp",
+			disability: "no",
+			veteran: "no",
+			"signature-name": "John Doe",
+			"signature-date": "2022-10-01",
 		}),
 	});
 });

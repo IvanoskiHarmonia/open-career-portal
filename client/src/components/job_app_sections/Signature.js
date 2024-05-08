@@ -9,12 +9,12 @@ function Signature() {
 			<div className="form-group">
 				<label htmlFor="signature-name">Your Name </label>
 				<Required />
-				<input id="signature-name" type="text" className="form-control" required />
+				<input type="text" id="signature-name" name="signature-name" className="form-control" required />
 			</div>
 			<div className="form-group">
 				<label htmlFor="signature-date">Today's Date</label>
 				<Required />
-				<input id="signature-date" type="date" className="form-control" required />
+				<input id="signature-date" type="date" name="signature-date" className="form-control" required />
 			</div>
 			<div className="form-group mt-3">
 				<label>

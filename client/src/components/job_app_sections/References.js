@@ -1,68 +1,100 @@
 import React, { useState } from "react";
 
 function References() {
-	const [references, setReferences] = useState([{ relationship: "", name: "", email: "", phoneNumber: "", company: "" }]);
+	const [references, setReferences] = useState([
+		{ id: 1, reference: "", reference_name: "", reference_email: "", reference_phoneNumber: "", reference_company: "" },
+	]);
 
 	const addReference = () => {
-		setReferences([...references, { relationship: "", name: "", email: "", phoneNumber: "", company: "" }]);
+		const previous_id = references[references.length - 1].id;
+		setReferences([
+			...references,
+			{
+				id: previous_id + 1,
+				reference: "",
+				reference_name: "",
+				reference_email: "",
+				reference_phoneNumber: "",
+				reference_company: "",
+			},
+		]);
 	};
 
-	const handleReferenceChange = (index, event) => {
-		const values = [...references];
-		values[index][event.target.name] = event.target.value;
-		setReferences(values);
+	const handleReferenceChange = (id, field, event) => {
+		const value = event.target.value;
+		setReferences((prev) => prev.map((entry) => (entry.id === id ? { ...entry, [field]: value } : entry)));
 	};
+
+	function removeReference(index) {
+		setReferences((prev) => prev.filter((_, i) => i !== index));
+	}
 
 	return (
 		<section className="references">
 			<h4 className="mt-3">References</h4>
-			{references.map((item, index) => (
-				<div key={index} className="mt-3">
+			{references.map((item) => (
+				<div key={item.id} className="mt-3">
+					<button className="btn btn-danger float-right pt-0 pb-0" onClick={() => removeReference(item.id)}>
+						X
+					</button>
 					<div className="form-group">
-						<label htmlFor={`relationship-${index}`}>Relationship {index + 1}</label>
+						<label htmlFor={`reference-${item.id}`}>Reference {item.id} Relationship</label>
 						<input
 							type="text"
-							id={`relationship-${index}`}
-							name="relationship"
+							id={`reference-${item.id}`}
+							name={`reference-${item.id}`}
+							autoComplete={`reference-${item.id}`}
 							className="form-control"
-							value={item.relationship}
-							onChange={(event) => handleReferenceChange(index, event)}
+							value={item.reference}
+							onChange={(event) => handleReferenceChange(item.id, "reference", event)}
 						/>
-						<label htmlFor={`relationship-name-${index}`}>Reference {index + 1} Name</label>
+					</div>
+					<div className="form-group">
+						<label htmlFor={`reference-name-${item.id}`}>Reference {item.id} Name</label>
 						<input
 							type="text"
-							id={`relationship-name-${index}`}
-							name="name"
+							id={`reference-name-${item.id}`}
+							name={`reference-name-${item.id}`}
+							autoComplete={`reference_name-${item.id}`}
 							className="form-control"
-							value={item.name}
-							onChange={(event) => handleReferenceChange(index, event)}
+							value={item.reference_name}
+							onChange={(event) => handleReferenceChange(item.id, "reference_name", event)}
 						/>
-						<label htmlFor={`relationship-email-${index}`}>Reference {index + 1} Email</label>
+					</div>
+					<div className="form-group">
+						<label htmlFor={`reference-email-${item.id}`}>Reference {item.id} Email</label>
 						<input
 							type="email"
-							id={`relationship-email-${index}`}
-							name="email"
+							id={`reference-email-${item.id}`}
+							name={`reference-email-${item.id}`}
+							autoComplete={`reference_email-${item.id}`}
 							className="form-control"
-							value={item.email}
-							onChange={(event) => handleReferenceChange(index, event)}
+							value={item.reference_email}
+							onChange={(event) => handleReferenceChange(item.id, "reference_email", event)}
 						/>
-						<label htmlFor={`relationship-phone-${index}`}>Reference {index + 1} Phone Number</label>
+					</div>
+					<div className="form-group">
+						<label htmlFor={`reference-phoneNumber-${item.id}`}>Reference {item.id} Phone Number</label>
 						<input
 							type="tel"
-							id={`relationship-phone-${index}`}
-							name="phoneNumber"
+							id={`reference-phoneNumber-${item.id}`}
+							name={`reference-phoneNumber-${item.id}`}
+							autoComplete={`reference_phoneNumber-${item.id}`}
 							className="form-control"
-							value={item.phoneNumber}
-							onChange={(event) => handleReferenceChange(index, event)}
+							value={item.reference_phoneNumber}
+							onChange={(event) => handleReferenceChange(item.id, "reference_phoneNumber", event)}
 						/>
-						<label htmlFor={`relationship-company-${index}`}>Reference {index + 1} Company</label>
+					</div>
+					<div className="form-group">
+						<label htmlFor={`reference-company-${item.id}`}>Reference {item.id} Company</label>
 						<input
 							type="text"
-							id={`relationship-company-${index}`}
-							name="company"
+							id={`reference-company-${item.id}`}
+							name={`reference-company-${item.id}`}
+							autoComplete={`reference_company-${item.id}`}
 							className="form-control"
-							value={item.company}
-							onChange={(event) => handleReferenceChange(index, event)}
+							value={item.reference_company}
+							onChange={(event) => handleReferenceChange(item.id, "reference_company", event)}
 						/>
 					</div>
 				</div>
