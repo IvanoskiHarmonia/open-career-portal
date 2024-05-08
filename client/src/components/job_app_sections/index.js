@@ -1,0 +1,11 @@
+export { default as Resume } from "./Resume";
+export { default as Opportunity } from "./Opportunity";
+export { default as ContactInfo } from "./ContactInfo";
+export { default as WorkEligibility } from "./WorkEligibility";
+export { default as EmploymentHistory } from "./EmploymentHistory";
+export { default as EducationHistory } from "./EducationHistory";
+export { default as JobSkills } from "./JobSkills";
+export { default as References } from "./References";
+export { default as InformationTruthfulness } from "./InformationTruthfulness";
+export { default as SelfIdentification } from "./SelfIdentification";
+export { default as Signature } from "./Signature";
