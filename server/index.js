@@ -28,6 +28,12 @@ app.post("/api/save-email", (req, res) => {
 	res.send({ message: "Email sent successfully!" });
 });
 
+app.post("/api/job-application", (req, res) => {
+	const data = req.body;
+	console.log(data);
+	res.send("Form data received!");
+});
+
 app.get("/api/test", (req, res) => {
 	res.send("Hello from the server!");
 });
