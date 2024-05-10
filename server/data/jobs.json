@@ -1,21 +1,47 @@
-{
-	"1": {
+[
+	{
+		"id": 1,
+		"title": "Job Title 1",
+		"company": "Company Name",
 		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-		"title": "Job Title 1"
+		"date_created": "03-07-2021",
+		"date_updated": "03-07-2021",
+		"date_expires": "04-07-2022"
 	},
-	"2": {
+	{
+		"id": 2,
+		"title": "Job Title 2",
+		"company": "Company Name",
 		"description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		"title": "Job Title 2"
+		"date_created": "03-07-2021",
+		"date_updated": "03-07-2021",
+		"date_expires": "04-07-2022"
 	},
-	"3": {
+	{
+		"id": 3,
+		"title": "Job Title 3",
+		"company": "Company Name",
 		"description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-		"title": "Job Title 3"
+		"date_created": "03-07-2021",
+		"date_updated": "03-07-2021",
+		"date_expires": "04-07-2022"
 	},
-	"4": {
+	{
+		"id": 4,
+		"title": "Job Title 4",
+		"company": "Company Name",
 		"description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-		"title": "Job Title 4"
+		"date_created": "03-07-2021",
+		"date_updated": "03-07-2021",
+		"date_expires": "04-06-2022"
 	},
-	"100": {
-		"description": "# Senior Python Developer\n\n## Job Description\n\nWe are seeking a **Senior Python Developer** to join our dynamic team at Tech Innovations Inc. In this role, you will be responsible for developing high-quality software solutions to meet our client's needs. This position involves working closely with both technical teams and clients to ensure our solutions are both innovative and functional.\n\n### Responsibilities\n\n- Design, develop, and maintain **Python** applications and services.\n- Contribute to all phases of the development lifecycle.\n- Write well-designed, testable code.\n- Collaborate with the QA team to ensure robustness, including developing unit tests.\n- Review and debug existing codebase to optimize performance.\n- Mentor junior developers and assist in their skill development.\n\n### Requirements\n\n- Strong proficiency in **Python**, with a good knowledge of its ecosystems.\n- Solid understanding of object-oriented programming.\n- Familiarity with various design and architectural patterns.\n- Experience with front-end technologies, such as **JavaScript**, **HTML5**, and **CSS3**.\n- Skilled in developing web applications using at least one popular web framework (e.g., Django, Flask).\n- Proficiency in code versioning tools, such as Git.\n\n### Sample Test Code\n\nHere is a simple Python snippet that showcases basic list comprehension:\n\n```python\n# Example of list comprehension in Python\ncubed_numbers = [x**3 for x in range(10)]\nprint(cubed_numbers)\n```\n\n### Why Join Us?\n\nJoin our team for an opportunity to lead in a challenging and rewarding environment where you can grow your career and work with cutting-edge technologies. You'll be part of a culture that values collaboration and innovation.\n\n**Apply now and make a real difference in the tech industry!**"
+	{
+		"id": 100,
+		"title": "Senior Python Developer",
+		"company": "Tech Innovations Inc.",
+		"description": "### Job Description\n\nWe are seeking a **Senior Python Developer** to join our dynamic team at Tech Innovations Inc. In this role, you will be responsible for developing high-quality software solutions to meet our client's needs. This position involves working closely with both technical teams and clients to ensure our solutions are both innovative and functional.\n\n### Responsibilities\n\n- Design, develop, and maintain **Python** applications and services.\n- Contribute to all phases of the development lifecycle.\n- Write well-designed, testable code.\n- Collaborate with the QA team to ensure robustness, including developing unit tests.\n- Review and debug existing codebase to optimize performance.\n- Mentor junior developers and assist in their skill development.\n\n### Requirements\n\n- Strong proficiency in **Python**, with a good knowledge of its ecosystems.\n- Solid understanding of object-oriented programming.\n- Familiarity with various design and architectural patterns.\n- Experience with front-end technologies, such as **JavaScript**, **HTML5**, and **CSS3**.\n- Skilled in developing web applications using at least one popular web framework (e.g., Django, Flask).\n- Proficiency in code versioning tools, such as Git.\n\n### Sample Test Code\n\nHere is a simple Python snippet that showcases basic list comprehension:\n\n```python\n# Example of list comprehension in Python\ncubed_numbers = [x**3 for x in range(10)]\nprint(cubed_numbers)\n```\n\n### Why Join Us?\n\nJoin our team for an opportunity to lead in a challenging and rewarding environment where you can grow your career and work with cutting-edge technologies. You'll be part of a culture that values collaboration and innovation.\n\n**Apply now and make a real difference in the tech industry!**",
+		"date_created": "03-06-2021",
+		"date_updated": "03-06-2021",
+		"date_expires": "04-06-2022"
 	}
-}
+]

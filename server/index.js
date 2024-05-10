@@ -15,14 +15,19 @@ app.use(
 
 const jobs = require("./data/jobs.json");
 
+function findJobById(jobId) {
+	return jobs.find((job) => job.id === jobId);
+}
+
 app.get("/api/jobs", (req, res) => {
 	res.send(jobs);
 });
 
 app.get("/api/job/:jobId", (req, res) => {
-	const jobId = req.params.jobId;
-	const jobDescription = `${jobs[jobId]["description"]}`;
-	const jobTitle = `${jobs[jobId]["title"]}`;
+	const job = findJobById(parseInt(req.params.jobId));
+	const jobDescription = `${job["description"]}`;
+	const jobTitle = `${job["title"]}`;
+	console.log(jobTitle);
 	res.send({ description: jobDescription, title: jobTitle });
 });
 
