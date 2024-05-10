@@ -75,7 +75,7 @@ import {
 	InformationTruthfulness,
 	SelfIdentification,
 	Signature,
-} from "./job_app_sections";
+} from "./job_fields_sections";
 
 import Required from "./small_blocks/Required";
 

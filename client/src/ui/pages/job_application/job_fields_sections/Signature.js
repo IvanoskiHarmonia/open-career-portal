@@ -21,7 +21,6 @@ function Signature() {
 					<input type="checkbox" area-label="Checking the checkbox is equivalent to a handwritten signature." required /> Checking the
 					checkbox is equivalent to a handwritten signature.
 				</label>
-				<Required />
 			</div>
 		</section>
 	);

@@ -2,6 +2,7 @@ import { useGoogleOneTapLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
 function Login() {
+	console.log("Login component loaded!");
 	useGoogleOneTapLogin({
 		clientId: process.env.REACT_APP_CLIENT_ID,
 		onSuccess: (response) => {

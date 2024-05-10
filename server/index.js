@@ -15,6 +15,10 @@ app.use(
 
 const jobs = require("./data/jobs.json");
 
+app.get("/api/jobs", (req, res) => {
+	res.send(jobs);
+});
+
 app.get("/api/job/:jobId", (req, res) => {
 	const jobId = req.params.jobId;
 	const jobDescription = `${jobs[jobId]["description"]}`;

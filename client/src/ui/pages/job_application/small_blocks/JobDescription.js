@@ -8,7 +8,6 @@ const JobDescription = ({ jobId }) => {
 	const [jobDescription, setJobDescription] = useState("");
 
 	useEffect(() => {
-		// Fetch the job description from the server using the jobId
 		axios
 			.get(`/api/job/${jobId}`)
 			.then((response) => {

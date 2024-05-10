@@ -1,6 +1,6 @@
 import React from "react";
 import Required from "../small_blocks/Required";
-import { states } from "../constants/States";
+import { states } from "../../../modules/components/constants/States";
 
 function ContactInfo() {
 	return (
