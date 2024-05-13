@@ -27,21 +27,13 @@ const SidePanel = () => {
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
-		<div className="container">
-			<div className="row">
-				<div className="col-md-4">
-					<h3>Open Positions</h3>
-					{jobsArray.map((job) => (
-						<Link to={`/careers/${job.id}`} key={job.id}>
-							<JobCard job={job} />
-						</Link>
-					))}
-				</div>
-				<div className="col-md-8">
-					<h3>Job Description</h3>
-					<p>Select a job to view the description.</p>
-				</div>
-			</div>
+		<div className="col-md-4">
+			<h3>Open Positions</h3>
+			{jobsArray.map((job) => (
+				<Link to={`/careers/${job.id}`} key={job.id}>
+					<JobCard job={job} />
+				</Link>
+			))}
 		</div>
 	);
 };

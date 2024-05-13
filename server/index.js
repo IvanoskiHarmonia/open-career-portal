@@ -25,9 +25,12 @@ app.get("/api/jobs", (req, res) => {
 
 app.get("/api/job/:jobId", (req, res) => {
 	const job = findJobById(parseInt(req.params.jobId));
+	if (!job) {
+		res.status(404).send("Job not found");
+		return;
+	}
 	const jobDescription = `${job["description"]}`;
 	const jobTitle = `${job["title"]}`;
-	console.log(jobTitle);
 	res.send({ description: jobDescription, title: jobTitle });
 });
 

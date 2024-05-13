@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import components from "../utils/MarkdownCode";
+import { useParams } from "react-router-dom";
 
-const JobDetails = ({ jobId }) => {
+const JobDetails = () => {
+	const { jobId } = useParams();
 	const [jobTitle, setJobTitle] = useState("");
 	const [jobDetails, setJobDetails] = useState("");
+
+	console.log("jobId", jobId);
 
 	useEffect(() => {
 		axios
@@ -20,12 +24,8 @@ const JobDetails = ({ jobId }) => {
 	}, [jobId]);
 
 	return (
-		<div className="container">
-			<div className="row">
-				<div className="col-md-8 offset-md-2">
-					<ReactMarkdown components={components} children={`# ${jobTitle}\n${jobDetails}`} />
-				</div>
-			</div>
+		<div className="col-md-8">
+			<ReactMarkdown components={components} children={`# ${jobTitle}\n${jobDetails}`} />
 		</div>
 	);
 };
