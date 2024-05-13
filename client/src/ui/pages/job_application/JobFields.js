@@ -106,42 +106,40 @@ function JobFields() {
 	}
 
 	return (
-		<div className="container mt-3">
-			<div className="row">
-				<div className="col-md-8 offset-md-2">
-					<h2>Job Application</h2>
-					<form action="/api/job-application" method="post" target="_blank" onSubmit={handleSubmit}>
-						<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 mt-3">
-							Fields with red <Required /> are required.
-						</h5>
+		<div className="mt-3">
+			<div className="col-md-8 offset-md-2">
+				<h2>Job Application</h2>
+				<form action="/api/job-application" method="post" target="_blank" onSubmit={handleSubmit}>
+					<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 mt-3">
+						Fields with red <Required /> are required.
+					</h5>
 
-						<Resume />
+					<Resume />
 
-						<Opportunity />
+					<Opportunity />
 
-						<ContactInfo />
+					<ContactInfo />
 
-						<WorkEligibility />
+					<WorkEligibility />
 
-						<EmploymentHistory />
+					<EmploymentHistory />
 
-						<EducationHistory />
+					<EducationHistory />
 
-						<JobSkills />
+					<JobSkills />
 
-						<References />
+					<References />
 
-						<InformationTruthfulness />
+					<InformationTruthfulness />
 
-						<SelfIdentification />
+					<SelfIdentification />
 
-						<Signature />
+					<Signature />
 
-						<button type="submit" className="btn btn-primary mt-4">
-							Submit Application
-						</button>
-					</form>
-				</div>
+					<button type="submit" className="btn btn-primary mt-4">
+						Submit Application
+					</button>
+				</form>
 			</div>
 		</div>
 	);

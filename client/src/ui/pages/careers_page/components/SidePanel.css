@@ -1,0 +1,4 @@
+.link-decoration a {
+	text-decoration: none !important;
+	color: red;
+}

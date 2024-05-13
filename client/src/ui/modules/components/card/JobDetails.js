@@ -2,30 +2,37 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import components from "../utils/MarkdownCode";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const JobDetails = () => {
+const JobDetails = ({ isApplyButtonVisible = false }) => {
 	const { jobId } = useParams();
-	const [jobTitle, setJobTitle] = useState("");
-	const [jobDetails, setJobDetails] = useState("");
+	const navigate = useNavigate();
 
-	console.log("jobId", jobId);
+	const [job, setJob] = useState({});
 
 	useEffect(() => {
 		axios
 			.get(`/api/job/${jobId}`)
 			.then((response) => {
-				setJobTitle(response.data.title);
-				setJobDetails(response.data.description);
+				setJob(response.data);
 			})
 			.catch((error) => {
 				console.error("Error fetching job description:", error);
 			});
 	}, [jobId]);
 
+	const handleApply = () => {
+		navigate(`/careers/apply/${jobId}`);
+	};
+
 	return (
-		<div className="col-md-8">
-			<ReactMarkdown components={components} children={`# ${jobTitle}\n${jobDetails}`} />
+		<div className="col-md-8 offset-md-2">
+			<ReactMarkdown components={components}>{`# ${job.title}\n${job.description}`}</ReactMarkdown>
+			{isApplyButtonVisible && (
+				<button className="btn btn-primary" onClick={handleApply}>
+					Apply
+				</button>
+			)}
 		</div>
 	);
 };

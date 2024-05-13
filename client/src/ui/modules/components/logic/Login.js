@@ -29,6 +29,9 @@ function Login() {
 		},
 	});
 
+	// This component doesn't render anything
+	window.location.href = "/careers";
+
 	return null;
 }
 
