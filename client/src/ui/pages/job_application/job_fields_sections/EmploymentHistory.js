@@ -23,57 +23,62 @@ function EmploymentHistory() {
 	}
 
 	return (
-		<section className="employement-history">
+		<section className="employement-history container">
 			<h4 className="mt-3">Employment History</h4>
 			{employmentHistory.map((item) => (
 				<div key={item.id} className="mt-3">
 					<button className="btn btn-danger float-right pt-0 pb-0" onClick={() => removeEmployment(item.id)}>
 						X
 					</button>
-					<div className="form-group">
-						<label htmlFor={`company-name-${item.id}`}>Company Name {item.id}</label>
-						<input
-							type="text"
-							id={`company-name-${item.id}`}
-							name={`companyName-${item.id}`}
-							className="form-control"
-							value={item.companyName || ""}
-							onChange={(event) => handleEmploymentChange(item.id, "companyName", event)}
-						/>
+					<div className="row">
+						<div className="form-group col-md-6">
+							<label htmlFor={`company-name-${item.id}`}>Company Name {item.id}</label>
+							<input
+								type="text"
+								id={`company-name-${item.id}`}
+								name={`companyName-${item.id}`}
+								className="form-control"
+								value={item.companyName || ""}
+								placeholder={`Company Name ${item.id}`}
+								onChange={(event) => handleEmploymentChange(item.id, "companyName", event)}
+							/>
+						</div>
+						<div className="form-group col-md-6">
+							<label htmlFor={`job-title-${item.id}`}>Job Title</label>
+							<input
+								type="text"
+								id={`job-title-${item.id}`}
+								name={`jobTitle-${item.id}`}
+								className="form-control"
+								value={item.jobTitle || ""}
+								placeholder={`Job Title ${item.id}`}
+								onChange={(event) => handleEmploymentChange(item.id, "jobTitle", event)}
+							/>
+						</div>
 					</div>
-					<div className="form-group"></div>
-					<div className="form-group">
-						<label htmlFor={`job-title-${item.id}`}>Job Title</label>
-						<input
-							type="text"
-							id={`job-title-${item.id}`}
-							name={`jobTitle-${item.id}`}
-							className="form-control"
-							value={item.jobTitle || ""}
-							onChange={(event) => handleEmploymentChange(item.id, "jobTitle", event)}
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor={`job-start-date-${item.id}`}>Start Date</label>
-						<input
-							type="date"
-							id={`job-start-date-${item.id}`}
-							name={`jobStartDate-${item.id}`}
-							className="form-control"
-							value={item.jobStartDate}
-							onChange={(event) => handleEmploymentChange(item.id, "jobStartDate", event)}
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor={`job-end-date-${item.id}`}>End Date</label>
-						<input
-							type="date"
-							id={`job-end-date-${item.id}`}
-							name={`jobEndDate-${item.id}`}
-							className="form-control"
-							value={item.jobEndDate}
-							onChange={(event) => handleEmploymentChange(item.id, "jobEndDate", event)}
-						/>
+					<div className="row">
+						<div className="form-group col-md-6">
+							<label htmlFor={`job-start-date-${item.id}`}>Start Date</label>
+							<input
+								type="date"
+								id={`job-start-date-${item.id}`}
+								name={`jobStartDate-${item.id}`}
+								className="form-control"
+								value={item.jobStartDate}
+								onChange={(event) => handleEmploymentChange(item.id, "jobStartDate", event)}
+							/>
+						</div>
+						<div className="form-group col-md-6">
+							<label htmlFor={`job-end-date-${item.id}`}>End Date</label>
+							<input
+								type="date"
+								id={`job-end-date-${item.id}`}
+								name={`jobEndDate-${item.id}`}
+								className="form-control"
+								value={item.jobEndDate}
+								onChange={(event) => handleEmploymentChange(item.id, "jobEndDate", event)}
+							/>
+						</div>
 					</div>
 					<div className="form-group">
 						<label htmlFor={`job-description-${item.id}`}>Job Description</label>
@@ -82,6 +87,7 @@ function EmploymentHistory() {
 							name={`jobDescription-${item.id}`}
 							className="form-control"
 							value={item.jobDescription || ""}
+							placeholder="Job Description"
 							onChange={(event) => handleEmploymentChange(item.id, "jobDescription", event)}
 						/>
 					</div>

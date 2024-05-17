@@ -3,15 +3,19 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const corsOptions = {
+	origin: "http://localhost:3000",
+	credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use(
-	cors({
-		origin: "http://example.com",
-		methods: "GET,POST",
-		allowedHeaders: "Content-Type,Authorization",
-	})
-);
+app.use((req, res, next) => {
+	res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+	res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+	next();
+});
 
 const jobs = require("./data/jobs.json");
 
@@ -32,6 +36,19 @@ app.get("/api/job/:jobId", (req, res) => {
 	const jobDescription = `${job["description"]}`;
 	const jobTitle = `${job["title"]}`;
 	res.send({ description: jobDescription, title: jobTitle });
+});
+
+app.post("/api/session/logout", (req, res) => {
+	res.send({ message: "Logged out successfully!" });
+});
+
+app.get("/api/session/validate", (req, res) => {
+	res.send({ isValidSession: true });
+});
+
+app.post("/api/users/login", (req, res) => {
+	console.log("User logged in", req.body.email);
+	res.send({ message: "User logged in successfully!" });
 });
 
 app.post("/api/save-email", (req, res) => {

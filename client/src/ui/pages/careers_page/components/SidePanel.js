@@ -1,6 +1,5 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
 
 import { getJobs } from "../../../../common/api/getJobs";
 import JobCard from "../../../modules/components/card/JobCard";
@@ -12,8 +11,8 @@ const SidePanel = () => {
 		isLoading,
 		error,
 	} = useQuery("jobs", getJobs, {
-		retry: 3, // Retries failed requests up to 3 times
-		retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 30000), // Exponential backoff up to 30 seconds
+		retry: 3,
+		retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 30000),
 	});
 
 	const jobsArray = jobsObject
@@ -28,11 +27,9 @@ const SidePanel = () => {
 
 	return (
 		<div className="link-decoration">
-			<h3>Open Positions</h3>
+			<h3 className="mt-3">Open Positions</h3>
 			{jobsArray.map((job) => (
-				<Link to={`/careers/${job.id}`} key={job.id}>
-					<JobCard job={job} />
-				</Link>
+				<JobCard job={job} key={job.id} />
 			))}
 		</div>
 	);

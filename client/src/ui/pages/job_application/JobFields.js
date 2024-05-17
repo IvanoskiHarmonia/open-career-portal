@@ -107,7 +107,7 @@ function JobFields() {
 
 	return (
 		<div className="mt-3">
-			<div className="col-md-8 offset-md-2">
+			<div className="col-lg-10 offset-lg-1">
 				<h2>Job Application</h2>
 				<form action="/api/job-application" method="post" target="_blank" onSubmit={handleSubmit}>
 					<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 mt-3">

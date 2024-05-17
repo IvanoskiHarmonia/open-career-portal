@@ -1,38 +1,65 @@
-import { useGoogleOneTapLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import React from "react";
+import axios from "axios";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../common/hooks/useAuth";
+import { LogIn } from "react-feather";
 
-function Login() {
-	console.log("Login component loaded!");
-	useGoogleOneTapLogin({
-		clientId: process.env.REACT_APP_CLIENT_ID,
-		onSuccess: (response) => {
-			const decodedToken = jwtDecode(response.credential);
-			console.log(decodedToken.email + " logged in successfully!");
+const Login = () => {
+	const navigate = useNavigate();
+	const { handleLogin } = useAuth();
 
-			fetch("/api/save-email", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ email: decodedToken.email }),
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					console.log("Email sent successfully:", data);
-				})
-				.catch((error) => {
-					console.error("Failed to send email:", error);
+	const login = useGoogleLogin({
+		clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+		auto_select: true,
+		onSuccess: async (tokenResponse) => {
+			try {
+				const googleUserResponse = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+					headers: {
+						Authorization: `Bearer ${tokenResponse.access_token}`,
+					},
 				});
+
+				await axios.post(
+					"http://localhost:8000/api/users/login",
+					{
+						token: tokenResponse.access_token,
+						expiresAt: new Date().getTime() + tokenResponse.expires_in,
+						email: googleUserResponse.data.email,
+					},
+					{ withCredentials: true }
+				);
+
+				handleLogin(navigate);
+			} catch (error) {
+				console.error("Failed to fetch user data or send to backend:", error);
+			}
 		},
-		onFailure: (response) => {
-			console.log("Login Failed:", response);
+		onError: (error) => {
+			console.error("Login Failed:", error);
 		},
 	});
 
-	// This component doesn't render anything
-	window.location.href = "/careers";
-
-	return null;
-}
+	return (
+		<div className="container">
+			<div className="row justify-content-center">
+				<div className="col-4">
+					<div className="card mt-5">
+						<div className="card-body shadow">
+							<div className="d-flex justify-content-center mb-1"></div>
+							<h2 className="card-title text-center mb-2">Login Page</h2>
+							<div className="d-flex justify-content-center">
+								<button onClick={() => login()} className="btn btn-primary d-flex align-items-center">
+									<LogIn size={20} />
+									Sign in
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default Login;

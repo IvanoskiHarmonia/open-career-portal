@@ -1,9 +1,8 @@
 // Careers.js
-import React, { useState } from "react";
+import React from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClient, QueryClientProvider } from "react-query";
 import SidePanel from "./components/SidePanel";
-import JobDetails from "../../modules/components/card/JobDetails";
 
 const queryClient = new QueryClient();
 

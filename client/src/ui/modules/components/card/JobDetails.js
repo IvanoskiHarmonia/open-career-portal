@@ -3,6 +3,7 @@ import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import components from "../utils/MarkdownCode";
 import { useNavigate, useParams } from "react-router-dom";
+import { ArrowRight } from "react-feather";
 
 const JobDetails = ({ isApplyButtonVisible = false }) => {
 	const { jobId } = useParams();
@@ -26,12 +27,14 @@ const JobDetails = ({ isApplyButtonVisible = false }) => {
 	};
 
 	return (
-		<div className="col-md-8 offset-md-2">
+		<div className="col-lg-10 offset-lg-1">
 			<ReactMarkdown components={components}>{`# ${job.title}\n${job.description}`}</ReactMarkdown>
 			{isApplyButtonVisible && (
-				<button className="btn btn-primary" onClick={handleApply}>
-					Apply
-				</button>
+				<div className="d-grid">
+					<button className="btn btn-primary" onClick={handleApply}>
+						Apply <ArrowRight />
+					</button>
+				</div>
 			)}
 		</div>
 	);

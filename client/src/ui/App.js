@@ -1,20 +1,45 @@
 import "./App.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Login from "./modules/components/logic/Login";
+import JobDetailsScreen from "./pages/job_details/JobDetailsScreen";
 import JobApplication from "./pages/job_application/JobApplication";
 import Careers from "./pages/careers_page/Careers";
 import { Route, Routes } from "react-router-dom";
-import JobDetails from "./modules/components/card/JobDetails";
+import { AuthProvider } from "../common/hooks/useAuth";
+import ProtectedRoute from "./modules/components/utils/ProtectedRoute";
 
 function App() {
 	return (
 		<GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
-			<Routes>
-				<Route path="/" element={<Login />} />
-				<Route path="/careers/*" element={<Careers />} />
-				<Route path="/careers/:jobId" element={<JobDetails isApplyButtonVisible={true} />} />
-				<Route path="/careers/apply/:jobId" element={<JobApplication />} />
-			</Routes>
+			<AuthProvider>
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route
+						path="/careers/"
+						element={
+							<ProtectedRoute>
+								<Careers />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/careers/:jobId"
+						element={
+							<ProtectedRoute>
+								<JobDetailsScreen />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/careers/apply/:jobId"
+						element={
+							<ProtectedRoute>
+								<JobApplication />
+							</ProtectedRoute>
+						}
+					/>
+				</Routes>
+			</AuthProvider>
 		</GoogleOAuthProvider>
 	);
 }
