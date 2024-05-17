@@ -42,16 +42,16 @@ const Login = () => {
 
 	return (
 		<div className="container">
-			<div className="row justify-content-center">
-				<div className="col-4">
-					<div className="card mt-5">
+			<div className="row justify-content-center align">
+				<div className="col-8">
+					<div className="card my-5">
 						<div className="card-body shadow">
 							<div className="d-flex justify-content-center mb-1"></div>
 							<h2 className="card-title text-center mb-2">Login Page</h2>
 							<div className="d-flex justify-content-center">
 								<button onClick={() => login()} className="btn btn-primary d-flex align-items-center">
+									Google
 									<LogIn size={20} />
-									Sign in
 								</button>
 							</div>
 						</div>

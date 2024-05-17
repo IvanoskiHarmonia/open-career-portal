@@ -12,7 +12,7 @@ const Careers = () => {
 			<QueryClientProvider client={queryClient}>
 				<div className="container">
 					<div className="row">
-						<div className="col">
+						<div className="col-md-10 offset-md-1">
 							<SidePanel />
 						</div>
 					</div>

@@ -7,11 +7,13 @@ import Careers from "./pages/careers_page/Careers";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../common/hooks/useAuth";
 import ProtectedRoute from "./modules/components/utils/ProtectedRoute";
+import Navbar from "./modules/components/card/Navbar";
 
 function App() {
 	return (
 		<GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
 			<AuthProvider>
+				<Navbar />
 				<Routes>
 					<Route path="/" element={<Login />} />
 					<Route

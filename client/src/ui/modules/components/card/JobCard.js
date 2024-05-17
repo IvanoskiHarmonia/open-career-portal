@@ -12,7 +12,10 @@ const JobCard = React.memo(({ job }) => {
 					<div className="row">
 						<h5 className="card-title col-md-4">{job.title}</h5>
 						<p className="card-text col-md-4">Date released: {job.date_created}</p>
-						<Link to={`/careers/${job.id}`} className="col-md-4">
+						<Link
+							to={`/careers/${job.id}`}
+							className="col-md-4 link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+						>
 							More Details &rarr;
 						</Link>
 					</div>

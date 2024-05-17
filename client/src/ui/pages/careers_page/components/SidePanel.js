@@ -27,7 +27,7 @@ const SidePanel = () => {
 
 	return (
 		<div className="link-decoration">
-			<h3 className="mt-3">Open Positions</h3>
+			<h3 className="">Open Positions</h3>
 			{jobsArray.map((job) => (
 				<JobCard job={job} key={job.id} />
 			))}
