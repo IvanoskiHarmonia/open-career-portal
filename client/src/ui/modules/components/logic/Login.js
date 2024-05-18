@@ -51,7 +51,7 @@ const Login = () => {
 							<div className="d-flex justify-content-center">
 								<button onClick={() => login()} className="btn btn-primary d-flex align-items-center">
 									Google
-									<LogIn size={20} />
+									<LogIn size={20} className="ms-1" />
 								</button>
 							</div>
 						</div>
