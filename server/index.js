@@ -60,7 +60,6 @@ app.post("/api/save-email", (req, res) => {
 app.post("/api/job-application", (req, res) => {
 	const data = req.body;
 	console.log(data);
-	console.log("companyName-1:", data["companyName-1"]);
 	res.send("Form data received!");
 });
 

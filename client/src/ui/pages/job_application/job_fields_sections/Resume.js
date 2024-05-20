@@ -10,11 +10,11 @@ function Resume() {
 					<label htmlFor="resumeInput">
 						Resume <Required />
 					</label>
-					<input type="file" id="resumeInput" className="form-control" accept=".pdf,.doc,.docx,.txt" required />
+					<input type="file" id="resumeInput" className="form-control" name="resume" accept=".pdf,.doc,.docx,.txt" required />
 				</div>
 				<div className="form-group col-md-6 mt-md-2 mt-lg-0">
 					<label htmlFor="cover-letter">Cover Letter</label>
-					<input type="file" id="cover-letter" className="form-control" accept=".pdf,.doc,.docx,.txt" />
+					<input type="file" id="cover-letter" className="form-control" name="cover-letter" accept=".pdf,.doc,.docx,.txt" />
 				</div>
 			</div>
 		</section>
