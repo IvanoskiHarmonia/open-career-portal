@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 const PORT = process.env.PORT || 8000;
+
+console.log(process.env.PORT);
 
 const corsOptions = {
 	origin: "http://localhost:3000",
