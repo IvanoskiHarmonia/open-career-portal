@@ -2,7 +2,7 @@ import React from "react";
 
 function Opportunity() {
 	return (
-		<section className="lead-opportunity">
+		<section className="lead-opportunity container">
 			<h4 className="mt-3">How did you hear about us?</h4>
 			<div className="form-group">
 				<label htmlFor="hear-about-us">How did you hear about us?</label>

@@ -3,23 +3,52 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const corsOptions = {
+	origin: "http://localhost:3000",
+	credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use(
-	cors({
-		origin: "http://example.com",
-		methods: "GET,POST",
-		allowedHeaders: "Content-Type,Authorization",
-	})
-);
+app.use((req, res, next) => {
+	res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+	res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+	next();
+});
 
 const jobs = require("./data/jobs.json");
 
+function findJobById(jobId) {
+	return jobs.find((job) => job.id === jobId);
+}
+
+app.get("/api/jobs", (req, res) => {
+	res.send(jobs);
+});
+
 app.get("/api/job/:jobId", (req, res) => {
-	const jobId = req.params.jobId;
-	const jobDescription = `${jobs[jobId]["description"]}`;
-	const jobTitle = `${jobs[jobId]["title"]}`;
+	const job = findJobById(parseInt(req.params.jobId));
+	if (!job) {
+		res.status(404).send("Job not found");
+		return;
+	}
+	const jobDescription = `${job["description"]}`;
+	const jobTitle = `${job["title"]}`;
 	res.send({ description: jobDescription, title: jobTitle });
+});
+
+app.post("/api/session/logout", (req, res) => {
+	res.send({ message: "Logged out successfully!" });
+});
+
+app.get("/api/session/validate", (req, res) => {
+	res.send({ isValidSession: true });
+});
+
+app.post("/api/users/login", (req, res) => {
+	console.log("User logged in", req.body.email);
+	res.send({ message: "User logged in successfully!" });
 });
 
 app.post("/api/save-email", (req, res) => {
@@ -31,7 +60,6 @@ app.post("/api/save-email", (req, res) => {
 app.post("/api/job-application", (req, res) => {
 	const data = req.body;
 	console.log(data);
-	console.log("companyName-1:", data["companyName-1"]);
 	res.send("Form data received!");
 });
 

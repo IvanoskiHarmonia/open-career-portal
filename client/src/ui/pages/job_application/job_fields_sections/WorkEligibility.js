@@ -4,7 +4,7 @@ import Required from "../small_blocks/Required";
 
 function WorkEligibility() {
 	return (
-		<section className="work-eligibility">
+		<section className="work-eligibility container">
 			<h4 className="mt-3">Work Eligibility</h4>
 			<div className="form-group">
 				<label>Are you legally eligible to work in the US?</label>
