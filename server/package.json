@@ -14,7 +14,8 @@
 		"cors": "^2.8.5",
 		"express": "^4.19.2",
 		"mongodb": "^6.6.2",
-		"mongoose": "^8.4.0"
+		"mongoose": "^8.4.0",
+		"uuid": "^9.0.1"
 	},
 	"devDependencies": {
 		"dotenv": "^16.4.5"

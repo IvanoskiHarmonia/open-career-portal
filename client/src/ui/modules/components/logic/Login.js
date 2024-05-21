@@ -20,7 +20,7 @@ const Login = () => {
 					},
 				});
 
-				await axios.post(
+				const loginResponse = await axios.post(
 					"http://localhost:8000/api/users/login",
 					{
 						token: tokenResponse.access_token,
@@ -30,7 +30,8 @@ const Login = () => {
 					{ withCredentials: true }
 				);
 
-				handleLogin(navigate);
+				const userId = loginResponse.data.userId;
+				handleLogin(navigate, userId);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);
 			}

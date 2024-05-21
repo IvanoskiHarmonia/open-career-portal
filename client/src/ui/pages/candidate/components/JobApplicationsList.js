@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getJobApplications } from "../../hooks/getJobApplications";
+import { getJobApplications } from "../../../modules/hooks/getJobApplications";
 import { Link } from "react-router-dom";
 
 const JobApplicationsList = () => {

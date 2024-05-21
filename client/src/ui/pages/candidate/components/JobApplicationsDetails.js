@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getJobApplicationById } from "../../hooks/getJobApplications";
+import { getJobApplicationById } from "../../../modules/hooks/getJobApplications";
 import { useParams } from "react-router-dom";
 
 const JobApplicationDetails = () => {

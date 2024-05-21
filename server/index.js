@@ -1,9 +1,12 @@
 const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
 const app = express();
+const cors = require("cors");
+const { v4: uuidv4 } = require("uuid");
+
+require("dotenv").config();
 
 const JobApplication = require("./models/JobApplication");
+const User = require("./models/User");
 
 const PORT = process.env.PORT || 8000;
 
@@ -38,6 +41,7 @@ function findJobById(jobId) {
 	return jobs.find((job) => job.id === jobId);
 }
 
+// Get all jobs GET APIs
 app.get("/api/jobs", (req, res) => {
 	res.send(jobs);
 });
@@ -53,6 +57,9 @@ app.get("/api/job/:jobId", (req, res) => {
 	res.send({ description: jobDescription, title: jobTitle });
 });
 
+
+// Login  
+
 app.post("/api/session/logout", (req, res) => {
 	res.send({ message: "Logged out successfully!" });
 });
@@ -61,20 +68,30 @@ app.get("/api/session/validate", (req, res) => {
 	res.send({ isValidSession: true });
 });
 
-app.post("/api/users/login", (req, res) => {
-	console.log("User logged in", req.body.email);
-	res.send({ message: "User logged in successfully!" });
-});
-
-app.post("/api/save-email", (req, res) => {
+app.post("/api/users/login", async (req, res) => {
 	const email = req.body.email;
-	console.log(`Sending email to ${email}`);
-	res.send({ message: "Email sent successfully!" });
+	try {
+		let user = await User.findOne({ email });
+		if (!user) {
+			user = new User({ email, userId: uuidv4() });
+			await user.save();
+			console.log("New user created:", user);
+		} else {
+			console.log("User logged in:", user);
+		}
+		res.send({ message: "User logged in successfully!", userId: user.userId });
+	} catch (error) {
+		console.error("Error logging in user:", error);
+		res.status(500).send({ message: "Error logging in user" });
+	}
 });
 
 app.post("/api/job-applications", async (req, res) => {
 	try {
-		const jobApplication = new JobApplication(req.body);
+		const jobApplication = new JobApplication({
+			userId: req.body.userId, // Ensure userId is included in the request body
+			...req.body,
+		});
 		await jobApplication.save();
 		res.status(201).send(jobApplication);
 	} catch (error) {
@@ -103,8 +120,16 @@ app.get("/api/job-applications/:id", async (req, res) => {
 	}
 });
 
-app.get("/api/test", (req, res) => {
-	res.send("Hello from the server!");
+app.get("/api/user-applications/:userId", async (req, res) => {
+	try {
+		const jobApplication = await JobApplication.find({ userId: req.params.userId });
+		if (!jobApplication) {
+			return res.status(404).send({ message: "Job application not found" });
+		}
+		res.status(200).send(jobApplication);
+	} catch (error) {
+		res.status(400).send(error);
+	}
 });
 
 app.listen(PORT, () => {

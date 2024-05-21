@@ -8,8 +8,9 @@ import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../common/hooks/useAuth";
 import ProtectedRoute from "./modules/components/utils/ProtectedRoute";
 import Navbar from "./modules/components/card/Navbar";
-import JobApplicationDetails from "./modules/components/card/JobApplicationsDetails";
-import JobApplicationsList from "./modules/components/card/JobApplicationsList";
+import UserJobApplications from "./pages/candidate/components/UserJobApplications";
+import JobApplicationsList from "./pages/candidate/components/JobApplicationsList";
+import JobApplicationDetails from "./pages/candidate/components/JobApplicationsDetails";
 
 function App() {
 	return (
@@ -55,6 +56,14 @@ function App() {
 						element={
 							<ProtectedRoute>
 								<JobApplicationDetails />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/user-applications/:userId"
+						element={
+							<ProtectedRoute>
+								<UserJobApplications />
 							</ProtectedRoute>
 						}
 					/>

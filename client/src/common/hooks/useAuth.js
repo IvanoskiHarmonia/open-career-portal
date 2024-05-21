@@ -7,6 +7,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(() => {});
+	const [userId, setUserId] = useState(() => {});
 
 	useEffect(() => {
 		validateSession();
@@ -22,8 +23,9 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
-	const handleLogin = (navigate) => {
+	const handleLogin = (navigate, userId) => {
 		setIsAuthenticated(true);
+		setUserId(userId);
 		navigate("/careers/");
 	};
 
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }) => {
 		try {
 			await axios.post("http://localhost:8000/api/session/logout", {}, { withCredentials: true });
 			setIsAuthenticated(false);
+			setUserId(null);
 		} catch (error) {
 			console.error("Failed to logout:", error);
 		}
