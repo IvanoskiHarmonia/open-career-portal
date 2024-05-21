@@ -72,11 +72,32 @@ app.post("/api/save-email", (req, res) => {
 	res.send({ message: "Email sent successfully!" });
 });
 
-app.post("/api/job-application", async (req, res) => {
+app.post("/api/job-applications", async (req, res) => {
 	try {
 		const jobApplication = new JobApplication(req.body);
 		await jobApplication.save();
 		res.status(201).send(jobApplication);
+	} catch (error) {
+		res.status(400).send(error);
+	}
+});
+
+app.get("/api/job-applications", async (req, res) => {
+	try {
+		const jobApplications = await JobApplication.find();
+		res.status(200).send(jobApplications);
+	} catch (error) {
+		res.status(400).send(error);
+	}
+});
+
+app.get("/api/job-applications/:id", async (req, res) => {
+	try {
+		const jobApplication = await JobApplication.findById(parseInt(req.params.id));
+		if (!jobApplication) {
+			return res.status(404).send({ message: "Job application not found" });
+		}
+		res.status(200).send(jobApplication);
 	} catch (error) {
 		res.status(400).send(error);
 	}

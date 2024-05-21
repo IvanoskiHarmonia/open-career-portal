@@ -8,6 +8,8 @@ import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../common/hooks/useAuth";
 import ProtectedRoute from "./modules/components/utils/ProtectedRoute";
 import Navbar from "./modules/components/card/Navbar";
+import JobApplicationDetails from "./modules/components/card/JobApplicationsDetails";
+import JobApplicationsList from "./modules/components/card/JobApplicationsList";
 
 function App() {
 	return (
@@ -37,6 +39,22 @@ function App() {
 						element={
 							<ProtectedRoute>
 								<JobApplication />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/applications"
+						element={
+							<ProtectedRoute>
+								<JobApplicationsList />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/applications/:id"
+						element={
+							<ProtectedRoute>
+								<JobApplicationDetails />
 							</ProtectedRoute>
 						}
 					/>
