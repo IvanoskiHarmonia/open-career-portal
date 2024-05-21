@@ -1,10 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
 require("dotenv").config();
+const app = express();
+
+const JobApplication = require("./models/JobApplication");
+
 const PORT = process.env.PORT || 8000;
 
-console.log(process.env.PORT);
+const mongoose = require("mongoose");
+
+mongoose
+	.connect(process.env.MONGODB_URI, {})
+	.then(() => {
+		console.log("Connected to MongoDB");
+	})
+	.catch((err) => {
+		console.log("Error connecting to MongoDB", err);
+	});
 
 const corsOptions = {
 	origin: "http://localhost:3000",
@@ -60,10 +72,14 @@ app.post("/api/save-email", (req, res) => {
 	res.send({ message: "Email sent successfully!" });
 });
 
-app.post("/api/job-application", (req, res) => {
-	const data = req.body;
-	console.log(data);
-	res.send("Form data received!");
+app.post("/api/job-application", async (req, res) => {
+	try {
+		const jobApplication = new JobApplication(req.body);
+		await jobApplication.save();
+		res.status(201).send(jobApplication);
+	} catch (error) {
+		res.status(400).send(error);
+	}
 });
 
 app.get("/api/test", (req, res) => {
