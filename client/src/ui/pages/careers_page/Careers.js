@@ -8,13 +8,11 @@ const queryClient = new QueryClient();
 const Careers = () => {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className="container">
+			<main className="container my-4">
 				<div className="row">
-					<div className="col-md-10 offset-md-1">
-						<SidePanel />
-					</div>
+					<SidePanel />
 				</div>
-			</div>
+			</main>
 		</QueryClientProvider>
 	);
 };

@@ -2,7 +2,7 @@ import UserJobApplications from "./components/UserJobApplications";
 
 const Candidate = () => {
 	return (
-		<div>
+		<div className="container">
 			<UserJobApplications />
 		</div>
 	);

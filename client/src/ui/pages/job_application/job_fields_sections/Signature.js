@@ -10,16 +10,16 @@ function Signature() {
 				<div className="form-group col-md-4">
 					<label htmlFor="signature-name">Your Name </label>
 					<Required />
-					<input type="text" id="signature-name" name="signature-name" className="form-control" placeholder="First Last" required />
+					<input type="text" id="signature-name" name="signatureName" className="form-control" placeholder="First Last" required />
 				</div>
 				<div className="form-group col-md-4">
 					<label htmlFor="employee-id">Employee ID (if applicable)</label>
-					<input type="text" id="employee-id" name="employee-id" className="form-control" placeholder="89328413..." />
+					<input type="text" id="employee-id" name="employeeId" className="form-control" placeholder="89328413..." />
 				</div>
 				<div className="form-group col-md-4">
 					<label htmlFor="signature-date">Today's Date</label>
 					<Required />
-					<input id="signature-date" type="date" name="signature-date" className="form-control" required />
+					<input id="signature-date" type="date" name="signatureDate" className="form-control" required />
 				</div>
 				<div className="form-group mt-3">
 					<label>

@@ -19,7 +19,7 @@ function SelfIdentificiation() {
 			<div className="form-group mt-2">
 				<label htmlFor="race-ethnicity-bg">What is your Race/Ethnic background? </label>
 				<Required />
-				<select id="race-ethnicity-bg" name="race-ethnicity-bg" autoComplete="race-ethnicity-bg" className="form-control" required>
+				<select id="race-ethnicity-bg" name="raceEthnicity" autoComplete="race-ethnicity-bg" className="form-control" required>
 					<option value="">Select an option</option>
 					<option value="white">White</option>
 					<option value="hispanic">Hispanic or Latino</option>

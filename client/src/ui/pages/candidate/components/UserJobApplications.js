@@ -19,7 +19,7 @@ const UserJobApplications = () => {
 	}, [userId]);
 
 	return (
-		<div>
+		<div className="row">
 			<h1>Your Job Applications</h1>
 			<ul>
 				{jobApplications.map((application) => (
