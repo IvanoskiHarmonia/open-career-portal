@@ -1,12 +1,11 @@
 import JobDetails from "../../modules/components/card/JobDetails";
+import StyleWrapper from "../../modules/components/wrappers/StyleWrapper";
 
 function JobDetailsScreen() {
 	return (
-		<main className="container my-4">
-			<div className="row">
-				<JobDetails isApplyButtonVisible={true} />
-			</div>
-		</main>
+		<StyleWrapper>
+			<JobDetails isApplyButtonVisible={true} />
+		</StyleWrapper>
 	);
 }
 

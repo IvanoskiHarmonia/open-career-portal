@@ -8,8 +8,6 @@ import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../common/hooks/useAuth";
 import ProtectedRoute from "./modules/components/utils/ProtectedRoute";
 import Navbar from "./modules/components/card/Navbar";
-import JobApplicationsList from "./pages/candidate/components/JobApplicationsList";
-import JobApplicationDetails from "./pages/candidate/components/JobApplicationsDetails";
 import Candidate from "./pages/candidate/Candidate";
 
 function App() {
@@ -18,9 +16,9 @@ function App() {
 			<AuthProvider>
 				<Navbar />
 				<Routes>
-					<Route path="/" element={<Login />} />
+					<Route path="/login" element={<Login />} />
 					<Route
-						path="/careers/"
+						path="/"
 						element={
 							<ProtectedRoute>
 								<Careers />
@@ -40,22 +38,6 @@ function App() {
 						element={
 							<ProtectedRoute>
 								<JobApplication />
-							</ProtectedRoute>
-						}
-					/>
-					<Route
-						path="/applications"
-						element={
-							<ProtectedRoute>
-								<JobApplicationsList />
-							</ProtectedRoute>
-						}
-					/>
-					<Route
-						path="/applications/:id"
-						element={
-							<ProtectedRoute>
-								<JobApplicationDetails />
 							</ProtectedRoute>
 						}
 					/>

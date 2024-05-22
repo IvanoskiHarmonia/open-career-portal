@@ -79,8 +79,11 @@ import {
 } from "./job_fields_sections";
 
 import Required from "./small_blocks/Required";
+import { useNavigate } from "react-router-dom";
 
 function JobFields() {
+	const navigate = useNavigate();
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
@@ -90,53 +93,50 @@ function JobFields() {
 		const userId = localStorage.getItem("userId");
 
 		try {
-			const response = await axios.post("http://localhost:8000/api/job-applications", {
+			await axios.post("http://localhost:8000/api/job-applications", {
 				userId,
 				...data,
 			});
-			console.log(userId);
-			console.log("Job application saved:", response.data);
+			navigate("/user-applications/" + userId);
 		} catch (error) {
 			console.error("Failed to save job application:", error);
 		}
 	};
 
 	return (
-		<div className="mt-3">
-			<div className="col-lg-10 offset-lg-1">
-				<h2>Job Application</h2>
-				<form onSubmit={handleSubmit}>
-					<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 mt-3">
-						Fields with red <Required /> are required.
-					</h5>
+		<div className="col-lg-10 offset-lg-1">
+			<h2>Job Application</h2>
+			<form onSubmit={handleSubmit}>
+				<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 my-3">
+					Fields with red <Required /> are required.
+				</h5>
 
-					<Resume />
+				<Resume />
 
-					<Opportunity />
+				<Opportunity />
 
-					<ContactInfo />
+				<ContactInfo />
 
-					<WorkEligibility />
+				<WorkEligibility />
 
-					<EmploymentHistory />
+				<EmploymentHistory />
 
-					<EducationHistory />
+				<EducationHistory />
 
-					<JobSkills />
+				<JobSkills />
 
-					<References />
+				<References />
 
-					<InformationTruthfulness />
+				<InformationTruthfulness />
 
-					<SelfIdentification />
+				<SelfIdentification />
 
-					<Signature />
+				<Signature />
 
-					<button type="submit" className="btn btn-primary mt-4">
-						Submit Application
-					</button>
-				</form>
-			</div>
+				<button type="submit" className="btn btn-primary mt-4">
+					Submit Application
+				</button>
+			</form>
 		</div>
 	);
 }

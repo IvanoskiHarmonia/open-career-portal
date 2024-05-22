@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -61,23 +62,54 @@ app.get("/api/job/:jobId", (req, res) => {
 
 app.post("/api/session/logout", (req, res) => {
 	res.send({ message: "Logged out successfully!" });
+	console.log("User logged out");
 });
 
-app.get("/api/session/validate", (req, res) => {
-	res.send({ isValidSession: true });
+app.use(cookieParser());
+
+app.get("/api/session/validate", async (req, res) => {
+	const token = req.cookies.sessionToken;
+
+	if (!token) {
+		console.log("No token found in cookies");
+		return res.send({ isValidSession: false });
+	}
+
+	try {
+		const user = await User.findOne({ token });
+		if (user && user.expiresAt > new Date().getTime()) {
+			return res.send({ isValidSession: true, userId: user.userId });
+		} else {
+			return res.send({ isValidSession: false });
+		}
+	} catch (error) {
+		console.error("Error validating session:", error);
+		return res.status(500).send({ isValidSession: false });
+	}
 });
 
 app.post("/api/users/login", async (req, res) => {
-	const email = req.body.email;
+	const { email, token, expiresAt } = req.body;
+
 	try {
 		let user = await User.findOne({ email });
 		if (!user) {
-			user = new User({ email, userId: uuidv4() });
+			user = new User({ email, userId: uuidv4(), token, expiresAt });
 			await user.save();
 			console.log("New user created:", user);
 		} else {
+			if (user.token !== token || user.expiresAt < new Date().getTime()) {
+				user.token = token;
+				user.expiresAt = expiresAt;
+				await user.save();
+				console.log("User token updated:", user);
+			}
 			console.log("User logged in:", user);
 		}
+
+		// Set the session token in a cookie
+		res.cookie("sessionToken", token, { httpOnly: true, expires: new Date(expiresAt) });
+
 		res.send({ message: "User logged in successfully!", userId: user.userId });
 	} catch (error) {
 		console.error("Error logging in user:", error);

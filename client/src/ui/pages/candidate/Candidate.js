@@ -1,10 +1,11 @@
+import StyleWrapper from "../../modules/components/wrappers/StyleWrapper";
 import UserJobApplications from "./components/UserJobApplications";
 
 const Candidate = () => {
 	return (
-		<div className="container">
+		<StyleWrapper>
 			<UserJobApplications />
-		</div>
+		</StyleWrapper>
 	);
 };
 
