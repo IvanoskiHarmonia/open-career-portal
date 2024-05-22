@@ -31,6 +31,8 @@ const Login = () => {
 				);
 
 				const userId = loginResponse.data.userId;
+				console.log("User ID:", userId);
+				localStorage.setItem("userId", userId);
 				handleLogin(navigate, userId);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);

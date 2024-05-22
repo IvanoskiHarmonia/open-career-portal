@@ -57,8 +57,7 @@ app.get("/api/job/:jobId", (req, res) => {
 	res.send({ description: jobDescription, title: jobTitle });
 });
 
-
-// Login  
+// Login
 
 app.post("/api/session/logout", (req, res) => {
 	res.send({ message: "Logged out successfully!" });
@@ -89,9 +88,10 @@ app.post("/api/users/login", async (req, res) => {
 app.post("/api/job-applications", async (req, res) => {
 	try {
 		const jobApplication = new JobApplication({
-			userId: req.body.userId, // Ensure userId is included in the request body
+			userId: req.body.userId,
 			...req.body,
 		});
+		console.log("Job application received:", jobApplication);
 		await jobApplication.save();
 		res.status(201).send(jobApplication);
 	} catch (error) {

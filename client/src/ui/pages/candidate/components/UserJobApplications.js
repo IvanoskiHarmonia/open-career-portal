@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const UserJobApplications = ({ userId }) => {
+const UserJobApplications = () => {
+	const userId = localStorage.getItem("userId");
 	const [jobApplications, setJobApplications] = useState([]);
 
 	useEffect(() => {
 		const fetchJobApplications = async () => {
 			try {
 				const response = await axios.get(`http://localhost:8000/api/user-applications/${userId}`);
+				console.log("Job applications:", response.data, userId);
 				setJobApplications(response.data);
 			} catch (error) {
 				console.error("Failed to fetch job applications:", error);

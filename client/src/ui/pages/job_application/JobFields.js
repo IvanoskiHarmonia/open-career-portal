@@ -63,6 +63,7 @@
 // Path: client/src/components/JobFields.js
 
 import React from "react";
+import axios from "axios";
 import {
 	Resume,
 	Opportunity,
@@ -80,36 +81,31 @@ import {
 import Required from "./small_blocks/Required";
 
 function JobFields() {
-	function handleSubmit(event) {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData);
 
-		fetch("/api/job-application", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error(`HTTP Error: ${response.status || "Unknown Status"}`);
-				}
-				return response.text();
-			})
-			.then((data) => console.log(data))
-			.catch((error) => {
-				console.error("Fetch Error:", error);
+		const userId = localStorage.getItem("userId");
+
+		try {
+			const response = await axios.post("http://localhost:8000/api/job-applications", {
+				userId,
+				...data,
 			});
-	}
+			console.log(userId);
+			console.log("Job application saved:", response.data);
+		} catch (error) {
+			console.error("Failed to save job application:", error);
+		}
+	};
 
 	return (
 		<div className="mt-3">
 			<div className="col-lg-10 offset-lg-1">
 				<h2>Job Application</h2>
-				<form action="/api/job-application" method="post" target="_blank" onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit}>
 					<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 mt-3">
 						Fields with red <Required /> are required.
 					</h5>

@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
 	const validateSession = async () => {
 		try {
 			const response = await axios.get("http://localhost:8000/api/session/validate", { withCredentials: true });
-
 			setIsAuthenticated(response.data.isValidSession);
 		} catch (error) {
 			console.error("Failed to validate session:", error);
@@ -26,6 +25,7 @@ export const AuthProvider = ({ children }) => {
 	const handleLogin = (navigate, userId) => {
 		setIsAuthenticated(true);
 		setUserId(userId);
+		console.log("User ID:", userId);
 		navigate("/careers/");
 	};
 
@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }) => {
 			await axios.post("http://localhost:8000/api/session/logout", {}, { withCredentials: true });
 			setIsAuthenticated(false);
 			setUserId(null);
+			localStorage.removeItem("userId");
 		} catch (error) {
 			console.error("Failed to logout:", error);
 		}
