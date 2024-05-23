@@ -6,8 +6,8 @@ import { useAuth } from "../../../../common/hooks/useAuth";
 import { LogIn } from "react-feather";
 
 const Login = () => {
-	const navigate = useNavigate();
 	const { handleLogin } = useAuth();
+	const navigate = useNavigate();
 
 	const login = useGoogleLogin({
 		clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
@@ -24,15 +24,14 @@ const Login = () => {
 					"http://localhost:8000/api/users/login",
 					{
 						token: tokenResponse.access_token,
-						expiresAt: new Date().getTime() + tokenResponse.expires_in * 1000,
+						expiresAt: new Date().getTime() + tokenResponse.expires_in + 60 * 60 * 1000,
 						email: googleUserResponse.data.email,
 					},
 					{ withCredentials: true }
 				);
 
 				const userId = loginResponse.data.userId;
-				console.log("User ID:", userId);
-				localStorage.setItem("userId", userId);
+				// localStorage.setItem("userId", userId);
 				handleLogin(navigate, userId, tokenResponse.expires_in);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);

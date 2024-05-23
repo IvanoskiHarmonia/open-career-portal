@@ -9,7 +9,7 @@ const UserJobApplications = () => {
 	useEffect(() => {
 		const fetchJobApplications = async () => {
 			try {
-				const response = await axios.get(`http://localhost:8000/api/user-applications/${userId}`);
+				const response = await axios.get(`http://localhost:8000/api/user-applications/user/${userId}`);
 				setJobApplications(response.data);
 			} catch (error) {
 				console.error("Failed to fetch job applications:", error);

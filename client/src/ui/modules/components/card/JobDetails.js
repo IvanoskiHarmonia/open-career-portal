@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import components from "../utils/MarkdownCode";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowRight } from "react-feather";
 
-const JobDetails = ({ isApplyButtonVisible = false }) => {
+const JobDetails = ({ setJob, job, isApplyButtonVisible = false }) => {
 	const { jobId } = useParams();
 	const navigate = useNavigate();
-
-	const [job, setJob] = useState({});
 
 	useEffect(() => {
 		axios
@@ -20,7 +18,7 @@ const JobDetails = ({ isApplyButtonVisible = false }) => {
 			.catch((error) => {
 				console.error("Error fetching job description:", error);
 			});
-	}, [jobId]);
+	}, [jobId, setJob]);
 
 	const handleApply = () => {
 		navigate(`/careers/apply/${jobId}`);
@@ -28,7 +26,7 @@ const JobDetails = ({ isApplyButtonVisible = false }) => {
 
 	return (
 		<div className="col-lg-10 offset-lg-1">
-			<ReactMarkdown components={components}>{`# ${job.title}\n${job.description}`}</ReactMarkdown>
+			{job && <ReactMarkdown components={components}>{`# ${job.title}\n${job.description}`}</ReactMarkdown>}
 			{isApplyButtonVisible && (
 				<div className="d-grid">
 					<button className="btn btn-primary" onClick={handleApply}>

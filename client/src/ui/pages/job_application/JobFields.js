@@ -83,7 +83,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../common/hooks/useAuth";
 import { Send } from "react-feather";
 
-function JobFields() {
+const JobFields = ({ job }) => {
 	const navigate = useNavigate();
 	const { userId } = useAuth();
 
@@ -92,17 +92,21 @@ function JobFields() {
 
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData);
-
-		// const userId = localStorage.getItem("userId");
+		data.jobTitle = job.title;
+		data.jobId = job.id;
 
 		try {
-			await axios.post("http://localhost:8000/api/job-applications", {
+			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
 				userId,
 				...data,
 			});
-			navigate("/user-applications/" + userId);
+			if (response.status === 201) {
+				navigate("/user-applications/" + userId);
+			} else {
+				console.error("Failed to save job application:", response.data);
+			}
 		} catch (error) {
-			console.error("Failed to save job application:", error);
+			console.error("Failed to save job application:", error.response ? error.response.data : error.message);
 		}
 	};
 
@@ -142,6 +146,6 @@ function JobFields() {
 			</form>
 		</div>
 	);
-}
+};
 
 export default JobFields;

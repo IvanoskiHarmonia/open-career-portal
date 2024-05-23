@@ -1,7 +1,6 @@
 const User = require("../models/User");
 
 const validateSession = async (req, res) => {
-	// return res.send({ isValidSession: true });
 	const token = req.cookies.sessionToken;
 
 	if (!token) {

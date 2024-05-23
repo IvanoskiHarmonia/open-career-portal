@@ -1,14 +1,5 @@
 const JobApplication = require("../models/JobApplication");
 
-const getAllJobApplications = async (req, res) => {
-	try {
-		const jobApplications = await JobApplication.find();
-		res.send(jobApplications);
-	} catch (error) {
-		res.status(400).send(error.message);
-	}
-};
-
 const getJobApplicationById = async (req, res) => {
 	try {
 		const jobApplication = await JobApplication.findById(req.params.id);
@@ -37,6 +28,7 @@ const createJobApplication = async (req, res) => {
 	try {
 		const jobApplication = new JobApplication({
 			userId: req.body.userId,
+			status: "Pending",
 			...req.body,
 		});
 		await jobApplication.save();
@@ -47,7 +39,6 @@ const createJobApplication = async (req, res) => {
 };
 
 module.exports = {
-	getAllJobApplications,
 	getJobApplicationById,
 	getUserApplications,
 	createJobApplication,

@@ -1,10 +1,13 @@
+import { useState } from "react";
 import JobDetails from "../../modules/components/card/JobDetails";
 import StyleWrapper from "../../modules/components/wrappers/StyleWrapper";
 
 function JobDetailsScreen() {
+	const [job, setJob] = useState({});
+
 	return (
 		<StyleWrapper>
-			<JobDetails isApplyButtonVisible={true} />
+			<JobDetails job={job} setJob={setJob} isApplyButtonVisible={true} />
 		</StyleWrapper>
 	);
 }
