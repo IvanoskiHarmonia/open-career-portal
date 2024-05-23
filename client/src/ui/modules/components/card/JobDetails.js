@@ -13,7 +13,7 @@ const JobDetails = ({ isApplyButtonVisible = false }) => {
 
 	useEffect(() => {
 		axios
-			.get(`/api/job/${jobId}`)
+			.get(`/api/jobs/${jobId}`)
 			.then((response) => {
 				setJob(response.data);
 			})

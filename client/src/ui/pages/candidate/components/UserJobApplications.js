@@ -26,7 +26,7 @@ const UserJobApplications = () => {
 					<li className="list-group-item d-flex justify-content-between align-items-center" key={application._id}>
 						{application.personalFirstName} {application.personalLastName} - {application.personalEmail} -{" "}
 						{application.signatureDate.split("T")[0]}
-						<span className="badge text-bg-success rounded">Reviewing</span>
+						<span className="badge text-bg-success rounded">In review</span>
 					</li>
 				))}
 			</ul>

@@ -80,9 +80,12 @@ import {
 
 import Required from "./small_blocks/Required";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../common/hooks/useAuth";
+import { Send } from "react-feather";
 
 function JobFields() {
 	const navigate = useNavigate();
+	const { userId } = useAuth();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -90,7 +93,7 @@ function JobFields() {
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData);
 
-		const userId = localStorage.getItem("userId");
+		// const userId = localStorage.getItem("userId");
 
 		try {
 			await axios.post("http://localhost:8000/api/job-applications", {
@@ -134,7 +137,7 @@ function JobFields() {
 				<Signature />
 
 				<button type="submit" className="btn btn-primary mt-4">
-					Submit Application
+					Submit Application <Send className="ms-1" />
 				</button>
 			</form>
 		</div>
