@@ -61,50 +61,33 @@ export const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		validateSession();
-		// const tokenExpiry = localStorage.getItem("tokenExpiry");
-		// const tokenExpiryNumber = Number(tokenExpiry);
-
-		// console.log("Token expiry:", tokenExpiry);
-
-		// if (!tokenExpiry || isNaN(tokenExpiryNumber) || checkTokenExpiry(tokenExpiryNumber)) {
-		// 	console.log("Token is either not present or expired:", tokenExpiry);
-		// 	handleLogout();
-		// } else {
-		// 	console.log("Token is valid:", tokenExpiry);
-		// }
 
 		// const handleBeforeUnload = () => {
 		// 	navigator.sendBeacon("/api/session/logout");
 		// };
 
-		// let idleTimeout;
+		let idleTimeout;
 
-		// const resetIdleTimer = () => {
-		// 	clearTimeout(idleTimeout);
-		// 	idleTimeout = setTimeout(() => {
-		// 		handleLogout();
-		// 	}, 15 * 60 * 1000); // 15 minutes
-		// };
+		const resetIdleTimer = () => {
+			clearTimeout(idleTimeout);
+			idleTimeout = setTimeout(() => {
+				handleLogout();
+			}, 30 * 60 * 1000); // 30 minutes
+		};
 
 		// window.addEventListener("beforeunload", handleBeforeUnload);
-		// window.addEventListener("mousemove", resetIdleTimer);
-		// window.addEventListener("keypress", resetIdleTimer);
+		window.addEventListener("mousemove", resetIdleTimer);
+		window.addEventListener("keypress", resetIdleTimer);
 
-		// resetIdleTimer();
+		resetIdleTimer();
 
-		// return () => {
-		// 	clearTimeout(idleTimeout);
-		// 	window.removeEventListener("beforeunload", handleBeforeUnload);
-		// 	window.removeEventListener("mousemove", resetIdleTimer);
-		// 	window.removeEventListener("keypress", resetIdleTimer);
-		// };
-	}, [validateSession]);
+		return () => {
+			clearTimeout(idleTimeout);
+			// window.removeEventListener("beforeunload", handleBeforeUnload);
+			window.removeEventListener("mousemove", resetIdleTimer);
+			window.removeEventListener("keypress", resetIdleTimer);
+		};
+	}, [handleLogout, validateSession]);
 
-	return (
-		<AuthContext.Provider value={{ isAuthenticated, userId, loading, handleLogout, handleLogin }}>{!loading && children}</AuthContext.Provider>
-	);
-};
-
-const checkTokenExpiry = (expiry) => {
-	return expiry < Date.now();
+	return <AuthContext.Provider value={{ isAuthenticated, userId, handleLogout, handleLogin }}>{!loading && children}</AuthContext.Provider>;
 };

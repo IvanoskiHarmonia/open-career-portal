@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GoBackButton from "../utils/GoBackButton";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../../common/hooks/useAuth";
 
 const Navbar = () => {
-	const { isAuthenticated, loading } = useAuth();
-
-	useEffect(() => {
-		if (!loading) {
-			if (!isAuthenticated) {
-				window.location.href = "/";
-			}
-		}
-	});
-
-	if (loading) return null;
+	const { isAuthenticated } = useAuth();
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
