@@ -24,7 +24,7 @@ function EmploymentHistory() {
 	}
 
 	return (
-		<section className="employement-history container">
+		<section id="employment-history" className="employement-history container">
 			<h4 className="mt-3">Employment History</h4>
 			{employmentHistory.map((item) => (
 				<div key={item.id} className="mt-3">

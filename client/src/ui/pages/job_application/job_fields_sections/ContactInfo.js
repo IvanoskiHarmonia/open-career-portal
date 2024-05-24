@@ -3,7 +3,7 @@ import Required from "../small_blocks/Required";
 
 function ContactInfo() {
 	return (
-		<section className="contact-info container">
+		<section id="contact-info" className="contact-info container">
 			<h4 className="mt-3">Contact Information</h4>
 			<div className="row">
 				<div className="form-group col-md-5">

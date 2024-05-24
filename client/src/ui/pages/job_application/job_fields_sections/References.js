@@ -30,7 +30,7 @@ function References() {
 	}
 
 	return (
-		<section className="references container">
+		<section id="references" className="references container">
 			<h4 className="mt-3">References</h4>
 			{references.map((item) => (
 				<div key={item.id} className="mt-3">

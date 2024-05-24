@@ -23,7 +23,7 @@ function EducationHistory() {
 	}
 
 	return (
-		<section className="education-history container">
+		<section id="education-history" className="education-history container">
 			<h4 className="mt-4">Education History</h4>
 			{educationHistory.map((item) => (
 				<div key={item.id} className="mt-3">

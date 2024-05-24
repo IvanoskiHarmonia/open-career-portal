@@ -4,7 +4,7 @@ import Required from "../small_blocks/Required";
 
 function InformationTruthfulness() {
 	return (
-		<section className="information-truthfulness container">
+		<section id="information-truthfulness" className="information-truthfulness container">
 			<h4 className="mt-3">Information Truthfulness</h4>
 			<div className="form-group">
 				<label htmlFor="information-truthfulness-check">

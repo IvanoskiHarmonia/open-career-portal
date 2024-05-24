@@ -3,7 +3,7 @@ import Required from "../small_blocks/Required";
 
 function Resume() {
 	return (
-		<section className="resume-coverletter-hear container">
+		<section id="resume-coverletter" className="resume-coverletter-hear container">
 			<h4 className="mt-3">Resume/Cover Letter</h4>
 			<div className="row">
 				<div className="form-group col-md-6">

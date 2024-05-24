@@ -62,7 +62,7 @@
 
 // Path: client/src/components/JobFields.js
 
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import {
 	Resume,
@@ -79,13 +79,25 @@ import {
 } from "./job_fields_sections";
 
 import Required from "./small_blocks/Required";
+import "./JobFields.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../common/hooks/useAuth";
 import { Send } from "react-feather";
+import ScrollSpyNav from "./small_blocks/ScrollSpyNav";
 
 const JobFields = ({ job }) => {
 	const navigate = useNavigate();
 	const { userId } = useAuth();
+
+	useEffect(() => {
+		// Initialize ScrollSpy
+		const bootstrap = window.bootstrap;
+		if (bootstrap) {
+			new bootstrap.ScrollSpy(document.body, {
+				target: "#scroll-spy-job-application",
+			});
+		}
+	}, []);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -94,9 +106,6 @@ const JobFields = ({ job }) => {
 		const data = Object.fromEntries(formData);
 		data.jobTitle = job.title;
 		data.jobId = job.id;
-
-
-		
 
 		try {
 			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
@@ -114,40 +123,52 @@ const JobFields = ({ job }) => {
 	};
 
 	return (
-		<div className="col-lg-10 offset-lg-1">
-			<h2>Job Application</h2>
-			<form onSubmit={handleSubmit}>
-				<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 my-3">
-					Fields with red <Required /> are required.
-				</h5>
+		<>
+			<div className="col-lg-3 d-none d-lg-block">
+				<ScrollSpyNav />
+			</div>
 
-				<Resume />
+			<div
+				data-bs-spy="scroll"
+				data-bs-target="#scroll-spy-job-application"
+				data-bs-smooth-scroll="true"
+				tabIndex="0"
+				className="col-lg-9 col-md-12"
+			>
+				<h2>Job Application</h2>
+				<form onSubmit={handleSubmit}>
+					<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 my-3">
+						Fields with red <Required /> are required.
+					</h5>
 
-				<Opportunity />
+					<Resume />
 
-				<ContactInfo />
+					<Opportunity />
 
-				<WorkEligibility />
+					<ContactInfo />
 
-				<EmploymentHistory />
+					<WorkEligibility />
 
-				<EducationHistory />
+					<EmploymentHistory />
 
-				<JobSkills />
+					<EducationHistory />
 
-				<References />
+					<JobSkills />
 
-				<InformationTruthfulness />
+					<References />
 
-				<SelfIdentification />
+					<InformationTruthfulness />
 
-				<Signature />
+					<SelfIdentification />
 
-				<button type="submit" className="btn btn-primary mt-4">
-					Submit Application <Send className="ms-1" />
-				</button>
-			</form>
-		</div>
+					<Signature />
+
+					<button type="submit" className="btn btn-primary mt-4">
+						Submit Application <Send className="ms-1" />
+					</button>
+				</form>
+			</div>
+		</>
 	);
 };
 

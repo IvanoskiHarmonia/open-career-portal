@@ -4,7 +4,7 @@ import Required from "../small_blocks/Required";
 
 function SelfIdentificiation() {
 	return (
-		<section className="self-identification container">
+		<section id="self-identification" className="self-identification container">
 			<h4 className="mt-3">Voluntary Equal Employment Opportunity Self-Identification</h4>
 			<div className="form-group">
 				<label htmlFor="gender">What is your Gender? </label>
