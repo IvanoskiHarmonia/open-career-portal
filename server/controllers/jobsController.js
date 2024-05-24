@@ -9,7 +9,7 @@ const getJobById = (req, res) => {
 	if (!job) {
 		return res.status(404).send("Job not found");
 	}
-	res.send({ description: job.description, title: job.title });
+	res.send({ id: job.id, description: job.description, title: job.title });
 };
 
 module.exports = {

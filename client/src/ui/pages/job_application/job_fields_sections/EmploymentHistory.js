@@ -5,7 +5,8 @@ function EmploymentHistory() {
 		{ id: 1, companyName: "", jobTitle: "", jobStartDate: "", jobEndDate: "", jobDescription: "" },
 	]);
 
-	const addEmploymentHistory = () => {
+	const addEmploymentHistory = (event) => {
+		event.preventDefault();
 		const previous_id = employmentHistory[employmentHistory.length - 1].id;
 		setEmploymentHistory([
 			...employmentHistory,
@@ -36,7 +37,7 @@ function EmploymentHistory() {
 							<input
 								type="text"
 								id={`company-name-${item.id}`}
-								name={`companyName-${item.id}`}
+								name="companyName"
 								className="form-control"
 								value={item.companyName || ""}
 								placeholder={`Company Name ${item.id}`}
@@ -48,7 +49,7 @@ function EmploymentHistory() {
 							<input
 								type="text"
 								id={`job-title-${item.id}`}
-								name={`jobTitle-${item.id}`}
+								name="jobTitle"
 								className="form-control"
 								value={item.jobTitle || ""}
 								placeholder={`Job Title ${item.id}`}
@@ -62,7 +63,7 @@ function EmploymentHistory() {
 							<input
 								type="date"
 								id={`job-start-date-${item.id}`}
-								name={`jobStartDate-${item.id}`}
+								name="jobStartDate"
 								className="form-control"
 								value={item.jobStartDate}
 								onChange={(event) => handleEmploymentChange(item.id, "jobStartDate", event)}
@@ -73,7 +74,7 @@ function EmploymentHistory() {
 							<input
 								type="date"
 								id={`job-end-date-${item.id}`}
-								name={`jobEndDate-${item.id}`}
+								name="jobEndDate"
 								className="form-control"
 								value={item.jobEndDate}
 								onChange={(event) => handleEmploymentChange(item.id, "jobEndDate", event)}
@@ -84,7 +85,7 @@ function EmploymentHistory() {
 						<label htmlFor={`job-description-${item.id}`}>Job Description</label>
 						<textarea
 							id={`job-description-${item.id}`}
-							name={`jobDescription-${item.id}`}
+							name="jobDescription"
 							className="form-control"
 							value={item.jobDescription || ""}
 							placeholder="Job Description"

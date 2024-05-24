@@ -4,6 +4,6 @@ const { getJobApplicationById, getUserApplications, createJobApplication } = req
 
 router.get("/:applicationId", getJobApplicationById); // TODO: This route is not used in the client
 router.get("/user/:userId", getUserApplications);
-router.post("/user-applications/create-application", createJobApplication);
+router.post("/create-application", createJobApplication);
 
 module.exports = router;

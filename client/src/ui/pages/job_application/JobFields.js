@@ -95,6 +95,9 @@ const JobFields = ({ job }) => {
 		data.jobTitle = job.title;
 		data.jobId = job.id;
 
+
+		
+
 		try {
 			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
 				userId,

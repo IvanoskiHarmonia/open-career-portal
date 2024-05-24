@@ -14,6 +14,7 @@ const JobDetails = ({ setJob, job, isApplyButtonVisible = false }) => {
 			.get(`/api/jobs/${jobId}`)
 			.then((response) => {
 				setJob(response.data);
+				console.log("Job Description:", response.data);
 			})
 			.catch((error) => {
 				console.error("Error fetching job description:", error);

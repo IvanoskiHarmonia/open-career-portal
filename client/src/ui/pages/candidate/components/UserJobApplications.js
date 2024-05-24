@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../../../common/hooks/useAuth";
+import { Tab, Tabs } from "react-bootstrap";
 
 const UserJobApplications = () => {
 	const { userId } = useAuth();
 	const [jobApplications, setJobApplications] = useState([]);
+	const [key, setKey] = useState("active");
 
 	useEffect(() => {
 		const fetchJobApplications = async () => {
@@ -18,18 +20,42 @@ const UserJobApplications = () => {
 		fetchJobApplications();
 	}, [userId]);
 
+	const activeApplications = jobApplications.filter((application) => application.status.toLowerCase() === "pending");
+	const inactiveApplications = jobApplications.filter((application) => application.status.toLowerCase() === "rejected");
+
 	return (
 		<div className="col-lg-10 offset-lg-1">
 			<h3>Your Job Applications</h3>
-			<ul className="list-group">
-				{jobApplications.map((application) => (
-					<li className="list-group-item d-flex justify-content-between align-items-center" key={application._id}>
-						{application.personalFirstName} {application.personalLastName} - {application.personalEmail} -{" "}
-						{application.signatureDate.split("T")[0]}
-						<span className="badge text-bg-success rounded">In review</span>
-					</li>
-				))}
-			</ul>
+			<Tabs id="applications-tabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
+				<Tab eventKey="active" title="Active Applications">
+					<ul className="list-group">
+						{activeApplications.map((application) => (
+							<li className="list-group-item d-flex justify-content-between align-items-center" key={application._id}>
+								<div>
+									<strong>{application.jobTitle}</strong> at {application.personalEmail || "N/A"}
+									<br />
+									Applied on: {application.signatureDate.split("T")[0]}
+								</div>
+								<span className="badge text-bg-success rounded">{application.status}</span>
+							</li>
+						))}
+					</ul>
+				</Tab>
+				<Tab eventKey="inactive" title="Inactive Applications">
+					<ul className="list-group">
+						{inactiveApplications.map((application) => (
+							<li className="list-group-item d-flex justify-content-between align-items-center" key={application._id}>
+								<div>
+									<strong>{application.jobTitle}</strong> at {application.companyName || "N/A"}
+									<br />
+									Applied on: {application.signatureDate.split("T")[0]}
+								</div>
+								<span className="badge text-bg-danger rounded">{application.status}</span>
+							</li>
+						))}
+					</ul>
+				</Tab>
+			</Tabs>
 		</div>
 	);
 };

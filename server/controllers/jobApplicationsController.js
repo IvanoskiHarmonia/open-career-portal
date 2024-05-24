@@ -31,6 +31,7 @@ const createJobApplication = async (req, res) => {
 			status: "Pending",
 			...req.body,
 		});
+		console.log("Job Application Data:", jobApplication);
 		await jobApplication.save();
 		res.status(201).send(jobApplication);
 	} catch (error) {

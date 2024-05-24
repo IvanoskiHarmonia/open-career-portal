@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const jobApplicationSchema = new mongoose.Schema({
 	userId: String,
+	status: String,
+	jobId: String,
+	jobTitle: String,
 	resume: Object,
 	coverLetter: Object,
 	personalFirstName: String,
