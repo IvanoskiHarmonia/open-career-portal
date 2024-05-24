@@ -135,7 +135,7 @@ const JobFields = ({ job }) => {
 				tabIndex="0"
 				className="col-lg-9 col-md-12"
 			>
-				<h2>Job Application</h2>
+				<h3 className="text-center">Job Application</h3>
 				<form onSubmit={handleSubmit}>
 					<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 my-3">
 						Fields with red <Required /> are required.

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
+import { FileText } from "react-feather";
 
 const ScrollSpyNav = () => {
 	const [activeSection, setActiveSection] = useState("resume-coverletter");
@@ -30,6 +31,15 @@ const ScrollSpyNav = () => {
 
 	return (
 		<Nav className="flex-column sticky-top" id="scroll-spy-job-application">
+			<button
+				className="btn btn-primary shadow-sm mb-2"
+				type="button"
+				data-bs-toggle="offcanvas"
+				data-bs-target="#offcanvasJobDescription"
+				aria-controls="offcanvasJobDescription"
+			>
+				Job Description <FileText size={20} />
+			</button>
 			<Nav.Link href="#resume-coverletter" active={activeSection === "resume-coverletter"}>
 				Resume/Cover Letter <span className="badge bg-danger">2</span>
 			</Nav.Link>
