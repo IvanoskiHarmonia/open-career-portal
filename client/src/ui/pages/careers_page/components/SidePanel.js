@@ -26,7 +26,7 @@ const SidePanel = () => {
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
-		<div>
+		<div className="col-lg-10 offset-lg-1">
 			<h3 className="">Open Positions</h3>
 			{jobsArray.map((job) => (
 				<JobCard job={job} key={job.id} />

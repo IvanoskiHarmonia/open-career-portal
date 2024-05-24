@@ -63,6 +63,7 @@
 // Path: client/src/components/JobFields.js
 
 import React from "react";
+import axios from "axios";
 import {
 	Resume,
 	Opportunity,
@@ -78,71 +79,76 @@ import {
 } from "./job_fields_sections";
 
 import Required from "./small_blocks/Required";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../common/hooks/useAuth";
+import { Send } from "react-feather";
 
-function JobFields() {
-	function handleSubmit(event) {
+const JobFields = ({ job }) => {
+	const navigate = useNavigate();
+	const { userId } = useAuth();
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData);
+		data.jobTitle = job.title;
+		data.jobId = job.id;
 
-		fetch("/api/job-application", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error(`HTTP Error: ${response.status || "Unknown Status"}`);
-				}
-				return response.text();
-			})
-			.then((data) => console.log(data))
-			.catch((error) => {
-				console.error("Fetch Error:", error);
+
+		
+
+		try {
+			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
+				userId,
+				...data,
 			});
-	}
+			if (response.status === 201) {
+				navigate("/user-applications/" + userId);
+			} else {
+				console.error("Failed to save job application:", response.data);
+			}
+		} catch (error) {
+			console.error("Failed to save job application:", error.response ? error.response.data : error.message);
+		}
+	};
 
 	return (
-		<div className="mt-3">
-			<div className="col-lg-10 offset-lg-1">
-				<h2>Job Application</h2>
-				<form action="/api/job-application" method="post" target="_blank" onSubmit={handleSubmit}>
-					<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 mt-3">
-						Fields with red <Required /> are required.
-					</h5>
+		<div className="col-lg-10 offset-lg-1">
+			<h2>Job Application</h2>
+			<form onSubmit={handleSubmit}>
+				<h5 className="bg-warning bg-opacity-25 text-center rounded border-1 p-2 my-3">
+					Fields with red <Required /> are required.
+				</h5>
 
-					<Resume />
+				<Resume />
 
-					<Opportunity />
+				<Opportunity />
 
-					<ContactInfo />
+				<ContactInfo />
 
-					<WorkEligibility />
+				<WorkEligibility />
 
-					<EmploymentHistory />
+				<EmploymentHistory />
 
-					<EducationHistory />
+				<EducationHistory />
 
-					<JobSkills />
+				<JobSkills />
 
-					<References />
+				<References />
 
-					<InformationTruthfulness />
+				<InformationTruthfulness />
 
-					<SelfIdentification />
+				<SelfIdentification />
 
-					<Signature />
+				<Signature />
 
-					<button type="submit" className="btn btn-primary mt-4">
-						Submit Application
-					</button>
-				</form>
-			</div>
+				<button type="submit" className="btn btn-primary mt-4">
+					Submit Application <Send className="ms-1" />
+				</button>
+			</form>
 		</div>
 	);
-}
+};
 
 export default JobFields;
