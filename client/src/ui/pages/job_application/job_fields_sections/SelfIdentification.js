@@ -1,11 +1,13 @@
 import React from "react";
 
+import { GenderRace, Disability, Veteran } from "../small_blocks/SelfIdentification_utils";
 import Required from "../small_blocks/Required";
 
 function SelfIdentificiation() {
 	return (
 		<section id="self-identification" className="self-identification container">
 			<h4 className="mt-3">Voluntary Equal Employment Opportunity Self-Identification</h4>
+			<GenderRace />
 			<div className="form-group">
 				<label htmlFor="gender">What is your Gender? </label>
 				<Required />
@@ -30,7 +32,32 @@ function SelfIdentificiation() {
 					<option value="optOut">Opt Out</option>
 				</select>
 			</div>
+			<h4 className="mt-3">Voluntary Self-Identification of Veteran Status</h4>
+			<Veteran />
+			<div className="form-group">
+				<label>Are you a veteran? </label>
+				<Required />
+				<div className="form-check">
+					<input type="radio" className="form-check-input" id="yes-veteran" name="veteran" value="yes" required />
+					<label className="form-check-label" htmlFor="yes-veteran">
+						Yes, I am a veteran
+					</label>
+				</div>
+				<div className="form-check">
+					<input type="radio" className="form-check-input" id="no-veteran" name="veteran" value="no" />
+					<label className="form-check-label" htmlFor="no-veteran">
+						No, I am not a veteran
+					</label>
+				</div>
+				<div className="form-check">
+					<input type="radio" className="form-check-input" id="optOut-veteran" name="veteran" value="optOut" />
+					<label className="form-check-label" htmlFor="optOut-veteran">
+						I do not wish to answer
+					</label>
+				</div>
+			</div>
 			<h4 className="mt-3">Voluntary Self-Identification of Disability</h4>
+			<Disability />
 			<div className="form-group">
 				<label>Do you have a disability? </label>
 				<Required />
@@ -53,27 +80,11 @@ function SelfIdentificiation() {
 					</label>
 				</div>
 			</div>
-			<h4 className="mt-3">Voluntary Self-Identification of Veteran Status</h4>
-			<div className="form-group">
-				<label>Are you a veteran? </label>
-				<Required />
-				<div className="form-check">
-					<input type="radio" className="form-check-input" id="yes-veteran" name="veteran" value="yes" required />
-					<label className="form-check-label" htmlFor="yes-veteran">
-						Yes, I am a veteran
-					</label>
-				</div>
-				<div className="form-check">
-					<input type="radio" className="form-check-input" id="no-veteran" name="veteran" value="no" />
-					<label className="form-check-label" htmlFor="no-veteran">
-						No, I am not a veteran
-					</label>
-				</div>
-				<div className="form-check">
-					<input type="radio" className="form-check-input" id="optOut-veteran" name="veteran" value="optOut" />
-					<label className="form-check-label" htmlFor="optOut-veteran">
-						I do not wish to answer
-					</label>
+			<div class="container my-4">
+				<div class="alert alert-info" role="alert">
+					<strong>PUBLIC BURDEN STATEMENT:</strong> According to the Paperwork Reduction Act of 1995, no persons are required to respond to
+					a collection of information unless such collection displays a valid OMB control number. This survey should take about 5 minutes to
+					complete.
 				</div>
 			</div>
 		</section>

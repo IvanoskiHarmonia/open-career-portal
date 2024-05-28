@@ -12,7 +12,7 @@ const OffCanvas = ({ children }) => {
 		>
 			<div className="offcanvas-header">
 				<h5 className="offcanvas-title" id="offcanvasJobDescriptionLabel">
-					Offcanvas
+					Job Description
 				</h5>
 				<button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
