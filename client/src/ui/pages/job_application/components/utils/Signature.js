@@ -1,10 +1,10 @@
 import React from "react";
 
-import Required from "../small_blocks/Required";
+import Required from "../../small_blocks/Required";
 
 function Signature() {
 	return (
-		<section className="signature container">
+		<section id="signature" className="signature container">
 			<h4 className="mt-3">Signature</h4>
 			<div className="row">
 				<div className="form-group col-md-4">

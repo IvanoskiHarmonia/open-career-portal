@@ -1,0 +1,4 @@
+.sticky-top {
+	top: 20% !important;
+	z-index: 1020;
+}

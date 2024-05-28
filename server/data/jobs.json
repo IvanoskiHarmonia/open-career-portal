@@ -1,47 +1,320 @@
 [
 	{
 		"id": 1,
-		"title": "Job Title 1",
-		"company": "Company Name",
-		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-		"date_created": "03-07-2021",
-		"date_updated": "03-07-2021",
-		"date_expires": "04-07-2022"
+		"title": "Software Engineer",
+		"company": "Tech Innovators Inc.",
+		"description": "We are looking for a skilled software engineer to join our team...",
+		"date_created": "2024-05-28T08:30:00Z",
+		"date_updated": "2024-05-28T08:30:00Z",
+		"location": "Austin, TX",
+		"type": "Full-time",
+		"salary": "85,000 - 100,000 USD",
+		"requirements": [
+			"Bachelor's degree in Computer Science or related field",
+			"2+ years of experience in software development",
+			"Proficiency in Java, Spring Boot, React"
+		],
+		"responsibilities": ["Develop and maintain web applications", "Collaborate with cross-functional teams", "Participate in code reviews"],
+		"benefits": ["Health insurance", "401(k) plan", "Flexible working hours"],
+		"application_deadline": "2024-06-30T23:59:59Z",
+		"contact_information": {
+			"email": "hr@techinnovators.com",
+			"phone": "123-456-7890"
+		},
+		"job_category": "IT",
+		"experience_level": "Mid-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/tech_innovators_logo.png",
+		"remote": true,
+		"how_to_apply": "Send your resume and cover letter to hr@techinnovators.com"
 	},
 	{
 		"id": 2,
-		"title": "Job Title 2",
-		"company": "Company Name",
-		"description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		"date_created": "03-07-2021",
-		"date_updated": "03-07-2021",
-		"date_expires": "04-07-2022"
+		"title": "Marketing Manager",
+		"company": "Creative Solutions LLC",
+		"description": "Seeking an experienced Marketing Manager to lead our marketing team...",
+		"date_created": "2024-05-25T10:15:00Z",
+		"date_updated": "2024-05-25T10:15:00Z",
+		"location": "New York, NY",
+		"type": "Full-time",
+		"salary": "70,000 - 90,000 USD",
+		"requirements": [
+			"Bachelor's degree in Marketing, Business, or related field",
+			"5+ years of experience in marketing management",
+			"Strong knowledge of digital marketing strategies"
+		],
+		"responsibilities": [
+			"Develop and implement marketing campaigns",
+			"Manage the marketing team",
+			"Analyze market trends and adjust strategies accordingly"
+		],
+		"benefits": ["Health insurance", "Paid time off", "Professional development opportunities"],
+		"application_deadline": "2024-07-15T23:59:59Z",
+		"contact_information": {
+			"email": "careers@creativesolutions.com",
+			"phone": "987-654-3210"
+		},
+		"job_category": "Marketing",
+		"experience_level": "Senior-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/creative_solutions_logo.png",
+		"remote": false,
+		"how_to_apply": "Apply online at our careers page"
 	},
 	{
 		"id": 3,
-		"title": "Job Title 3",
-		"company": "Company Name",
-		"description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-		"date_created": "03-07-2021",
-		"date_updated": "03-07-2021",
-		"date_expires": "04-07-2022"
+		"title": "Data Scientist",
+		"company": "Data Wizards Corp",
+		"description": "We are hiring a Data Scientist to help us extract insights from large datasets...",
+		"date_created": "2024-05-20T09:00:00Z",
+		"date_updated": "2024-05-20T09:00:00Z",
+		"location": "San Francisco, CA",
+		"type": "Full-time",
+		"salary": "95,000 - 120,000 USD",
+		"requirements": [
+			"Master's degree in Data Science, Statistics, or related field",
+			"3+ years of experience in data analysis",
+			"Proficiency in Python, R, and SQL"
+		],
+		"responsibilities": [
+			"Analyze large datasets to extract actionable insights",
+			"Develop predictive models",
+			"Collaborate with cross-functional teams"
+		],
+		"benefits": ["Health insurance", "Stock options", "Gym membership"],
+		"application_deadline": "2024-08-01T23:59:59Z",
+		"contact_information": {
+			"email": "jobs@datawizards.com",
+			"phone": "456-789-1230"
+		},
+		"job_category": "Data Science",
+		"experience_level": "Mid-level",
+		"education": "Master's degree",
+		"company_logo": "https://example.com/logos/data_wizards_logo.png",
+		"remote": true,
+		"how_to_apply": "Send your resume to jobs@datawizards.com"
 	},
 	{
 		"id": 4,
-		"title": "Job Title 4",
-		"company": "Company Name",
-		"description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-		"date_created": "03-07-2021",
-		"date_updated": "03-07-2021",
-		"date_expires": "04-06-2022"
+		"title": "Product Manager",
+		"company": "InnovateTech",
+		"description": "Looking for a Product Manager to oversee the development and launch of new products...",
+		"date_created": "2024-05-22T11:30:00Z",
+		"date_updated": "2024-05-22T11:30:00Z",
+		"location": "Seattle, WA",
+		"type": "Full-time",
+		"salary": "90,000 - 110,000 USD",
+		"requirements": [
+			"Bachelor's degree in Business, Engineering, or related field",
+			"4+ years of experience in product management",
+			"Strong project management skills"
+		],
+		"responsibilities": [
+			"Manage product development from conception to launch",
+			"Work with cross-functional teams",
+			"Analyze market trends and user feedback"
+		],
+		"benefits": ["Health insurance", "401(k) matching", "Paid parental leave"],
+		"application_deadline": "2024-07-31T23:59:59Z",
+		"contact_information": {
+			"email": "hr@innovatetech.com",
+			"phone": "321-654-9870"
+		},
+		"job_category": "Product Management",
+		"experience_level": "Mid-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/innovate_tech_logo.png",
+		"remote": false,
+		"how_to_apply": "Apply online at our careers page"
 	},
 	{
-		"id": 100,
-		"title": "Senior Python Developer",
-		"company": "Tech Innovations Inc.",
-		"description": "### Job Description\n\nWe are seeking a **Senior Python Developer** to join our dynamic team at Tech Innovations Inc. In this role, you will be responsible for developing high-quality software solutions to meet our client's needs. This position involves working closely with both technical teams and clients to ensure our solutions are both innovative and functional.\n\n### Responsibilities\n\n- Design, develop, and maintain **Python** applications and services.\n- Contribute to all phases of the development lifecycle.\n- Write well-designed, testable code.\n- Collaborate with the QA team to ensure robustness, including developing unit tests.\n- Review and debug existing codebase to optimize performance.\n- Mentor junior developers and assist in their skill development.\n\n### Requirements\n\n- Strong proficiency in **Python**, with a good knowledge of its ecosystems.\n- Solid understanding of object-oriented programming.\n- Familiarity with various design and architectural patterns.\n- Experience with front-end technologies, such as **JavaScript**, **HTML5**, and **CSS3**.\n- Skilled in developing web applications using at least one popular web framework (e.g., Django, Flask).\n- Proficiency in code versioning tools, such as Git.\n\n### Sample Test Code\n\nHere is a simple Python snippet that showcases basic list comprehension:\n\n```python\n# Example of list comprehension in Python\ncubed_numbers = [x**3 for x in range(10)]\nprint(cubed_numbers)\n```\n\n### Why Join Us?\n\nJoin our team for an opportunity to lead in a challenging and rewarding environment where you can grow your career and work with cutting-edge technologies. You'll be part of a culture that values collaboration and innovation.\n\n**Apply now and make a real difference in the tech industry!**",
-		"date_created": "03-06-2021",
-		"date_updated": "03-06-2021",
-		"date_expires": "04-06-2022"
+		"id": 5,
+		"title": "UX Designer",
+		"company": "Creative Minds Studio",
+		"description": "We need a UX Designer to create user-friendly interfaces for our applications...",
+		"date_created": "2024-05-18T14:00:00Z",
+		"date_updated": "2024-05-18T14:00:00Z",
+		"location": "Los Angeles, CA",
+		"type": "Full-time",
+		"salary": "75,000 - 95,000 USD",
+		"requirements": [
+			"Bachelor's degree in Design, HCI, or related field",
+			"3+ years of experience in UX design",
+			"Proficiency in design tools like Sketch, Figma, Adobe XD"
+		],
+		"responsibilities": [
+			"Design intuitive user interfaces",
+			"Conduct user research and usability testing",
+			"Collaborate with developers and product managers"
+		],
+		"benefits": ["Health insurance", "Flexible work hours", "Professional development"],
+		"application_deadline": "2024-06-15T23:59:59Z",
+		"contact_information": {
+			"email": "jobs@creativeminds.com",
+			"phone": "789-123-4560"
+		},
+		"job_category": "Design",
+		"experience_level": "Mid-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/creative_minds_logo.png",
+		"remote": true,
+		"how_to_apply": "Submit your portfolio and resume to jobs@creativeminds.com"
+	},
+	{
+		"id": 6,
+		"title": "Human Resources Manager",
+		"company": "PeopleFirst Inc.",
+		"description": "We are seeking an experienced HR Manager to oversee our HR department...",
+		"date_created": "2024-05-19T12:30:00Z",
+		"date_updated": "2024-05-19T12:30:00Z",
+		"location": "Chicago, IL",
+		"type": "Full-time",
+		"salary": "80,000 - 100,000 USD",
+		"requirements": [
+			"Bachelor's degree in Human Resources, Business, or related field",
+			"5+ years of experience in HR management",
+			"Strong understanding of labor laws and regulations"
+		],
+		"responsibilities": [
+			"Manage the HR department and oversee all HR functions",
+			"Develop and implement HR policies and procedures",
+			"Handle employee relations and conflict resolution"
+		],
+		"benefits": ["Health insurance", "Retirement plan", "Paid vacation"],
+		"application_deadline": "2024-07-20T23:59:59Z",
+		"contact_information": {
+			"email": "careers@peoplefirst.com",
+			"phone": "654-321-0987"
+		},
+		"job_category": "Human Resources",
+		"experience_level": "Senior-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/people_first_logo.png",
+		"remote": false,
+		"how_to_apply": "Apply online at our careers page"
+	},
+	{
+		"id": 7,
+		"title": "Financial Analyst",
+		"company": "Finance Gurus LLC",
+		"description": "We are hiring a Financial Analyst to support our finance team with data analysis...",
+		"date_created": "2024-05-21T15:00:00Z",
+		"date_updated": "2024-05-21T15:00:00Z",
+		"location": "Boston, MA",
+		"type": "Full-time",
+		"salary": "70,000 - 85,000 USD",
+		"requirements": [
+			"Bachelor's degree in Finance, Economics, or related field",
+			"2+ years of experience in financial analysis",
+			"Strong analytical and quantitative skills"
+		],
+		"responsibilities": [
+			"Analyze financial data and create financial models",
+			"Prepare reports and presentations for management",
+			"Assist in budgeting and forecasting"
+		],
+		"benefits": ["Health insurance", "401(k) plan", "Professional development"],
+		"application_deadline": "2024-07-10T23:59:59Z",
+		"contact_information": {
+			"email": "hr@financegurus.com",
+			"phone": "987-123-6540"
+		},
+		"job_category": "Finance",
+		"experience_level": "Mid-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/finance_gurus_logo.png",
+		"remote": false,
+		"how_to_apply": "Email your resume and cover letter to hr@financegurus.com"
+	},
+	{
+		"id": 8,
+		"title": "Sales Representative",
+		"company": "Sales Pros Inc.",
+		"description": "We need a dynamic Sales Representative to join our sales team...",
+		"date_created": "2024-05-26T13:00:00Z",
+		"date_updated": "2024-05-26T13:00:00Z",
+		"location": "Miami, FL",
+		"type": "Full-time",
+		"salary": "50,000 - 65,000 USD",
+		"requirements": [
+			"Bachelor's degree in Business, Marketing, or related field",
+			"1+ years of experience in sales",
+			"Excellent communication and interpersonal skills"
+		],
+		"responsibilities": ["Develop and maintain client relationships", "Meet and exceed sales targets", "Prepare sales reports and forecasts"],
+		"benefits": ["Health insurance", "Commission", "Travel opportunities"],
+		"application_deadline": "2024-08-15T23:59:59Z",
+		"contact_information": {
+			"email": "careers@salespros.com",
+			"phone": "123-654-7890"
+		},
+		"job_category": "Sales",
+		"experience_level": "Entry-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/sales_pros_logo.png",
+		"remote": false,
+		"how_to_apply": "Apply online at our careers page"
+	},
+	{
+		"id": 9,
+		"title": "Customer Support Specialist",
+		"company": "Support Heroes Inc.",
+		"description": "We are looking for a Customer Support Specialist to provide excellent support to our customers...",
+		"date_created": "2024-05-23T08:00:00Z",
+		"date_updated": "2024-05-23T08:00:00Z",
+		"location": "Denver, CO",
+		"type": "Full-time",
+		"salary": "45,000 - 60,000 USD",
+		"requirements": ["Bachelor's degree in any field", "1+ years of experience in customer support", "Strong problem-solving skills"],
+		"responsibilities": [
+			"Respond to customer inquiries via phone, email, and chat",
+			"Resolve customer issues in a timely manner",
+			"Document customer interactions and feedback"
+		],
+		"benefits": ["Health insurance", "Paid time off", "Flexible working hours"],
+		"application_deadline": "2024-06-30T23:59:59Z",
+		"contact_information": {
+			"email": "jobs@supportheroes.com",
+			"phone": "789-456-1230"
+		},
+		"job_category": "Customer Support",
+		"experience_level": "Entry-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/support_heroes_logo.png",
+		"remote": true,
+		"how_to_apply": "Send your resume to jobs@supportheroes.com"
+	},
+	{
+		"id": 10,
+		"title": "Operations Manager",
+		"company": "Efficient Operations Ltd.",
+		"description": "Seeking an Operations Manager to oversee our daily operations and ensure efficiency...",
+		"date_created": "2024-05-27T09:30:00Z",
+		"date_updated": "2024-05-27T09:30:00Z",
+		"location": "Houston, TX",
+		"type": "Full-time",
+		"salary": "80,000 - 100,000 USD",
+		"requirements": [
+			"Bachelor's degree in Business, Operations Management, or related field",
+			"4+ years of experience in operations management",
+			"Strong leadership and organizational skills"
+		],
+		"responsibilities": [
+			"Oversee daily operations and ensure efficiency",
+			"Manage operations team and coordinate with other departments",
+			"Develop and implement operational policies and procedures"
+		],
+		"benefits": ["Health insurance", "Retirement plan", "Performance bonuses"],
+		"application_deadline": "2024-08-31T23:59:59Z",
+		"contact_information": {
+			"email": "careers@efficientoperations.com",
+			"phone": "456-321-7890"
+		},
+		"job_category": "Operations",
+		"experience_level": "Senior-level",
+		"education": "Bachelor's degree",
+		"company_logo": "https://example.com/logos/efficient_operations_logo.png",
+		"remote": false,
+		"how_to_apply": "Apply online at our careers page"
 	}
 ]

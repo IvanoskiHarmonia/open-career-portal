@@ -1,4 +1,4 @@
-.markdown-limited {
+.clamp-2 {
 	display: -webkit-box;
 	-webkit-line-clamp: 2; /* Number of lines you want */
 	-webkit-box-orient: vertical;

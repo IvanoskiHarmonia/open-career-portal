@@ -1,17 +1,34 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import components from "../utils/MarkdownCode";
 import { Link } from "react-router-dom";
-import "./JobCard.css";
 import { ExternalLink } from "react-feather";
+import "./JobCard.css";
 
 const JobCard = React.memo(({ job }) => {
 	return (
 		<div className="card my-3 shadow-sm">
 			<div className="card-body">
-				<div className="d-flex justify-content-between align-items-start mb-3">
-					<h5 className="card-title mb-0">{job.title}</h5>
-					<p className="card-text text-muted small">Date released: {job.date_created}</p>
+				<div className="d-flex justify-content-between align-items-start">
+					<div>
+						<h5 className="card-title mb-0">{job.title}</h5>
+						<h6 className="card-subtitle text-muted">{job.company}</h6>
+					</div>
+					<p className="card-text text-muted small">Date released: {new Date(job.date_created).toLocaleDateString()}</p>
+				</div>
+				<div className="d-flex justify-content-between align-items-center">
+					<p className="card-text mb-2">
+						<strong>Location:</strong> {job.location}
+					</p>
+					<p className="card-text">
+						<strong>Type:</strong> {job.type}
+					</p>
+				</div>
+				<div className="d-flex justify-content-between align-items-center">
+					<p className="card-text">
+						<strong>Salary:</strong> {job.salary}
+					</p>
+					<p className="card-text">
+						<strong>Remote:</strong> {job.remote ? "Yes" : "No"}
+					</p>
 				</div>
 				<div className="d-flex justify-content-between align-items-center">
 					<Link to={`/careers/${job.id}`} className="text-info text-decoration-none" target="_blank" rel="noopener noreferrer">
@@ -19,8 +36,8 @@ const JobCard = React.memo(({ job }) => {
 					</Link>
 				</div>
 				<hr />
-				<div className="markdown-limited">
-					<ReactMarkdown components={components}>{job.description}</ReactMarkdown>
+				<div className="clamp-2">
+					<p>{job.description}</p>
 				</div>
 			</div>
 		</div>

@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
 function EducationHistory() {
-	const [educationHistory, setEducationHistory] = useState([
-		{ id: 1, schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", gpa: "" },
-	]);
+	const [educationHistory, setEducationHistory] = useState([]);
 
-	const addEducationHistory = () => {
-		const previous_id = educationHistory[educationHistory.length - 1].id;
+	const addEducationHistory = (event) => {
+		event.preventDefault();
+		const newId = educationHistory.length > 0 ? educationHistory[educationHistory.length - 1].id + 1 : 1;
 		setEducationHistory([
 			...educationHistory,
-			{ id: previous_id + 1, schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", gpa: "" },
+			{ id: newId, schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", gpa: "" },
 		]);
 	};
 
@@ -18,16 +17,17 @@ function EducationHistory() {
 		setEducationHistory((prev) => prev.map((entry) => (entry.id === id ? { ...entry, [field]: value } : entry)));
 	};
 
-	function removeEducation(index) {
-		setEducationHistory((prev) => prev.filter((_, i) => i !== index));
+	function removeEducation(id, event) {
+		event.preventDefault();
+		setEducationHistory((prev) => prev.filter((entry) => entry.id !== id));
 	}
 
 	return (
-		<section className="education-history container">
+		<section id="education-history" className="education-history container">
 			<h4 className="mt-4">Education History</h4>
 			{educationHistory.map((item) => (
 				<div key={item.id} className="mt-3">
-					<button className="btn btn-danger float-right pt-0 pb-0" onClick={() => removeEducation(item.id)}>
+					<button className="btn btn-danger float-right pt-0 pb-0" onClick={(event) => removeEducation(item.id, event)}>
 						X
 					</button>
 					<div className="row">

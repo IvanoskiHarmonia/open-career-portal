@@ -2,7 +2,7 @@ import React from "react";
 
 function JobSkills() {
 	return (
-		<section className="job-skills container">
+		<section id="job-skills" className="job-skills container">
 			<h4 className="mt-3">Skills</h4>
 			<div className="row">
 				<div className="form-group col-md-6">

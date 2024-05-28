@@ -1,34 +1,36 @@
 import React, { useState } from "react";
 
 function EmploymentHistory() {
-	const [employmentHistory, setEmploymentHistory] = useState([
-		{ id: 1, companyName: "", jobTitle: "", jobStartDate: "", jobEndDate: "", jobDescription: "" },
-	]);
+	const [employmentHistory, setEmploymentHistory] = useState([]);
 
 	const addEmploymentHistory = (event) => {
 		event.preventDefault();
-		const previous_id = employmentHistory[employmentHistory.length - 1].id;
+		const newId = employmentHistory.length > 0 ? employmentHistory[employmentHistory.length - 1].id + 1 : 1;
 		setEmploymentHistory([
 			...employmentHistory,
-			{ id: previous_id + 1, companyName: "", jobTitle: "", jobStartDate: "", jobEndDate: "", jobDescription: "" },
+			{ id: newId, companyName: "", jobTitle: "", jobStartDate: "", jobEndDate: "", jobDescription: "" },
 		]);
 	};
 
 	const handleEmploymentChange = (id, field, event) => {
-		const value = event.target.value;
+		let value = event.target.value;
+		if (field === "jobStartDate" || field === "jobEndDate") {
+			value = new Date(value);
+		}
 		setEmploymentHistory((prev) => prev.map((entry) => (entry.id === id ? { ...entry, [field]: value } : entry)));
 	};
 
-	function removeEmployment(index) {
-		setEmploymentHistory((prev) => prev.filter((_, i) => i !== index));
+	function removeEmployment(id, event) {
+		event.preventDefault();
+		setEmploymentHistory((prev) => prev.filter((entry) => entry.id !== id));
 	}
 
 	return (
-		<section className="employement-history container">
+		<section id="employment-history" className="employement-history container">
 			<h4 className="mt-3">Employment History</h4>
 			{employmentHistory.map((item) => (
 				<div key={item.id} className="mt-3">
-					<button className="btn btn-danger float-right pt-0 pb-0" onClick={() => removeEmployment(item.id)}>
+					<button className="btn btn-danger float-right pt-0 pb-0" onClick={(event) => removeEmployment(item.id, event)}>
 						X
 					</button>
 					<div className="row">
