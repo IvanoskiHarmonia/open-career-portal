@@ -12,7 +12,6 @@ const JobDetails = ({ setJob, job, isApplyButtonVisible = false }) => {
 		axios
 			.get(`/api/jobs/${jobId}`)
 			.then((response) => {
-				console.log("Job:", response.data.job);
 				setJob(response.data.job);
 			})
 			.catch((error) => {
