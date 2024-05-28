@@ -76,14 +76,14 @@ import {
 	InformationTruthfulness,
 	SelfIdentification,
 	Signature,
-} from "./job_fields_sections";
+} from "./utils";
 
-import Required from "./small_blocks/Required";
+import Required from "../small_blocks/Required";
 import "./JobFields.css";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../common/hooks/useAuth";
+import { useAuth } from "../../../../common/hooks/useAuth";
 import { Send } from "react-feather";
-import ScrollSpyNav from "./small_blocks/ScrollSpyNav";
+import ScrollSpyNav from "../small_blocks/ScrollSpyNav";
 
 const JobFields = ({ job }) => {
 	const navigate = useNavigate();

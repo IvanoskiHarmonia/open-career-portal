@@ -1,7 +1,7 @@
 import React from "react";
 
-import { GenderRace, Disability, Veteran } from "../small_blocks/SelfIdentification_utils";
-import Required from "../small_blocks/Required";
+import { GenderRace, Disability, Veteran } from "./SelfIdentification_utils";
+import Required from "../../small_blocks/Required";
 
 function SelfIdentificiation() {
 	return (

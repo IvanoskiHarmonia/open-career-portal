@@ -1,6 +1,6 @@
 import React from "react";
 
-import Required from "../small_blocks/Required";
+import Required from "../../small_blocks/Required";
 
 function WorkEligibility() {
 	return (

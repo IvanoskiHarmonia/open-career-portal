@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 
 function References() {
-	const [references, setReferences] = useState([
-		{ id: 1, reference: "", reference_name: "", reference_email: "", reference_phoneNumber: "", reference_company: "" },
-	]);
+	const [references, setReferences] = useState([]);
 
-	const addReference = () => {
-		const previous_id = references[references.length - 1].id;
+	const addReference = (event) => {
+		event.preventDefault();
+		const newId = references.length > 0 ? references[references.length - 1].id + 1 : 1;
 		setReferences([
 			...references,
 			{
-				id: previous_id + 1,
+				id: newId + 1,
 				reference: "",
 				reference_name: "",
 				reference_email: "",
@@ -25,8 +24,9 @@ function References() {
 		setReferences((prev) => prev.map((entry) => (entry.id === id ? { ...entry, [field]: value } : entry)));
 	};
 
-	function removeReference(index) {
-		setReferences((prev) => prev.filter((_, i) => i !== index));
+	function removeReference(id, event) {
+		event.preventDefault();
+		setReferences((prev) => prev.filter((entry) => entry.id !== id));
 	}
 
 	return (
@@ -34,7 +34,7 @@ function References() {
 			<h4 className="mt-3">References</h4>
 			{references.map((item) => (
 				<div key={item.id} className="mt-3">
-					<button className="btn btn-danger float-right pt-0 pb-0" onClick={() => removeReference(item.id)}>
+					<button className="btn btn-danger float-right pt-0 pb-0" onClick={(event) => removeReference(item.id, event)}>
 						X
 					</button>
 					<div className="row">
