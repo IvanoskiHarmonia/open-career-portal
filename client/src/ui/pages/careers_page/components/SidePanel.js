@@ -5,7 +5,7 @@ import { getJobs } from "../../../../common/api/getJobs";
 import JobCard from "../../../modules/components/card/JobCard";
 import "./SidePanel.css";
 
-const SidePanel = () => {
+const SidePanel = ({ jobs }) => {
 	const {
 		data: jobsObject,
 		isLoading,
@@ -28,9 +28,7 @@ const SidePanel = () => {
 	return (
 		<div className="col-lg-10 offset-lg-1">
 			<h3 className="">Open Positions</h3>
-			{jobsArray.map((job) => (
-				<JobCard job={job} key={job.id} />
-			))}
+			{jobs.length === 0 ? jobsArray.map((job) => <JobCard job={job} key={job.id} />) : jobs.map((job) => <JobCard job={job} key={job.id} />)}
 		</div>
 	);
 };
