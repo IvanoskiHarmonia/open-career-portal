@@ -1,43 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
-const DropDown = ({ data, setFilter, dropdownName, dropdownField }) => {
-	const [dropdown, setDropdown] = useState(dropdownName);
-
-	data = [dropdownName, ...data];
+const DropDown = ({ data, setFilter, dropdownName, dropdownField, selectedValue }) => {
+	const handleSelect = (eventKey) => {
+		if (eventKey === dropdownName) {
+			setFilter("", dropdownField);
+		} else {
+			setFilter(eventKey, dropdownField);
+		}
+	};
 
 	return (
-		<div className="dropdown me-1">
-			<button
-				className={`btn btn-outline-primary dropdown-toggle ${dropdown === dropdownName ? "" : "active"}`}
-				type="button"
-				id="dropdownMenuButton"
-				data-bs-toggle="dropdown"
-				aria-expanded="false"
-			>
-				{dropdown}
-			</button>
-			<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				{data.map((item, index) => (
-					<li key={index}>
-						<button
-							className="dropdown-item"
-							onClick={() => {
-								if (item === dropdownName) {
-									setDropdown(dropdownName);
-									setFilter("", dropdownField);
-									return;
-								} else {
-									setFilter(item, dropdownField);
-									setDropdown(item);
-								}
-							}}
-						>
-							{item}
-						</button>
-					</li>
-				))}
-			</ul>
-		</div>
+		<DropdownButton
+			id={`dropdown-${dropdownField}`}
+			title={selectedValue || dropdownName}
+			onSelect={handleSelect}
+			className={`btn-outline-primary me-1 ${selectedValue === "" || selectedValue === dropdownName ? "" : "active"}`}
+			variant={selectedValue === "" || selectedValue === dropdownName ? "outline-primary" : "primary"}
+		>
+			{[dropdownName, ...data].map((item, index) => (
+				<Dropdown.Item key={index} eventKey={item}>
+					{item}
+				</Dropdown.Item>
+			))}
+		</DropdownButton>
 	);
 };
 

@@ -7,10 +7,10 @@ import { useState } from "react";
 const SearchBar = ({ jobs, setJobs, setMessage }) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedFilters, setSelectedFilters] = useState({
-		education: "",
-		experience_level: "",
-		remote: "",
-		location: "",
+		education: "Degree",
+		experience_level: "Experience Levels",
+		remote: "Remote",
+		location: "Location",
 	});
 
 	const handleSearch = (e) => {
@@ -19,6 +19,7 @@ const SearchBar = ({ jobs, setJobs, setMessage }) => {
 		if (term === "") {
 			setJobs([]);
 			setMessage("");
+			resetFilters();
 			return;
 		}
 		getJobByTitleOrDescription(term)
@@ -38,32 +39,42 @@ const SearchBar = ({ jobs, setJobs, setMessage }) => {
 			...prevFilters,
 			[field]: item,
 		}));
-		applyFilters({ ...selectedFilters, [field]: item });
+		if (item === "Degree" || item === "Experience Levels" || item === "Remote" || item === "Location") {
+			applyFilters({
+				...selectedFilters,
+				[field]: "",
+			});
+		} else {
+			applyFilters({
+				...selectedFilters,
+				[field]: item,
+			});
+		}
 	};
 
 	const resetFilters = () => {
 		setSelectedFilters({
-			education: "",
-			experience_level: "",
-			remote: false,
-			location: "",
+			education: "Degree",
+			experience_level: "Experience Levels",
+			remote: "Remote",
+			location: "Location",
 		});
 	};
 
 	const applyFilters = (filters) => {
 		let filteredJobs = jobs;
 
-		if (filters.education) {
+		if (filters.education && filters.education !== "Degree") {
 			filteredJobs = filteredJobs.filter((job) => job.education.includes(filters.education));
 		}
-		if (filters.experience_level) {
+		if (filters.experience_level && filters.experience_level !== "Experience Levels") {
 			filteredJobs = filteredJobs.filter((job) => job.experience_level.includes(filters.experience_level));
 		}
-		if (filters.remote) {
+		if (filters.remote && filters.remote !== "Remote") {
 			const remote = filters.remote === "Yes" ? true : false;
 			filteredJobs = filteredJobs.filter((job) => job.remote === remote);
 		}
-		if (filters.location) {
+		if (filters.location && filters.location !== "Location") {
 			filteredJobs = filteredJobs.filter((job) => job.location.includes(filters.location));
 		}
 
@@ -92,10 +103,34 @@ const SearchBar = ({ jobs, setJobs, setMessage }) => {
 				<SearchDataList />
 			</div>
 			<div className="input-group mb-2">
-				<DropDown data={Degrees} setFilter={handleDropDown} dropdownName={"Degree"} dropdownField={"education"} />
-				<DropDown data={ExperienceLevels} setFilter={handleDropDown} dropdownName="Experience Levels" dropdownField={"experience_level"} />
-				<DropDown data={["Yes", "No"]} setFilter={handleDropDown} dropdownName={"Remote"} dropdownField={"remote"} />
-				<DropDown data={Locations} setFilter={handleDropDown} dropdownName={"Location"} dropdownField={"location"} />
+				<DropDown
+					data={Degrees}
+					setFilter={handleDropDown}
+					dropdownName="Degree"
+					dropdownField="education"
+					selectedValue={selectedFilters.education}
+				/>
+				<DropDown
+					data={ExperienceLevels}
+					setFilter={handleDropDown}
+					dropdownName="Experience Levels"
+					dropdownField="experience_level"
+					selectedValue={selectedFilters.experience_level}
+				/>
+				<DropDown
+					data={["Yes", "No"]}
+					setFilter={handleDropDown}
+					dropdownName="Remote"
+					dropdownField="remote"
+					selectedValue={selectedFilters.remote}
+				/>
+				<DropDown
+					data={Locations}
+					setFilter={handleDropDown}
+					dropdownName="Location"
+					dropdownField="location"
+					selectedValue={selectedFilters.location}
+				/>
 			</div>
 		</>
 	);
