@@ -17,5 +17,5 @@ export const getJobByTitleOrDescription = async (searchTerm) => {
 		const errorMessage = `Error ${response.status}: ${response.statusText}`;
 		throw new Error(errorMessage);
 	}
-	return response.data;
+	return response.data.jobs;
 };

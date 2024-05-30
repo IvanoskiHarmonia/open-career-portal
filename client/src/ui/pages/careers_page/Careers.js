@@ -9,12 +9,13 @@ const queryClient = new QueryClient();
 
 const Careers = () => {
 	const [jobs, setJobs] = useState([]);
+	const [message, setMessage] = useState("");
 
 	return (
 		<QueryClientProvider client={queryClient}>
 			<StyleWrapper>
-				<SearchBar setJobs={setJobs} />
-				<SidePanel jobs={jobs} />
+				<SearchBar jobs={jobs} setJobs={setJobs} setMessage={setMessage} />
+				<SidePanel jobs={jobs} setJobs={setJobs} message={message} />
 			</StyleWrapper>
 		</QueryClientProvider>
 	);

@@ -1,2 +1,2 @@
-const ExperienceLevels = ["Intern", "Entry Level", "Mid Level", "Senior Level", "Director", "Executive", "Associate"];
+const ExperienceLevels = ["Intern", "Entry", "Mid", "Senior", "Director", "Executive", "Associate"];
 export default ExperienceLevels;
