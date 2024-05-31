@@ -1,5 +1,6 @@
 import React from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
+import shuffleArray from "../../../../../../common/utils/shuffleArray";
 
 const DropDown = ({ data, setFilter, dropdownName, dropdownField, selectedValue }) => {
 	const handleSelect = (eventKey) => {
@@ -9,6 +10,13 @@ const DropDown = ({ data, setFilter, dropdownName, dropdownField, selectedValue 
 			setFilter(eventKey, dropdownField);
 		}
 	};
+
+	if (!data) {
+		return null;
+	} else if (data.length > 10) {
+		data = data.slice(0, 10);
+		shuffleArray(data);
+	}
 
 	return (
 		<DropdownButton

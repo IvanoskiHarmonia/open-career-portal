@@ -1,18 +1,12 @@
 import { SearchKeywords } from "../constants/SearchBarData";
 import { useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import shuffleArray from "../../../../../../common/utils/shuffleArray";
 
 const SearchDataList = () => {
 	const [showAll, setShowAll] = useState(false);
 	shuffleArray(SearchKeywords);
 	const keywordsToShow = showAll ? SearchKeywords : SearchKeywords.slice(0, 5);
-
-	function shuffleArray(array) {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
-		}
-	}
 
 	return (
 		<>
