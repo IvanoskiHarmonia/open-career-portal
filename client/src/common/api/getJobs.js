@@ -10,3 +10,12 @@ export const getJobs = async () => {
 	}
 	return response.data;
 };
+
+export const getJobByTitleOrDescription = async (searchTerm) => {
+	const response = await axios.get(`/api/jobs/search/${searchTerm.toLowerCase()}`);
+	if (response.status !== 200) {
+		const errorMessage = `Error ${response.status}: ${response.statusText}`;
+		throw new Error(errorMessage);
+	}
+	return response.data.jobs;
+};
