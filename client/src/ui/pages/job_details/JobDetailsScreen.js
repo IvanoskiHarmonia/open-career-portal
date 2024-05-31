@@ -1,5 +1,5 @@
 import { useState } from "react";
-import JobDetails from "../../modules/components/card/JobDetails";
+import JobDetails from "../../modules/components/card/JobDetails/JobDetails";
 import StyleWrapper from "../../modules/components/wrappers/StyleWrapper";
 
 function JobDetailsScreen() {

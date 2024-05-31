@@ -1,6 +1,6 @@
 import "./JobApplication.css";
 import JobFields from "./components/JobFields";
-import JobDetails from "../../modules/components/card/JobDetails";
+import JobDetails from "../../modules/components/card/JobDetails/JobDetails";
 import OffCanvas from "./small_blocks/OffCanvas";
 import StyleWrapper from "../../modules/components/wrappers/StyleWrapper";
 import { useState } from "react";
