@@ -89,5 +89,7 @@ export const AuthProvider = ({ children }) => {
 		};
 	}, [handleLogout, validateSession]);
 
-	return <AuthContext.Provider value={{ isAuthenticated, userId, handleLogout, handleLogin }}>{!loading && children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={{ isAuthenticated, userId, handleLogout, handleLogin, loading }}>{!loading && children}</AuthContext.Provider>
+	);
 };

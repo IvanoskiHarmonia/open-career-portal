@@ -1,5 +1,5 @@
 import "./App.css";
-import Login from "./modules/components/logic/Login";
+import Login from "./pages/login/Login";
 import JobDetailsScreen from "./pages/job_details/JobDetailsScreen";
 import JobApplication from "./pages/job_application/JobApplication";
 import Careers from "./pages/careers_page/Careers";

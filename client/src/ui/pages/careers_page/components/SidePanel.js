@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { getJobs } from "../../../../common/api/getJobs";
-import JobCard from "../../../modules/components/card/JobCard";
+import JobCard from "../../../modules/components/card/JobCard/JobCard";
 import "./SidePanel.css";
+import JobCardPlaceholder from "../../../modules/components/card/JobCard/JobCardPlaceholder";
 
 const SidePanel = ({ jobs, setJobs, message }) => {
 	const {
@@ -16,19 +17,24 @@ const SidePanel = ({ jobs, setJobs, message }) => {
 	});
 
 	useEffect(() => {
-		const jobsArray = jobsObject
-			? Object.keys(jobsObject).map((key) => ({
-					id: key,
-					...jobsObject[key],
-			  }))
-			: [];
-
-		if (jobs.length === 0) {
+		if (jobsObject && jobs.length === 0) {
+			const jobsArray = Object.keys(jobsObject).map((key) => ({
+				id: key,
+				...jobsObject[key],
+			}));
 			setJobs(jobsArray);
 		}
-	}, [jobs, jobsObject, setJobs]);
+	}, [jobsObject, jobs.length, setJobs]);
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) {
+		return (
+			<div>
+				<JobCardPlaceholder />
+				<JobCardPlaceholder />
+				<JobCardPlaceholder />
+			</div>
+		);
+	}
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (

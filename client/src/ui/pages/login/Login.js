@@ -2,11 +2,12 @@ import React from "react";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../../common/hooks/useAuth";
+import { useAuth } from "../../../common/hooks/useAuth";
 import { LogIn } from "react-feather";
+import LoginPlaceholder from "./components/LoginPlaceholder";
 
 const Login = () => {
-	const { handleLogin } = useAuth();
+	const { handleLogin, loading } = useAuth();
 	const navigate = useNavigate();
 
 	const login = useGoogleLogin({
@@ -42,13 +43,16 @@ const Login = () => {
 		},
 	});
 
+	if (loading) {
+		return <LoginPlaceholder />;
+	}
+
 	return (
 		<div className="container">
 			<div className="row justify-content-center align">
 				<div className="col-8">
 					<div className="card my-5">
 						<div className="card-body shadow">
-							<div className="d-flex justify-content-center mb-1"></div>
 							<h2 className="card-title text-center mb-2">Login Page</h2>
 							<div className="d-flex justify-content-center">
 								<button onClick={() => login()} className="btn btn-primary d-flex align-items-center">
