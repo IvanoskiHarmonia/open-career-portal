@@ -18,23 +18,23 @@ const JobApplicationDetailsPlaceholder = () => {
 				</p>
 				<p className="placeholder-glow d-flex">
 					<strong>Location:</strong>
-					<span class="placeholder col-3 placeholder-sm"></span>
+					<span className="placeholder col-3 placeholder-sm"></span>
 				</p>
 				<p className="placeholder-glow d-flex">
 					<strong>Type:</strong>
-					<span class="placeholder col-3 placeholder-sm"></span>
+					<span className="placeholder col-3 placeholder-sm"></span>
 				</p>
 				<p className="placeholder-glow d-flex">
 					<strong>Salary:</strong>
-					<span class="placeholder col-2 placeholder-sm"></span>
+					<span className="placeholder col-2 placeholder-sm"></span>
 				</p>
 				<p className="placeholder-glow d-flex">
 					<strong>Date Created:</strong>
-					<span class="placeholder col-2 placeholder-sm"></span>
+					<span className="placeholder col-2 placeholder-sm"></span>
 				</p>
 				<p className="placeholder-glow d-flex">
 					<strong>Date Updated:</strong>
-					<span class="placeholder col-2 placeholder-sm"></span>
+					<span className="placeholder col-2 placeholder-sm"></span>
 				</p>
 
 				<p>

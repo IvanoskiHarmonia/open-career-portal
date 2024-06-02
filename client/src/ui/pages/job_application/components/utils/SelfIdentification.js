@@ -80,8 +80,8 @@ function SelfIdentificiation() {
 					</label>
 				</div>
 			</div>
-			<div class="container my-4">
-				<div class="alert alert-info" role="alert">
+			<div className="container my-4">
+				<div className="alert alert-info" role="alert">
 					<strong>PUBLIC BURDEN STATEMENT:</strong> According to the Paperwork Reduction Act of 1995, no persons are required to respond to
 					a collection of information unless such collection displays a valid OMB control number. This survey should take about 5 minutes to
 					complete.

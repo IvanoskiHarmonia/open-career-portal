@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 
-function EmploymentHistory() {
+const EmploymentHistory = forwardRef((props, ref) => {
 	const [employmentHistory, setEmploymentHistory] = useState([]);
 
 	const addEmploymentHistory = (event) => {
@@ -14,9 +14,6 @@ function EmploymentHistory() {
 
 	const handleEmploymentChange = (id, field, event) => {
 		let value = event.target.value;
-		if (field === "jobStartDate" || field === "jobEndDate") {
-			value = new Date(value);
-		}
 		setEmploymentHistory((prev) => prev.map((entry) => (entry.id === id ? { ...entry, [field]: value } : entry)));
 	};
 
@@ -24,6 +21,10 @@ function EmploymentHistory() {
 		event.preventDefault();
 		setEmploymentHistory((prev) => prev.filter((entry) => entry.id !== id));
 	}
+
+	useImperativeHandle(ref, () => ({
+		getEmploymentHistory: () => employmentHistory,
+	}));
 
 	return (
 		<section id="employment-history" className="employement-history container">
@@ -101,6 +102,6 @@ function EmploymentHistory() {
 			</button>
 		</section>
 	);
-}
+});
 
 export default EmploymentHistory;

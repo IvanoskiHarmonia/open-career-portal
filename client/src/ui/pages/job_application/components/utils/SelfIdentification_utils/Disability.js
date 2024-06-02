@@ -1,6 +1,6 @@
 const Disability = () => {
 	return (
-		<div class="container my-4">
+		<div className="container my-4">
 			<p>Form CC-305 Page 1 of 1 OMB Control Number 1250-0005 Expires 04/30/2026</p>
 			<p>
 				<strong>Why are you being asked to complete this form?</strong>
@@ -25,38 +25,38 @@ const Disability = () => {
 				A disability is a condition that substantially limits one or more of your “major life activities.” If you have or have ever had such a
 				condition, you are a person with a disability. <strong>Disabilities include, but are not limited to</strong>:
 			</p>
-			<ul class="list-group mb-4">
-				<li class="list-group-item">Alcohol or other substance use disorder (not currently using drugs illegally)</li>
-				<li class="list-group-item">Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS</li>
-				<li class="list-group-item">Blind or low vision</li>
-				<li class="list-group-item">Cancer (past or present)</li>
-				<li class="list-group-item">Cardiovascular or heart disease</li>
-				<li class="list-group-item">Celiac disease</li>
-				<li class="list-group-item">Cerebral palsy</li>
-				<li class="list-group-item">Deaf or serious difficulty hearing</li>
-				<li class="list-group-item">Diabetes</li>
-				<li class="list-group-item">Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders</li>
-				<li class="list-group-item">Epilepsy or other seizure disorder</li>
-				<li class="list-group-item">Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome</li>
-				<li class="list-group-item">Intellectual or developmental disability</li>
-				<li class="list-group-item">
+			<ul className="list-group mb-4">
+				<li className="list-group-item">Alcohol or other substance use disorder (not currently using drugs illegally)</li>
+				<li className="list-group-item">Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS</li>
+				<li className="list-group-item">Blind or low vision</li>
+				<li className="list-group-item">Cancer (past or present)</li>
+				<li className="list-group-item">Cardiovascular or heart disease</li>
+				<li className="list-group-item">Celiac disease</li>
+				<li className="list-group-item">Cerebral palsy</li>
+				<li className="list-group-item">Deaf or serious difficulty hearing</li>
+				<li className="list-group-item">Diabetes</li>
+				<li className="list-group-item">Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders</li>
+				<li className="list-group-item">Epilepsy or other seizure disorder</li>
+				<li className="list-group-item">Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome</li>
+				<li className="list-group-item">Intellectual or developmental disability</li>
+				<li className="list-group-item">
 					Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD
 				</li>
-				<li class="list-group-item">Missing limbs or partially missing limbs</li>
-				<li class="list-group-item">
+				<li className="list-group-item">Missing limbs or partially missing limbs</li>
+				<li className="list-group-item">
 					Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports
 				</li>
-				<li class="list-group-item">
+				<li className="list-group-item">
 					Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)
 				</li>
-				<li class="list-group-item">
+				<li className="list-group-item">
 					Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia,
 					other learning disabilities
 				</li>
-				<li class="list-group-item">Partial or complete paralysis (any cause)</li>
-				<li class="list-group-item">Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema</li>
-				<li class="list-group-item">Short stature (dwarfism)</li>
-				<li class="list-group-item">Traumatic brain injury</li>
+				<li className="list-group-item">Partial or complete paralysis (any cause)</li>
+				<li className="list-group-item">Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema</li>
+				<li className="list-group-item">Short stature (dwarfism)</li>
+				<li className="list-group-item">Traumatic brain injury</li>
 			</ul>
 		</div>
 	);

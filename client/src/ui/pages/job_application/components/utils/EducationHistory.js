@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 
-function EducationHistory() {
+const EducationHistory = forwardRef((props, ref) => {
 	const [educationHistory, setEducationHistory] = useState([]);
 
 	const addEducationHistory = (event) => {
@@ -22,6 +22,10 @@ function EducationHistory() {
 		setEducationHistory((prev) => prev.filter((entry) => entry.id !== id));
 	}
 
+	useImperativeHandle(ref, () => ({
+		getEducationHistory: () => educationHistory,
+	}));
+
 	return (
 		<section id="education-history" className="education-history container">
 			<h4 className="mt-4">Education History</h4>
@@ -36,7 +40,7 @@ function EducationHistory() {
 							<input
 								type="text"
 								id={`school-name-${item.id}`}
-								name={`schoolName-${item.id}`}
+								name="schoolName"
 								value={item.schoolName || ""}
 								className="form-control"
 								placeholder="University of California, Berkeley, etc..."
@@ -48,7 +52,7 @@ function EducationHistory() {
 							<input
 								type="text"
 								id={`degree-${item.id}`}
-								name={`degree-${item.id}`}
+								name="degree"
 								value={item.degree || ""}
 								className="form-control"
 								placeholder="Bachelors, Masters, etc..."
@@ -60,7 +64,7 @@ function EducationHistory() {
 							<input
 								type="text"
 								id={`major-${item.id}`}
-								name={`major-${item.id}`}
+								name="major"
 								value={item.major || ""}
 								className="form-control"
 								placeholder="Computer Science, Business, etc..."
@@ -74,7 +78,7 @@ function EducationHistory() {
 							<input
 								type="date"
 								id={`enrollment-date-${item.id}`}
-								name={`enrollmentDate-${item.id}`}
+								name="enrollmentDate"
 								value={item.enrollmentDate || ""}
 								className="form-control"
 								onChange={(e) => handleEducationChange(item.id, "enrollmentDate", e)}
@@ -96,7 +100,7 @@ function EducationHistory() {
 							<input
 								type="date"
 								id={`graduation-date-${item.id}`}
-								name={`graduationDate-${item.id}`}
+								name="graduationDate"
 								value={item.graduationDate || ""}
 								className="form-control"
 								onChange={(e) => handleEducationChange(item.id, "graduationDate", e)}
@@ -107,7 +111,7 @@ function EducationHistory() {
 							<input
 								type="text"
 								id={`gpa-${item.id}`}
-								name={`gpa-${item.id}`}
+								name="gpa"
 								value={item.gpa || ""}
 								className="form-control"
 								placeholder="3.5, 4.0, etc..."
@@ -122,6 +126,6 @@ function EducationHistory() {
 			</button>
 		</section>
 	);
-}
+});
 
 export default EducationHistory;
