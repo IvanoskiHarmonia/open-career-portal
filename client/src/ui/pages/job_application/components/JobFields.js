@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import {
 	Resume,
@@ -28,6 +28,25 @@ const JobFields = ({ job }) => {
 	const employementHistoryRef = useRef(null);
 	const educationHistoryRef = useRef(null);
 	const referencesRef = useRef(null);
+
+	useEffect(() => {
+		const fetchUserDetails = async () => {
+			try {
+				const response = await axios.get("http://localhost:8000/api/user-applications/user-details/" + userId);
+				if (response.status === 200) {
+					const userData = response.data;
+					console.log("User Data:", userData);
+					console.log("User Data:", userData.personalFirstName);
+				} else {
+					console.error("Failed to fetch user details:", response.data);
+				}
+			} catch (error) {
+				console.error("Failed to fetch user details:", error.response ? error.response.data : error.message);
+			}
+		};
+
+		fetchUserDetails();
+	}, [userId]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
