@@ -65,6 +65,7 @@ const jobApplicationSchema = new mongoose.Schema({
 	signatureName: String,
 	employeeId: String,
 	signatureDate: Date,
+	createdAt: Date,
 });
 
 const JobApplication = mongoose.model("JobApplication", jobApplicationSchema);

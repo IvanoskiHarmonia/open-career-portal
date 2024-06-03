@@ -59,10 +59,13 @@ const JobFields = ({ job }) => {
 		data.educationHistory = educationHistoryRef.current.getEducationHistory();
 		data.references = referencesRef.current.getReferences();
 
+		const createdAt = new Date().toISOString();
+
 		try {
 			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
 				userId,
 				...data,
+				createdAt,
 			});
 			if (response.status === 201) {
 				navigate("/user-applications/" + userId);
