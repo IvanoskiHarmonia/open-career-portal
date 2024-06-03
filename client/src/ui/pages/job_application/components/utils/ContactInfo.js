@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Required from "../../small_blocks/Required";
 
-function ContactInfo() {
+function ContactInfo({ initialData }) {
+	useEffect(() => {
+		if (initialData.length === 0) return;
+		document.getElementById("first-name").value = initialData.personalFirstName;
+		document.getElementById("middle-initial").value = initialData.personalMiddleInitial;
+		document.getElementById("last-name").value = initialData.personalLastName;
+		document.getElementById("form-email").value = initialData.personalEmail;
+		document.getElementById("phone-number").value = initialData.personalPhoneNumber;
+		document.getElementById("address-line-1").value = initialData.personalAddress1;
+		document.getElementById("address-line-2").value = initialData.personalAddress2;
+		document.getElementById("city").value = initialData.personalCity;
+		document.getElementById("province-state").value = initialData.personalState;
+		document.getElementById("zip-code").value = initialData.personalZipCode;
+		document.getElementById("country-region").value = initialData.personalCountry;
+	}, [initialData]);
+
 	return (
 		<section id="contact-info" className="contact-info container">
 			<h4 className="mt-3">Contact Information</h4>

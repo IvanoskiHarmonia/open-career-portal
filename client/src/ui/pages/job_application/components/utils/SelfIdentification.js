@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { GenderRace, Disability, Veteran } from "./SelfIdentification_utils";
 import Required from "../../small_blocks/Required";
 
-function SelfIdentificiation() {
+function SelfIdentificiation({ initialData }) {
+	useEffect(() => {
+		if (initialData.length === 0) return;
+		document.getElementById("gender").value = initialData.gender;
+		document.getElementById("race-ethnicity-bg").value = initialData.raceEthnicity;
+		document.getElementById("yes-veteran").checked = initialData.veteran === "yes";
+		document.getElementById("no-veteran").checked = initialData.veteran === "no";
+		document.getElementById("optOut-veteran").checked = initialData.veteran === "optOut";
+		document.getElementById("yes-disability").checked = initialData.disability === "yes";
+		document.getElementById("no-disability").checked = initialData.disability === "no";
+		document.getElementById("optOut-disability").checked = initialData.disability === "optOut";
+	}, [initialData]);
+
 	return (
 		<section id="self-identification" className="self-identification container">
 			<h4 className="mt-3">Voluntary Equal Employment Opportunity Self-Identification</h4>

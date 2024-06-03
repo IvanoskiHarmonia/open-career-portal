@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Required from "../../small_blocks/Required";
 
-function WorkEligibility() {
+function WorkEligibility({ initialData }) {
+	useEffect(() => {
+		if (initialData.length === 0) return;
+		document.getElementById("yes-usWorkEligibility").checked = initialData.usWorkEligibility === "yes";
+		document.getElementById("no-usWorkEligibility").checked = initialData.usWorkEligibility === "no";
+		document.getElementById("yes-relocate").checked = initialData.relocate === "yes";
+		document.getElementById("no-relocate").checked = initialData.relocate === "no";
+		document.getElementById("notSure-relocate").checked = initialData.relocate === "notSure";
+		document.getElementById("yes-felony").checked = initialData.felony === "yes";
+		document.getElementById("no-felony").checked = initialData.felony === "no";
+		if (initialData.felony === "yes") document.getElementById("felon-explanation").value = initialData.felonExplanation;
+		document.getElementById("yes-backgroundCheck").checked = initialData.backgroundCheck === "yes";
+		document.getElementById("no-backgroundCheck").checked = initialData.backgroundCheck === "no";
+		document.getElementById("yes-drugTest").checked = initialData.drugTest === "yes";
+		document.getElementById("no-drugTest").checked = initialData.drugTest === "no";
+		document.getElementById("yes-overtime").checked = initialData.overtime === "yes";
+		document.getElementById("no-overtime").checked = initialData.overtime === "no";
+		document.getElementById("yes-weekends").checked = initialData.weekends === "yes";
+		document.getElementById("no-weekends").checked = initialData.weekends === "no";
+		document.getElementById("yes-travel").checked = initialData.travel === "yes";
+		document.getElementById("no-travel").checked = initialData.travel === "no";
+		document.getElementById("yes-remote").checked = initialData.remote === "yes";
+		document.getElementById("no-remote").checked = initialData.remote === "no";
+	}, [initialData]);
+
 	return (
 		<section id="work-eligibility" className="work-eligibility container">
 			<h4 className="mt-3">Work Eligibility</h4>

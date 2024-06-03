@@ -45,6 +45,7 @@ const getUserDetailsFromPreviousApplications = async (req, res) => {
 		if (!jobApplication) {
 			return res.status(404).send({ message: "Job application not found" });
 		}
+
 		res.send(jobApplication);
 	} catch (error) {
 		res.status(400).send(error.message);

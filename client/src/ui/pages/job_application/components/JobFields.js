@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import {
 	Resume,
@@ -24,6 +24,7 @@ import ScrollSpyNav from "../small_blocks/ScrollSpyNav";
 const JobFields = ({ job }) => {
 	const navigate = useNavigate();
 	const { userId } = useAuth();
+	const [initialData, setInitialData] = useState([]);
 
 	const employementHistoryRef = useRef(null);
 	const educationHistoryRef = useRef(null);
@@ -34,9 +35,7 @@ const JobFields = ({ job }) => {
 			try {
 				const response = await axios.get("http://localhost:8000/api/user-applications/user-details/" + userId);
 				if (response.status === 200) {
-					const userData = response.data;
-					console.log("User Data:", userData);
-					console.log("User Data:", userData.personalFirstName);
+					setInitialData(response.data);
 				} else {
 					console.error("Failed to fetch user details:", response.data);
 				}
@@ -98,21 +97,21 @@ const JobFields = ({ job }) => {
 
 					<Opportunity />
 
-					<ContactInfo />
+					<ContactInfo initialData={initialData} />
 
-					<WorkEligibility />
+					<WorkEligibility initialData={initialData} />
 
-					<EmploymentHistory ref={employementHistoryRef} />
+					<EmploymentHistory ref={employementHistoryRef} initialData={initialData.jobExperience} />
 
-					<EducationHistory ref={educationHistoryRef} />
+					<EducationHistory ref={educationHistoryRef} initialData={initialData.educationHistory} />
 
-					<JobSkills />
+					<JobSkills initialData={initialData} />
 
-					<References ref={referencesRef} />
+					<References ref={referencesRef} initialData={initialData.references} />
 
 					<InformationTruthfulness />
 
-					<SelfIdentification />
+					<SelfIdentification initialData={initialData} />
 
 					<Signature />
 

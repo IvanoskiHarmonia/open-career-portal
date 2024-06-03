@@ -23,8 +23,14 @@ function Signature() {
 				</div>
 				<div className="form-group mt-3">
 					<label>
-						<input type="checkbox" area-label="Checking the checkbox is equivalent to a handwritten signature." required /> Checking the
-						checkbox is equivalent to a handwritten signature.
+						<input
+							type="checkbox"
+							id="confirm-signature"
+							name="confirmSignature"
+							area-label="Checking the checkbox is equivalent to a handwritten signature."
+							required
+						/>{" "}
+						Checking the checkbox is equivalent to a handwritten signature.
 					</label>
 				</div>
 			</div>
