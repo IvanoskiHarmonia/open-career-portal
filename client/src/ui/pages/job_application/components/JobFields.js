@@ -41,7 +41,6 @@ const JobFields = ({ job }) => {
 		data.educationHistory = educationHistoryRef.current.getEducationHistory();
 		data.references = referencesRef.current.getReferences();
 
-		console.log("Job Application Data:", data);
 		try {
 			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
 				userId,
