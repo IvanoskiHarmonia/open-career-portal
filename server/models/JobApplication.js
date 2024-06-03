@@ -36,7 +36,7 @@ const jobApplicationSchema = new mongoose.Schema({
 			jobDescription: String,
 		},
 	],
-	education: [
+	educationHistory: [
 		{
 			schoolName: String,
 			degree: String,
@@ -48,6 +48,7 @@ const jobApplicationSchema = new mongoose.Schema({
 	],
 	references: [
 		{
+			referenceRelationship: String,
 			referenceName: String,
 			referenceEmail: String,
 			referencePhoneNumber: String,
