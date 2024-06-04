@@ -5,7 +5,7 @@ const OffCanvas = ({ children }) => {
 		<div
 			className="offcanvas offcanvas-start"
 			data-bs-scroll="true"
-			data-bs-backdrop="false" // Optional: if you want to allow interaction with the backdrop
+			data-bs-backdrop="false"
 			tabIndex="-1"
 			id="offcanvasJobDescription"
 			aria-labelledby="offcanvasJobDescriptionLabel"

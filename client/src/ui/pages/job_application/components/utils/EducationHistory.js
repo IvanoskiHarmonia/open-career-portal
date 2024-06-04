@@ -101,12 +101,32 @@ const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 						<div className="form-group col-md-4">
 							<label htmlFor="did-you-graduate">Did you graduate?</label>
 							<div className="form-check">
-								<input type="radio" className="form-check-input" id="yes-graduate" name="graduated" value="yes" />
-								<label htmlFor="yes-graduate">Yes</label>
+								<input
+									type="radio"
+									className="form-check-input"
+									id={`yes-graduate-${item.id}`}
+									name={`graduated-${item.id}`}
+									onChange={(e) => handleEducationChange(item.id, "graduated", e)}
+									value="yes"
+									checked={item.graduated === "yes"}
+								/>
+								<label className="form-check-label" htmlFor="yes-graduate">
+									Yes
+								</label>
 							</div>
 							<div className="form-check">
-								<input type="radio" className="form-check-input" id="no-graduate" name="graduated" value="no" />
-								<label htmlFor="no-graduate">No</label>
+								<input
+									type="radio"
+									className="form-check-input"
+									id={`no-graduate-${item.id}`}
+									name={`graduated-${item.id}`}
+									onChange={(e) => handleEducationChange(item.id, "graduated", e)}
+									value="no"
+									checked={item.graduated === "no"}
+								/>
+								<label className="form-check-label" htmlFor="no-graduate">
+									No
+								</label>
 							</div>
 						</div>
 						<div className="form-group col-md-4">

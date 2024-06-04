@@ -1,4 +1,3 @@
-// Careers.js
 import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import SidePanel from "./components/SidePanel";

@@ -56,15 +56,15 @@ export const AuthProvider = ({ children }) => {
 		setIsAuthenticated(true);
 		setUserId(userId);
 		localStorage.setItem("tokenExpiry", Date.now() + expiresIn * 1000);
-		navigate("/");
+		if (navigate(-1) !== "/login") {
+			navigate(-1);
+		} else {
+			navigate("/");
+		}
 	};
 
 	useEffect(() => {
 		validateSession();
-
-		// const handleBeforeUnload = () => {
-		// 	navigator.sendBeacon("/api/session/logout");
-		// };
 
 		let idleTimeout;
 
@@ -72,10 +72,9 @@ export const AuthProvider = ({ children }) => {
 			clearTimeout(idleTimeout);
 			idleTimeout = setTimeout(() => {
 				handleLogout();
-			}, 30 * 60 * 1000); // 30 minutes
+			}, 120 * 60 * 1000);
 		};
 
-		// window.addEventListener("beforeunload", handleBeforeUnload);
 		window.addEventListener("mousemove", resetIdleTimer);
 		window.addEventListener("keypress", resetIdleTimer);
 
@@ -83,7 +82,6 @@ export const AuthProvider = ({ children }) => {
 
 		return () => {
 			clearTimeout(idleTimeout);
-			// window.removeEventListener("beforeunload", handleBeforeUnload);
 			window.removeEventListener("mousemove", resetIdleTimer);
 			window.removeEventListener("keypress", resetIdleTimer);
 		};
