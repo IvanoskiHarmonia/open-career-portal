@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import JobFields from "./JobFields";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 global.fetch = jest.fn(() =>
 	Promise.resolve({
