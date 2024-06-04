@@ -25,14 +25,13 @@ const Login = () => {
 					"http://localhost:8000/api/users/login",
 					{
 						token: tokenResponse.access_token,
-						expiresAt: new Date().getTime() + tokenResponse.expires_in + 60 * 60 * 1000,
+						expiresAt: new Date().getTime() + tokenResponse.expires_in + 120 * 60 * 1000,
 						email: googleUserResponse.data.email,
 					},
 					{ withCredentials: true }
 				);
 
 				const userId = loginResponse.data.userId;
-				// localStorage.setItem("userId", userId);
 				handleLogin(navigate, userId, tokenResponse.expires_in);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);

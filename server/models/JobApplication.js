@@ -43,6 +43,7 @@ const jobApplicationSchema = new mongoose.Schema({
 			major: String,
 			enrollmentDate: Date,
 			graduationDate: Date,
+			graduated: String,
 			gpa: String,
 		},
 	],
@@ -55,6 +56,8 @@ const jobApplicationSchema = new mongoose.Schema({
 			referenceCompany: String,
 		},
 	],
+	listOfSkills: String,
+	listOfCertifications: String,
 	gender: String,
 	raceEthnicity: String,
 	disability: String,
@@ -62,6 +65,7 @@ const jobApplicationSchema = new mongoose.Schema({
 	signatureName: String,
 	employeeId: String,
 	signatureDate: Date,
+	createdAt: Date,
 });
 
 const JobApplication = mongoose.model("JobApplication", jobApplicationSchema);

@@ -1,7 +1,8 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, { useState, forwardRef, useImperativeHandle, useEffect, useRef } from "react";
 
-const References = forwardRef((props, ref) => {
+const References = forwardRef(({ initialData = [] }, ref) => {
 	const [references, setReferences] = useState([]);
+	const initialDataRef = useRef(initialData);
 
 	const addReference = (event) => {
 		event.preventDefault();
@@ -32,6 +33,18 @@ const References = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		getReferences: () => references,
 	}));
+
+	useEffect(() => {
+		if (initialData.length === 0) return;
+		const formattedData = initialData.map((item, index) => ({
+			...item,
+			id: index + 1,
+		}));
+		if (JSON.stringify(initialDataRef.current) !== JSON.stringify(initialData)) {
+			setReferences(formattedData);
+			initialDataRef.current = formattedData;
+		}
+	}, [initialData]);
 
 	return (
 		<section id="references" className="references container">

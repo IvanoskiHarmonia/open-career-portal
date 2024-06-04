@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import {
 	Resume,
@@ -24,10 +24,28 @@ import ScrollSpyNav from "../small_blocks/ScrollSpyNav";
 const JobFields = ({ job }) => {
 	const navigate = useNavigate();
 	const { userId } = useAuth();
+	const [initialData, setInitialData] = useState([]);
 
 	const employementHistoryRef = useRef(null);
 	const educationHistoryRef = useRef(null);
 	const referencesRef = useRef(null);
+
+	useEffect(() => {
+		const fetchUserDetails = async () => {
+			try {
+				const response = await axios.get("http://localhost:8000/api/user-applications/user-details/" + userId);
+				if (response.status === 200) {
+					setInitialData(response.data);
+				} else {
+					console.error("Failed to fetch user details:", response.data);
+				}
+			} catch (error) {
+				console.error("Failed to fetch user details:", error.response ? error.response.data : error.message);
+			}
+		};
+
+		fetchUserDetails();
+	}, [userId]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -41,10 +59,13 @@ const JobFields = ({ job }) => {
 		data.educationHistory = educationHistoryRef.current.getEducationHistory();
 		data.references = referencesRef.current.getReferences();
 
+		const createdAt = new Date().toISOString();
+
 		try {
 			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
 				userId,
 				...data,
+				createdAt,
 			});
 			if (response.status === 201) {
 				navigate("/user-applications/" + userId);
@@ -79,21 +100,21 @@ const JobFields = ({ job }) => {
 
 					<Opportunity />
 
-					<ContactInfo />
+					<ContactInfo initialData={initialData} />
 
-					<WorkEligibility />
+					<WorkEligibility initialData={initialData} />
 
-					<EmploymentHistory ref={employementHistoryRef} />
+					<EmploymentHistory ref={employementHistoryRef} initialData={initialData.jobExperience} />
 
-					<EducationHistory ref={educationHistoryRef} />
+					<EducationHistory ref={educationHistoryRef} initialData={initialData.educationHistory} />
 
-					<JobSkills />
+					<JobSkills initialData={initialData} />
 
-					<References ref={referencesRef} />
+					<References ref={referencesRef} initialData={initialData.references} />
 
 					<InformationTruthfulness />
 
-					<SelfIdentification />
+					<SelfIdentification initialData={initialData} />
 
 					<Signature />
 

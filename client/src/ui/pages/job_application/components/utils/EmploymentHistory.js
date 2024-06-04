@@ -1,7 +1,8 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef } from "react";
 
-const EmploymentHistory = forwardRef((props, ref) => {
+const EmploymentHistory = forwardRef(({ initialData = [] }, ref) => {
 	const [employmentHistory, setEmploymentHistory] = useState([]);
+	const initialDataRef = useRef(initialData);
 
 	const addEmploymentHistory = (event) => {
 		event.preventDefault();
@@ -25,6 +26,20 @@ const EmploymentHistory = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		getEmploymentHistory: () => employmentHistory,
 	}));
+
+	useEffect(() => {
+		if (initialData.length === 0) return;
+		const formattedData = initialData.map((item, index) => ({
+			...item,
+			id: index + 1,
+			jobStartDate: item.jobStartDate ? item.jobStartDate.split("T")[0] : "",
+			jobEndDate: item.jobEndDate ? item.jobEndDate.split("T")[0] : "",
+		}));
+		if (JSON.stringify(initialDataRef.current) !== JSON.stringify(initialData)) {
+			setEmploymentHistory(formattedData);
+			initialDataRef.current = formattedData;
+		}
+	}, [initialData]);
 
 	return (
 		<section id="employment-history" className="employement-history container">

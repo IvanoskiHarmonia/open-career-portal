@@ -9,18 +9,21 @@ const Navbar = () => {
 	const [darkMode, setDarkMode] = useState(false);
 
 	const toggleMode = () => {
-		setDarkMode(!darkMode);
-		const html = document.querySelector("html");
-		html.setAttribute("data-bs-theme", darkMode ? "dark" : "light");
-		localStorage.setItem("darkMode", !darkMode);
+		setDarkMode((prevDarkMode) => {
+			const newDarkMode = !prevDarkMode;
+			const html = document.querySelector("html");
+			html.setAttribute("data-bs-theme", newDarkMode ? "dark" : "light");
+			localStorage.setItem("darkMode", newDarkMode);
+			return newDarkMode;
+		});
 	};
 
 	useEffect(() => {
-		const mode = localStorage.getItem("darkMode");
-		setDarkMode(mode === "true");
+		const isDarkMode = localStorage.getItem("darkMode") === "true";
+		setDarkMode(isDarkMode);
 		const html = document.querySelector("html");
-		html.setAttribute("data-bs-theme", mode ? "dark" : "light");
-	}, [setDarkMode]);
+		html.setAttribute("data-bs-theme", isDarkMode ? "dark" : "light");
+	}, []);
 
 	return (
 		<>
