@@ -1,4 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect, useRef } from "react";
+import Required from "../../small_blocks/Required";
 
 const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 	const [educationHistory, setEducationHistory] = useState([]);
@@ -9,7 +10,16 @@ const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 		const newId = educationHistory.length > 0 ? educationHistory[educationHistory.length - 1].id + 1 : 1;
 		setEducationHistory([
 			...educationHistory,
-			{ id: newId, schoolName: "", degree: "", major: "", enrollmentDate: "", graduationDate: "", graduated: "", gpa: "" },
+			{
+				id: newId,
+				schoolName: "",
+				schoolDegree: "",
+				schoolMajor: "",
+				schoolEnrollmentDate: "",
+				schoolGraduationDate: "",
+				schoolGraduated: "",
+				schoolGPA: "",
+			},
 		]);
 	};
 
@@ -31,8 +41,8 @@ const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 		const formattedData = initialData.map((item, index) => ({
 			...item,
 			id: index + 1,
-			enrollmentDate: item.enrollmentDate ? item.enrollmentDate.split("T")[0] : "",
-			graduationDate: item.graduationDate ? item.graduationDate.split("T")[0] : "",
+			schoolEnrollmentDate: item.schoolEnrollmentDate ? item.schoolEnrollmentDate.split("T")[0] : "",
+			schoolGraduationDate: item.schoolGraduationDate ? item.schoolGraduationDate.split("T")[0] : "",
 		}));
 		if (JSON.stringify(initialDataRef.current) !== JSON.stringify(initialData)) {
 			setEducationHistory(formattedData);
@@ -50,68 +60,78 @@ const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 					</button>
 					<div className="row">
 						<div className="form-group col-md-4">
-							<label htmlFor={`school-name-${item.id}`}>School Name {item.id}</label>
+							<label htmlFor={`schoolName-${item.id}`}>School Name {item.id}</label>
+							<Required />
 							<input
 								type="text"
-								id={`school-name-${item.id}`}
+								id={`schoolName-${item.id}`}
 								name="schoolName"
 								value={item.schoolName || ""}
 								className="form-control"
 								placeholder="University of California, Berkeley, etc..."
 								onChange={(e) => handleEducationChange(item.id, "schoolName", e)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-4">
-							<label htmlFor={`degree-${item.id}`}>Degree</label>
+							<label htmlFor={`schoolDegree-${item.id}`}>Degree</label>
+							<Required />
 							<input
 								type="text"
-								id={`degree-${item.id}`}
-								name="degree"
-								value={item.degree || ""}
+								id={`schoolDegree-${item.id}`}
+								name="schoolDegree"
+								value={item.schoolDegree || ""}
 								className="form-control"
 								placeholder="Bachelors, Masters, etc..."
-								onChange={(e) => handleEducationChange(item.id, "degree", e)}
+								onChange={(e) => handleEducationChange(item.id, "schoolDegree", e)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-4">
-							<label htmlFor={`major-${item.id}`}>Major</label>
+							<label htmlFor={`schoolMajor-${item.id}`}>Major</label>
+							<Required />
 							<input
 								type="text"
-								id={`major-${item.id}`}
-								name="major"
-								value={item.major || ""}
+								id={`schoolMajor-${item.id}`}
+								name="schoolMajor"
+								value={item.schoolMajor || ""}
 								className="form-control"
 								placeholder="Computer Science, Business, etc..."
-								onChange={(e) => handleEducationChange(item.id, "major", e)}
+								onChange={(e) => handleEducationChange(item.id, "schoolMajor", e)}
+								required
 							/>
 						</div>
 					</div>
 					<div className="row">
 						<div className="form-group col-md-4">
-							<label htmlFor={`enrollment-date-${item.id}`}>Enrollment Date</label>
+							<label htmlFor={`schoolEnrollmentDate-${item.id}`}>Enrollment Date</label>
+							<Required />
 							<input
 								type="date"
-								id={`enrollment-date-${item.id}`}
-								name="enrollmentDate"
-								value={item.enrollmentDate || ""}
+								id={`schoolEnrollmentDate-${item.id}`}
+								name="schoolEnrollmentDate"
+								value={item.schoolEnrollmentDate || ""}
 								className="form-control"
-								onChange={(e) => handleEducationChange(item.id, "enrollmentDate", e)}
+								onChange={(e) => handleEducationChange(item.id, "schoolEnrollmentDate", e)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-4">
 							<label htmlFor="did-you-graduate">Did you graduate?</label>
+							<Required />
 							<div className="form-check">
 								<input
 									type="radio"
 									className="form-check-input"
-									id={`yes-graduate-${item.id}`}
-									name={`graduated-${item.id}`}
-									onChange={(e) => handleEducationChange(item.id, "graduated", e)}
+									id={`yes-schoolGraduated-${item.id}`}
+									name={`schoolGraduated-${item.id}`}
+									onChange={(e) => handleEducationChange(item.id, "schoolGraduated", e)}
 									value="yes"
-									checked={item.graduated === "yes"}
-									aria-label={`yes-graduate-${item.id}`}
+									checked={item.schoolGraduated === "yes"}
+									aria-label={`yes-schoolGraduated-${item.id}`}
+									required
 								/>
-								<label className="form-check-label" htmlFor="yes-graduate">
+								<label className="form-check-label" htmlFor="yes-schoolGraduated">
 									Yes
 								</label>
 							</div>
@@ -119,39 +139,43 @@ const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 								<input
 									type="radio"
 									className="form-check-input"
-									id={`no-graduate-${item.id}`}
-									name={`graduated-${item.id}`}
-									onChange={(e) => handleEducationChange(item.id, "graduated", e)}
+									id={`no-schoolGraduated-${item.id}`}
+									name={`schoolGraduated-${item.id}`}
+									onChange={(e) => handleEducationChange(item.id, "schoolGraduated", e)}
 									value="no"
-									checked={item.graduated === "no"}
-									aria-label={`no-graduate-${item.id}`}
+									checked={item.schoolGraduated === "no"}
+									aria-label={`no-schoolGraduated-${item.id}`}
 								/>
-								<label className="form-check-label" htmlFor="no-graduate">
+								<label className="form-check-label" htmlFor="no-schoolGraduated">
 									No
 								</label>
 							</div>
 						</div>
 						<div className="form-group col-md-4">
-							<label htmlFor={`graduation-date-${item.id}`}>Graduation Date</label>
+							<label htmlFor={`schoolGraduationDate-${item.id}`}>Graduation Date</label>
+							<Required />
 							<input
 								type="date"
-								id={`graduation-date-${item.id}`}
-								name="graduationDate"
-								value={item.graduationDate || ""}
+								id={`schoolGraduationDate-${item.id}`}
+								name="schoolGraduationDate"
+								value={item.schoolGraduationDate || ""}
 								className="form-control"
-								onChange={(e) => handleEducationChange(item.id, "graduationDate", e)}
+								onChange={(e) => handleEducationChange(item.id, "schoolGraduationDate", e)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-4">
-							<label htmlFor={`gpa-${item.id}`}>GPA</label>
+							<label htmlFor={`schoolGPA-${item.id}`}>GPA</label>
+							<Required />
 							<input
 								type="text"
-								id={`gpa-${item.id}`}
-								name="gpa"
-								value={item.gpa || ""}
+								id={`schoolGPA-${item.id}`}
+								name="schoolGPA"
+								value={item.schoolGPA || ""}
 								className="form-control"
 								placeholder="3.5, 4.0, etc..."
-								onChange={(e) => handleEducationChange(item.id, "gpa", e)}
+								onChange={(e) => handleEducationChange(item.id, "schoolGPA", e)}
+								required
 							/>
 						</div>
 					</div>

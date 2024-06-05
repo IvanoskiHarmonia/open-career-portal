@@ -40,6 +40,21 @@ mockAxios.onGet("http://localhost:8000/api/user-applications/user-details/test-u
 
 mockAxios.onPost("http://localhost:8000/api/user-applications/create-application").reply(201, {});
 
+const formDataToObject = (formData) => {
+	const obj = {};
+	formData.forEach((value, key) => {
+		if (obj[key] !== undefined) {
+			if (!Array.isArray(obj[key])) {
+				obj[key] = [obj[key]];
+			}
+			obj[key].push(value);
+		} else {
+			obj[key] = value;
+		}
+	});
+	return obj;
+};
+
 test("submits the form with entered data", async () => {
 	const job = {
 		id: 1,
@@ -175,7 +190,7 @@ test("submits the form with entered data", async () => {
 	const startDateEducationInput = screen.getByLabelText("Enrollment Date");
 	fireEvent.change(startDateEducationInput, { target: { value: "2014-09-01" } });
 
-	const confirmGraduationRadio = screen.getByLabelText("yes-graduate-1");
+	const confirmGraduationRadio = screen.getByLabelText("yes-schoolGraduated-1");
 	fireEvent.click(confirmGraduationRadio);
 
 	const graduationDateInput = screen.getByLabelText("Graduation Date");
@@ -249,90 +264,72 @@ test("submits the form with entered data", async () => {
 		expect(mockAxios.history.post.length).toBe(1);
 	});
 
-	const postedData = JSON.parse(mockAxios.history.post[0].data);
-	expect(mockAxios.history.post[0].url).toBe("http://localhost:8000/api/user-applications/create-application");
-	expect(postedData).toMatchObject({
-		userId: "test-user-id",
-		resume: expect.any(Object),
-		coverLetter: expect.any(Object),
-		personalFirstName: "John",
-		personalMiddleInitial: "",
-		personalLastName: "Doe",
-		personalEmail: "john.doe@example.com",
-		personalPhoneNumber: "+1234567890",
-		personalAddress1: "123 Main St",
-		personalAddress2: "Apt 4B",
-		personalCity: "New York",
-		personalState: "New York",
-		personalZipCode: "10001",
-		personalCountry: "United States",
-		usWorkEligibility: "yes",
-		relocate: "yes",
-		felony: "no",
-		backgroundCheck: "yes",
-		drugTest: "yes",
-		overtime: "yes",
-		weekends: "yes",
-		travel: "yes",
-		remote: "yes",
-		companyName: "ABC Corp",
-		jobTitle: "Software Engineer",
-		jobStartDate: "2020-01-01",
-		jobEndDate: "2022-01-01",
-		jobDescription: "Lorem ipsum dolor sit amet",
-		schoolName: "University of Example",
-		degree: "Bachelor of Science",
-		major: "Computer Science",
-		enrollmentDate: "2014-09-01",
-		"graduated-1": "yes",
-		graduationDate: "2018-05-01",
-		gpa: "3.8",
-		listOfSkills: "JavaScript, React, HTML, CSS",
-		listOfCertifications: "Certification 1, Certification 2",
-		referenceRelationship: "Manager",
-		referenceName: "Jane Smith",
-		referenceEmail: "jane.smith@example.com",
-		referencePhoneNumber: "+1234567890",
-		referenceCompany: "XYZ Corp",
-		veteran: "no",
-		disability: "no",
-		signatureName: "John Doe",
-		employeeId: "",
-		signatureDate: "2022-10-01",
-		confirmSignature: "on",
-		jobId: 1,
-		jobExperience: [
-			{
-				id: 1,
-				companyName: "ABC Corp",
-				jobTitle: "Software Engineer",
-				jobStartDate: "2020-01-01",
-				jobEndDate: "2022-01-01",
-				jobDescription: "Lorem ipsum dolor sit amet",
-			},
-		],
-		educationHistory: [
-			{
-				id: 1,
-				schoolName: "University of Example",
-				degree: "Bachelor of Science",
-				major: "Computer Science",
-				enrollmentDate: "2014-09-01",
-				graduationDate: "2018-05-01",
-				graduated: "yes",
-				gpa: "3.8",
-			},
-		],
-		references: [
-			{
-				id: 1,
-				referenceRelationship: "Manager",
-				referenceName: "Jane Smith",
-				referenceEmail: "jane.smith@example.com",
-				referencePhoneNumber: "+1234567890",
-				referenceCompany: "XYZ Corp",
-			},
-		],
-		createdAt: expect.any(String), // This allows for dynamic timestamp
-	});
+	const postedData = new FormData();
+	mockAxios.history.post[0].data.forEach((value, key) => postedData.append(key, value));
+
+	const formDataObject = formDataToObject(postedData);
+
+	expect(formDataObject.resume).toBeInstanceOf(File);
+	expect(formDataObject.coverLetter).toBeInstanceOf(File);
+	expect(formDataObject).toHaveProperty("personalFirstName", "John");
+	expect(formDataObject).toHaveProperty("personalMiddleInitial", "");
+	expect(formDataObject).toHaveProperty("personalLastName", "Doe");
+	expect(formDataObject).toHaveProperty("personalEmail", "john.doe@example.com");
+	expect(formDataObject).toHaveProperty("personalPhoneNumber", "+1234567890");
+	expect(formDataObject).toHaveProperty("personalAddress1", "123 Main St");
+	expect(formDataObject).toHaveProperty("personalAddress2", "Apt 4B");
+	expect(formDataObject).toHaveProperty("personalCity", "New York");
+	expect(formDataObject).toHaveProperty("personalState", "New York");
+	expect(formDataObject).toHaveProperty("personalZipCode", "10001");
+	expect(formDataObject).toHaveProperty("personalCountry", "United States");
+	expect(formDataObject).toHaveProperty("usWorkEligibility", "yes");
+	expect(formDataObject).toHaveProperty("relocate", "yes");
+	expect(formDataObject).toHaveProperty("felony", "no");
+	expect(formDataObject).toHaveProperty("backgroundCheck", "yes");
+	expect(formDataObject).toHaveProperty("drugTest", "yes");
+	expect(formDataObject).toHaveProperty("overtime", "yes");
+	expect(formDataObject).toHaveProperty("weekends", "yes");
+	expect(formDataObject).toHaveProperty("travel", "yes");
+	expect(formDataObject).toHaveProperty("remote", "yes");
+	expect(formDataObject).toHaveProperty("companyName", "ABC Corp");
+	expect(formDataObject).toHaveProperty("companyJobTitle", "Software Engineer");
+	expect(formDataObject).toHaveProperty("companyJobStartDate", "2020-01-01");
+	expect(formDataObject).toHaveProperty("companyJobEndDate", "2022-01-01");
+	expect(formDataObject).toHaveProperty("companyJobDescription", "Lorem ipsum dolor sit amet");
+	expect(formDataObject).toHaveProperty("schoolName", "University of Example");
+	expect(formDataObject).toHaveProperty("schoolDegree", "Bachelor of Science");
+	expect(formDataObject).toHaveProperty("schoolMajor", "Computer Science");
+	expect(formDataObject).toHaveProperty("schoolEnrollmentDate", "2014-09-01");
+	expect(formDataObject).toHaveProperty("schoolGraduated-1", "yes");
+	expect(formDataObject).toHaveProperty("schoolGraduationDate", "2018-05-01");
+	expect(formDataObject).toHaveProperty("schoolGPA", "3.8");
+	expect(formDataObject).toHaveProperty("listOfSkills", "JavaScript, React, HTML, CSS");
+	expect(formDataObject).toHaveProperty("listOfCertifications", "Certification 1, Certification 2");
+	expect(formDataObject).toHaveProperty("referenceRelationship", "Manager");
+	expect(formDataObject).toHaveProperty("referenceName", "Jane Smith");
+	expect(formDataObject).toHaveProperty("referenceEmail", "jane.smith@example.com");
+	expect(formDataObject).toHaveProperty("referencePhoneNumber", "+1234567890");
+	expect(formDataObject).toHaveProperty("referenceCompany", "XYZ Corp");
+	expect(formDataObject).toHaveProperty("veteran", "no");
+	expect(formDataObject).toHaveProperty("disability", "no");
+	expect(formDataObject).toHaveProperty("signatureName", "John Doe");
+	expect(formDataObject).toHaveProperty("employeeId", "");
+	expect(formDataObject).toHaveProperty("signatureDate", "2022-10-01");
+	expect(formDataObject).toHaveProperty("confirmSignature", "on");
+	expect(formDataObject).toHaveProperty("jobTitle", "Software Engineer");
+	expect(formDataObject).toHaveProperty("jobId", "1");
+	expect(formDataObject).toHaveProperty("userId", "test-user-id");
+	expect(formDataObject).toHaveProperty(
+		"jobExperience",
+		'[{"id":1,"companyName":"ABC Corp","companyJobTitle":"Software Engineer","companyJobStartDate":"2020-01-01","companyJobEndDate":"2022-01-01","companyJobDescription":"Lorem ipsum dolor sit amet"}]'
+	);
+	expect(formDataObject).toHaveProperty(
+		"educationHistory",
+		'[{"id":1,"schoolName":"University of Example","schoolDegree":"Bachelor of Science","schoolMajor":"Computer Science","schoolEnrollmentDate":"2014-09-01","schoolGraduationDate":"2018-05-01","schoolGraduated":"yes","schoolGPA":"3.8"}]'
+	);
+	expect(formDataObject).toHaveProperty(
+		"references",
+		'[{"id":1,"referenceRelationship":"Manager","referenceName":"Jane Smith","referenceEmail":"jane.smith@example.com","referencePhoneNumber":"+1234567890","referenceCompany":"XYZ Corp"}]'
+	);
+	expect(formDataObject).toHaveProperty("createdAt");
 });

@@ -1,4 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect, useRef } from "react";
+import Required from "../../small_blocks/Required";
 
 const References = forwardRef(({ initialData = [] }, ref) => {
 	const [references, setReferences] = useState([]);
@@ -57,6 +58,7 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 					<div className="row">
 						<div className="form-group col-md-6">
 							<label htmlFor={`referenceRelationship-${item.id}`}>Reference {item.id} Relationship</label>
+							<Required />
 							<input
 								type="text"
 								id={`referenceRelationship-${item.id}`}
@@ -65,10 +67,12 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 								value={item.referenceRelationship}
 								placeholder="Professional, Personal, etc..."
 								onChange={(event) => handleReferenceChange(item.id, "referenceRelationship", event)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-6">
 							<label htmlFor={`referenceName-${item.id}`}>Reference {item.id} Name</label>
+							<Required />
 							<input
 								type="text"
 								id={`referenceName-${item.id}`}
@@ -77,10 +81,12 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 								value={item.referenceName}
 								placeholder="First Last"
 								onChange={(event) => handleReferenceChange(item.id, "referenceName", event)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-4">
 							<label htmlFor={`referenceEmail-${item.id}`}>Reference {item.id} Email</label>
+							<Required />
 							<input
 								type="email"
 								id={`referenceEmail-${item.id}`}
@@ -89,10 +95,12 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 								value={item.referenceEmail}
 								placeholder="example@gmail.com"
 								onChange={(event) => handleReferenceChange(item.id, "referenceEmail", event)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-4">
 							<label htmlFor={`referencePhoneNumber-${item.id}`}>Reference {item.id} Phone Number</label>
+							<Required />
 							<input
 								type="tel"
 								id={`referencePhoneNumber-${item.id}`}
@@ -101,10 +109,12 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 								value={item.referencePhoneNumber}
 								placeholder="+1 123-456-7890"
 								onChange={(event) => handleReferenceChange(item.id, "referencePhoneNumber", event)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-4">
 							<label htmlFor={`referenceCompany-${item.id}`}>Reference {item.id} Company</label>
+							<Required />
 							<input
 								type="text"
 								id={`referenceCompany-${item.id}`}
@@ -113,6 +123,7 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 								value={item.referenceCompany}
 								placeholder="Company Name"
 								onChange={(event) => handleReferenceChange(item.id, "referenceCompany", event)}
+								required
 							/>
 						</div>
 					</div>

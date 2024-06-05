@@ -1,4 +1,6 @@
 const JobApplication = require("../models/JobApplication");
+const upload = require("../config/upload");
+const fields = require("./constants/JobApplicationFields");
 
 const getJobApplicationById = async (req, res) => {
 	try {
@@ -25,18 +27,23 @@ const getUserApplications = async (req, res) => {
 };
 
 const createJobApplication = async (req, res) => {
-	try {
-		const jobApplication = new JobApplication({
-			userId: req.body.userId,
-			status: "Pending",
-			...req.body,
-		});
-		console.log("Job Application Data:", jobApplication);
-		await jobApplication.save();
-		res.status(201).send(jobApplication);
-	} catch (error) {
-		res.status(400).send(error.message);
-	}
+	upload.fields([
+		{ name: "resume", maxCount: 1 },
+		{ name: "coverLetter", maxCount: 1 },
+	])(req, res, async (err) => {
+		if (err) {
+			console.error("File upload error:", err);
+			return res.status(400).send(err.message);
+		}
+		try {
+			const jobApplication = new JobApplication(fields(req));
+			await jobApplication.save();
+			res.status(201).send();
+		} catch (error) {
+			console.error("Job application save error:", error);
+			res.status(400).send(error.message);
+		}
+	});
 };
 
 const getUserDetailsFromPreviousApplications = async (req, res) => {
