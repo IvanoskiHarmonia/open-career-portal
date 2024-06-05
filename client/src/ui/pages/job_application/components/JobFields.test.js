@@ -1,11 +1,14 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import JobFields from "./JobFields";
 import "@testing-library/jest-dom";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 
 global.fetch = jest.fn(() =>
 	Promise.resolve({
-		json: () => Promise.resolve({ message: "Success" }),
+		status: 201,
+		json: () => Promise.resolve({}),
 	})
 );
 
@@ -19,7 +22,25 @@ jest.mock("../../../../common/hooks/useAuth", () => ({
 	useAuth: jest.fn(() => ({ userId: "test-user-id", isAuthenticated: true, loading: false })),
 }));
 
-test("submits the form with entered data", () => {
+const mockAxios = new MockAdapter(axios);
+
+mockAxios.onGet("http://localhost:8000/api/user-applications/user-details/test-user-id").reply(200, {
+	personalFirstName: "John",
+	personalLastName: "Doe",
+	personalEmail: "john.doe@example.com",
+	personalPhoneNumber: "+1234567890",
+	personalAddress1: "123 Main St",
+	personalAddress2: "Apt 4B",
+	personalCity: "New York",
+	personalZipCode: "10001",
+	jobExperience: [],
+	educationHistory: [],
+	references: [],
+});
+
+mockAxios.onPost("http://localhost:8000/api/user-applications/create-application").reply(201, {});
+
+test("submits the form with entered data", async () => {
 	const job = {
 		id: 1,
 		title: "Software Engineer",
@@ -121,12 +142,9 @@ test("submits the form with entered data", () => {
 	const remoteWorkRadio = screen.getByLabelText("Yes", { selector: "#yes-remote" });
 	fireEvent.click(remoteWorkRadio);
 
-	/** TODO: FIX THESE TESTS
-	 * Employment History errors
-	 * The reason for the issue is that employment history fields are not being rendered without the user clicking on the Employment History `Add Another Job` button.
-	 * The solution is to add a test that clicks on the `Add Another Job` button to render the employment history fields.
-	 * Same goes for the Education History fields and the References fields.
-	 */
+	const addAnotherJobButton = screen.getByText("Add Another Job");
+	fireEvent.click(addAnotherJobButton);
+
 	const companyNameInput = screen.getByLabelText("Company Name 1");
 	fireEvent.change(companyNameInput, { target: { value: "ABC Corp" } });
 
@@ -142,6 +160,9 @@ test("submits the form with entered data", () => {
 	const jobDescriptionInput = screen.getByLabelText("Job Description");
 	fireEvent.change(jobDescriptionInput, { target: { value: "Lorem ipsum dolor sit amet" } });
 
+	const addAnotherEducationButton = screen.getByText("Add Another Education");
+	fireEvent.click(addAnotherEducationButton);
+
 	const schoolNameInput = screen.getByLabelText("School Name 1");
 	fireEvent.change(schoolNameInput, { target: { value: "University of Example" } });
 
@@ -154,6 +175,9 @@ test("submits the form with entered data", () => {
 	const startDateEducationInput = screen.getByLabelText("Enrollment Date");
 	fireEvent.change(startDateEducationInput, { target: { value: "2014-09-01" } });
 
+	const confirmGraduationRadio = screen.getByLabelText("yes-graduate-1");
+	fireEvent.click(confirmGraduationRadio);
+
 	const graduationDateInput = screen.getByLabelText("Graduation Date");
 	fireEvent.change(graduationDateInput, { target: { value: "2018-05-01" } });
 
@@ -165,6 +189,9 @@ test("submits the form with entered data", () => {
 
 	const certificationsInput = screen.getByLabelText("Certifications");
 	fireEvent.change(certificationsInput, { target: { value: "Certification 1, Certification 2" } });
+
+	const addAnotherReferenceButton = screen.getByText("Add Another Reference");
+	fireEvent.click(addAnotherReferenceButton);
 
 	const relationshipInput = screen.getByLabelText("Reference 1 Relationship");
 	fireEvent.change(relationshipInput, { target: { value: "Manager" } });
@@ -212,59 +239,100 @@ test("submits the form with entered data", () => {
 	});
 
 	fireEvent.click(signatureCheckbox);
-
 	expect(signatureCheckbox).toBeChecked();
 
 	const submitButton = screen.getByText("Submit Application");
-	fireEvent.click(submitButton);
+	const form = submitButton.closest("form");
+	fireEvent.submit(form);
 
-	expect(fetch).toHaveBeenCalledWith("/api/job-application", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		/** TODO: FIX BODY
-		 * The body does not match the actual form data fields,
-		 * The body should be updated to match the actual form data fields
-		 */
-		body: JSON.stringify({
-			personalFirstName: "John",
-			personalLastName: "Doe",
-			personalEmail: "john.doe@example.com",
-			personalPhoneNumber: "+1234567890",
-			personalAddress1: "123 Main St",
-			personalAddress2: "Apt 4B",
-			personalCity: "New York",
-			personalZipCode: "10001",
-			usWorkEligibility: "yes",
-			relocate: "yes",
-			felony: "no",
-			backgroundCheck: "yes",
-			drugTest: "yes",
-			overtime: "yes",
-			weekends: "yes",
-			travel: "yes",
-			remote: "yes",
-			"companyName-1": "ABC Corp",
-			"jobTitle-1": "Software Engineer",
-			"jobStartDate-1": "2020-01-01",
-			"jobEndDate-1": "2022-01-01",
-			"jobDescription-1": "Lorem ipsum dolor sit amet",
-			"schoolName-1": "University of Example",
-			"degree-1": "Bachelor of Science",
-			"major-1": "Computer Science",
-			"enrollmentDate-1": "2014-09-01",
-			"graduationDate-1": "2018-05-01",
-			"gpa-1": "3.8",
-			"reference-1": "Manager",
-			"reference-name-1": "Jane Smith",
-			"reference-email-1": "jane.smith@example.com",
-			"reference-phoneNumber-1": "+1234567890",
-			"reference-company-1": "XYZ Corp",
-			disability: "no",
-			veteran: "no",
-			"signature-name": "John Doe",
-			"signature-date": "2022-10-01",
-		}),
+	await waitFor(() => {
+		expect(mockAxios.history.post.length).toBe(1);
+	});
+
+	const postedData = JSON.parse(mockAxios.history.post[0].data);
+	expect(mockAxios.history.post[0].url).toBe("http://localhost:8000/api/user-applications/create-application");
+	expect(postedData).toMatchObject({
+		userId: "test-user-id",
+		resume: expect.any(Object),
+		coverLetter: expect.any(Object),
+		personalFirstName: "John",
+		personalMiddleInitial: "",
+		personalLastName: "Doe",
+		personalEmail: "john.doe@example.com",
+		personalPhoneNumber: "+1234567890",
+		personalAddress1: "123 Main St",
+		personalAddress2: "Apt 4B",
+		personalCity: "New York",
+		personalState: "New York",
+		personalZipCode: "10001",
+		personalCountry: "United States",
+		usWorkEligibility: "yes",
+		relocate: "yes",
+		felony: "no",
+		backgroundCheck: "yes",
+		drugTest: "yes",
+		overtime: "yes",
+		weekends: "yes",
+		travel: "yes",
+		remote: "yes",
+		companyName: "ABC Corp",
+		jobTitle: "Software Engineer",
+		jobStartDate: "2020-01-01",
+		jobEndDate: "2022-01-01",
+		jobDescription: "Lorem ipsum dolor sit amet",
+		schoolName: "University of Example",
+		degree: "Bachelor of Science",
+		major: "Computer Science",
+		enrollmentDate: "2014-09-01",
+		"graduated-1": "yes",
+		graduationDate: "2018-05-01",
+		gpa: "3.8",
+		listOfSkills: "JavaScript, React, HTML, CSS",
+		listOfCertifications: "Certification 1, Certification 2",
+		referenceRelationship: "Manager",
+		referenceName: "Jane Smith",
+		referenceEmail: "jane.smith@example.com",
+		referencePhoneNumber: "+1234567890",
+		referenceCompany: "XYZ Corp",
+		veteran: "no",
+		disability: "no",
+		signatureName: "John Doe",
+		employeeId: "",
+		signatureDate: "2022-10-01",
+		confirmSignature: "on",
+		jobId: 1,
+		jobExperience: [
+			{
+				id: 1,
+				companyName: "ABC Corp",
+				jobTitle: "Software Engineer",
+				jobStartDate: "2020-01-01",
+				jobEndDate: "2022-01-01",
+				jobDescription: "Lorem ipsum dolor sit amet",
+			},
+		],
+		educationHistory: [
+			{
+				id: 1,
+				schoolName: "University of Example",
+				degree: "Bachelor of Science",
+				major: "Computer Science",
+				enrollmentDate: "2014-09-01",
+				graduationDate: "2018-05-01",
+				graduated: "yes",
+				gpa: "3.8",
+			},
+		],
+		references: [
+			{
+				id: 1,
+				referenceRelationship: "Manager",
+				referenceName: "Jane Smith",
+				referenceEmail: "jane.smith@example.com",
+				referencePhoneNumber: "+1234567890",
+				referenceCompany: "XYZ Corp",
+			},
+		],
+		createdAt: expect.any(String), // This allows for dynamic timestamp
 	});
 });

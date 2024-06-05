@@ -56,7 +56,7 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 					</button>
 					<div className="row">
 						<div className="form-group col-md-6">
-							<label htmlFor={`reference-${item.id}`}>Reference {item.id} Relationship</label>
+							<label htmlFor={`referenceRelationship-${item.id}`}>Reference {item.id} Relationship</label>
 							<input
 								type="text"
 								id={`referenceRelationship-${item.id}`}
@@ -95,7 +95,7 @@ const References = forwardRef(({ initialData = [] }, ref) => {
 							<label htmlFor={`referencePhoneNumber-${item.id}`}>Reference {item.id} Phone Number</label>
 							<input
 								type="tel"
-								id={`reference-phoneNumber-${item.id}`}
+								id={`referencePhoneNumber-${item.id}`}
 								name="referencePhoneNumber"
 								className="form-control"
 								value={item.referencePhoneNumber}

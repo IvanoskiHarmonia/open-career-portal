@@ -109,6 +109,7 @@ const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 									onChange={(e) => handleEducationChange(item.id, "graduated", e)}
 									value="yes"
 									checked={item.graduated === "yes"}
+									aria-label={`yes-graduate-${item.id}`}
 								/>
 								<label className="form-check-label" htmlFor="yes-graduate">
 									Yes
@@ -123,6 +124,7 @@ const EducationHistory = forwardRef(({ initialData = [] }, ref) => {
 									onChange={(e) => handleEducationChange(item.id, "graduated", e)}
 									value="no"
 									checked={item.graduated === "no"}
+									aria-label={`no-graduate-${item.id}`}
 								/>
 								<label className="form-check-label" htmlFor="no-graduate">
 									No
