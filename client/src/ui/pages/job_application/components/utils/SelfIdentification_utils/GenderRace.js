@@ -1,3 +1,5 @@
+import React from "react";
+
 const GenderRace = () => {
 	return (
 		<div className="container my-4">
