@@ -1,3 +1,5 @@
+import React from "react";
+
 const Disability = () => {
 	return (
 		<div className="container my-4">
@@ -35,7 +37,9 @@ const Disability = () => {
 				<li className="list-group-item">Cerebral palsy</li>
 				<li className="list-group-item">Deaf or serious difficulty hearing</li>
 				<li className="list-group-item">Diabetes</li>
-				<li className="list-group-item">Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders</li>
+				<li className="list-group-item">
+					Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders
+				</li>
 				<li className="list-group-item">Epilepsy or other seizure disorder</li>
 				<li className="list-group-item">Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome</li>
 				<li className="list-group-item">Intellectual or developmental disability</li>

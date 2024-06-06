@@ -4,4 +4,9 @@ module.exports = {
 	},
 	moduleFileExtensions: ["js", "jsx"],
 	testEnvironment: "jsdom",
+	moduleNameMapper: {
+		"\\.(css|less)$": "<rootDir>/test/jest/__mocks__/styleMock.js",
+	},
+	verbose: true,
+	silent: false,
 };

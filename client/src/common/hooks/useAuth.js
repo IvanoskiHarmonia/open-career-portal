@@ -25,13 +25,15 @@ export const AuthProvider = ({ children }) => {
 				console.log("Session is not valid");
 				setIsAuthenticated(false);
 				setUserId(null);
-				navigate("/login");
+				const redirectPath = window.location.pathname === "/login" ? "/" : window.location.pathname;
+				navigate(`/login?redirect=${encodeURIComponent(redirectPath)}`);
 			}
 		} catch (error) {
 			console.error("Failed to validate session:", error);
 			setIsAuthenticated(false);
 			setUserId(null);
-			navigate("/login");
+			const redirectPath = window.location.pathname === "/login" ? "/" : window.location.pathname;
+			navigate(`/login?redirect=${encodeURIComponent(redirectPath)}`);
 		} finally {
 			setLoading(false);
 		}
@@ -52,15 +54,12 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, [navigate]);
 
-	const handleLogin = (navigate, userId, expiresIn) => {
+	const handleLogin = (navigate, userId, expiresIn, redirectURL = "/") => {
 		setIsAuthenticated(true);
 		setUserId(userId);
 		localStorage.setItem("tokenExpiry", Date.now() + expiresIn * 1000);
-		if (navigate(-1) !== "/login") {
-			navigate(-1);
-		} else {
-			navigate("/");
-		}
+		console.log(`Navigating to ${redirectURL}`);
+		navigate(redirectURL);
 	};
 
 	useEffect(() => {

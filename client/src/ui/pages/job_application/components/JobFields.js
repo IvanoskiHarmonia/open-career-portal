@@ -51,21 +51,24 @@ const JobFields = ({ job }) => {
 		event.preventDefault();
 
 		const formData = new FormData(event.target);
-		const data = Object.fromEntries(formData);
-		data.jobTitle = job.title;
-		data.jobId = job.id;
+		formData.append("jobTitle", job.title);
+		formData.append("jobId", job.id);
+		formData.append("userId", userId);
 
-		data.jobExperience = employementHistoryRef.current.getEmploymentHistory();
-		data.educationHistory = educationHistoryRef.current.getEducationHistory();
-		data.references = referencesRef.current.getReferences();
+		const employmentHistory = JSON.stringify(employementHistoryRef.current.getEmploymentHistory());
+		const educationHistory = JSON.stringify(educationHistoryRef.current.getEducationHistory());
+		const references = JSON.stringify(referencesRef.current.getReferences());
 
-		const createdAt = new Date().toISOString();
+		formData.append("jobExperience", employmentHistory);
+		formData.append("educationHistory", educationHistory);
+		formData.append("references", references);
+		formData.append("createdAt", new Date().toISOString());
 
 		try {
-			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", {
-				userId,
-				...data,
-				createdAt,
+			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
 			});
 			if (response.status === 201) {
 				navigate("/user-applications/" + userId);

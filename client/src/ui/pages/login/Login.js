@@ -32,7 +32,8 @@ const Login = () => {
 				);
 
 				const userId = loginResponse.data.userId;
-				handleLogin(navigate, userId, tokenResponse.expires_in);
+				const redirectUrl = new URLSearchParams(window.location.search).get("redirect") || "/";
+				handleLogin(navigate, userId, tokenResponse.expires_in, redirectUrl);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);
 			}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef } from "react";
+import Required from "../../small_blocks/Required";
 
 const EmploymentHistory = forwardRef(({ initialData = [] }, ref) => {
 	const [employmentHistory, setEmploymentHistory] = useState([]);
@@ -9,7 +10,7 @@ const EmploymentHistory = forwardRef(({ initialData = [] }, ref) => {
 		const newId = employmentHistory.length > 0 ? employmentHistory[employmentHistory.length - 1].id + 1 : 1;
 		setEmploymentHistory([
 			...employmentHistory,
-			{ id: newId, companyName: "", jobTitle: "", jobStartDate: "", jobEndDate: "", jobDescription: "" },
+			{ id: newId, companyName: "", companyJobTitle: "", companyJobStartDate: "", companyJobEndDate: "", companyJobDescription: "" },
 		]);
 	};
 
@@ -32,8 +33,8 @@ const EmploymentHistory = forwardRef(({ initialData = [] }, ref) => {
 		const formattedData = initialData.map((item, index) => ({
 			...item,
 			id: index + 1,
-			jobStartDate: item.jobStartDate ? item.jobStartDate.split("T")[0] : "",
-			jobEndDate: item.jobEndDate ? item.jobEndDate.split("T")[0] : "",
+			companyJobStartDate: item.companyJobStartDate ? item.companyJobStartDate.split("T")[0] : "",
+			companyJobEndDate: item.companyJobEndDate ? item.companyJobEndDate.split("T")[0] : "",
 		}));
 		if (JSON.stringify(initialDataRef.current) !== JSON.stringify(initialData)) {
 			setEmploymentHistory(formattedData);
@@ -51,63 +52,73 @@ const EmploymentHistory = forwardRef(({ initialData = [] }, ref) => {
 					</button>
 					<div className="row">
 						<div className="form-group col-md-6">
-							<label htmlFor={`company-name-${item.id}`}>Company Name {item.id}</label>
+							<label htmlFor={`companyName-${item.id}`}>Company Name {item.id}</label>
+							<Required />
 							<input
 								type="text"
-								id={`company-name-${item.id}`}
+								id={`companyName-${item.id}`}
 								name="companyName"
 								className="form-control"
 								value={item.companyName || ""}
 								placeholder={`Company Name ${item.id}`}
 								onChange={(event) => handleEmploymentChange(item.id, "companyName", event)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-6">
-							<label htmlFor={`job-title-${item.id}`}>Job Title</label>
+							<label htmlFor={`companyJobTitle-${item.id}`}>Job Title</label>
+							<Required />
 							<input
 								type="text"
-								id={`job-title-${item.id}`}
-								name="jobTitle"
+								id={`companyJobTitle-${item.id}`}
+								name="companyJobTitle"
 								className="form-control"
-								value={item.jobTitle || ""}
+								value={item.companyJobTitle || ""}
 								placeholder={`Job Title ${item.id}`}
-								onChange={(event) => handleEmploymentChange(item.id, "jobTitle", event)}
+								onChange={(event) => handleEmploymentChange(item.id, "companyJobTitle", event)}
+								required
 							/>
 						</div>
 					</div>
 					<div className="row">
 						<div className="form-group col-md-6">
-							<label htmlFor={`job-start-date-${item.id}`}>Start Date</label>
+							<label htmlFor={`companyJobStartDate-${item.id}`}>Start Date</label>
+							<Required />
 							<input
 								type="date"
-								id={`job-start-date-${item.id}`}
-								name="jobStartDate"
+								id={`companyJobStartDate-${item.id}`}
+								name="companyJobStartDate"
 								className="form-control"
-								value={item.jobStartDate}
-								onChange={(event) => handleEmploymentChange(item.id, "jobStartDate", event)}
+								value={item.companyJobStartDate}
+								onChange={(event) => handleEmploymentChange(item.id, "companyJobStartDate", event)}
+								required
 							/>
 						</div>
 						<div className="form-group col-md-6">
-							<label htmlFor={`job-end-date-${item.id}`}>End Date</label>
+							<label htmlFor={`companyJobEndDate-${item.id}`}>End Date</label>
+							<Required />
 							<input
 								type="date"
-								id={`job-end-date-${item.id}`}
-								name="jobEndDate"
+								id={`companyJobEndDate-${item.id}`}
+								name="companyJobEndDate"
 								className="form-control"
-								value={item.jobEndDate}
-								onChange={(event) => handleEmploymentChange(item.id, "jobEndDate", event)}
+								value={item.companyJobEndDate}
+								onChange={(event) => handleEmploymentChange(item.id, "companyJobEndDate", event)}
+								required
 							/>
 						</div>
 					</div>
 					<div className="form-group">
-						<label htmlFor={`job-description-${item.id}`}>Job Description</label>
+						<label htmlFor={`companyJobDescription-${item.id}`}>Job Description</label>
+						<Required />
 						<textarea
-							id={`job-description-${item.id}`}
-							name="jobDescription"
+							id={`companyJobDescription-${item.id}`}
+							name="companyJobDescription"
 							className="form-control"
-							value={item.jobDescription || ""}
+							value={item.companyJobDescription || ""}
 							placeholder="Job Description"
-							onChange={(event) => handleEmploymentChange(item.id, "jobDescription", event)}
+							onChange={(event) => handleEmploymentChange(item.id, "companyJobDescription", event)}
+							required
 						/>
 					</div>
 				</div>

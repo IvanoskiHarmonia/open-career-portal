@@ -1,3 +1,5 @@
+import React from "react";
+
 const Veteran = () => {
 	return (
 		<div className="container my-3">
