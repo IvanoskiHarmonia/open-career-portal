@@ -14,13 +14,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Tools you need to install the software and how to install them:
+🔴<span style="color:red">Tools you **MUST HAVE** to run this app.</span>🔴 Install the software and how to install them:
 
 -   [Node.js](https://nodejs.org/en/download/) - Node version v22.2.0 - **Not LTS**, but the latest version.
 -   [Git](https://git-scm.com/downloads) - Version 2.42.1
 -   [MongoDB](https://www.mongodb.com/try/download/community) - mongosh version 2.2.6
--   [MongoDB Cloud](https://www.mongodb.com/lp/cloud/atlas/) - MongoDB Atlas register for free
 -   [NPM](https://www.npmjs.com/get-npm) - npm version 10.7.0
+-   [MongoDB Cloud](https://www.mongodb.com/lp/cloud/atlas/) - MongoDB Atlas register for free
+-   [Google Cloud Platform](https://console.cloud.google.com/) - Google Cloud Platform register for free
 
 What things you need to install the software and how to install them:
 
