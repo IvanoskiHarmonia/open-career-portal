@@ -7,7 +7,7 @@ function JobDetailsScreen() {
 
 	return (
 		<StyleWrapper>
-			<JobDetails job={job} setJob={setJob} isApplyButtonVisible={true} />
+			<JobDetails job={job} setJob={setJob} detailsScreen={true} />
 		</StyleWrapper>
 	);
 }

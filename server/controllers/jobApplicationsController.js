@@ -59,9 +59,22 @@ const getUserDetailsFromPreviousApplications = async (req, res) => {
 	}
 };
 
+const checkIfUserAppliedToJob = async (req, res) => {
+	try {
+		const jobApplication = await JobApplication.findOne({ userId: req.params.userId, jobId: req.params.jobId });
+		if (!jobApplication) {
+			return res.status(404).send({ message: "Job application not found" });
+		}
+		res.send(jobApplication);
+	} catch (error) {
+		res.status(400).send(error.message);
+	}
+};
+
 module.exports = {
 	getJobApplicationById,
 	getUserApplications,
 	createJobApplication,
 	getUserDetailsFromPreviousApplications,
+	checkIfUserAppliedToJob,
 };

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../../../common/hooks/useAuth";
-import { Tab, Tabs } from "react-bootstrap";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import UserJobApplicationsPlaceholder from "./UserJobApplicationsPlaceholder";
+import SpinnerOverlay from "../../../modules/components/loading/SpinnerOverlay";
 
 const UserJobApplications = () => {
 	const { userId } = useAuth();
 	const [jobApplications, setJobApplications] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const [key, setKey] = useState("active");
 
 	useEffect(() => {
@@ -15,6 +19,8 @@ const UserJobApplications = () => {
 				setJobApplications(response.data);
 			} catch (error) {
 				console.error("Failed to fetch job applications:", error);
+			} finally {
+				setLoading(false);
 			}
 		};
 		fetchJobApplications();
@@ -22,6 +28,15 @@ const UserJobApplications = () => {
 
 	const activeApplications = jobApplications.filter((application) => application.status.toLowerCase() === "pending");
 	const inactiveApplications = jobApplications.filter((application) => application.status.toLowerCase() === "rejected");
+
+	if (loading) {
+		return (
+			<>
+				<UserJobApplicationsPlaceholder />
+				<SpinnerOverlay />
+			</>
+		);
+	}
 
 	return (
 		<div className="col-lg-10 offset-lg-1">
