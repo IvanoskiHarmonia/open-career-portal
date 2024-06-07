@@ -6,6 +6,7 @@ export const getJobs = async () => {
 		const errorMessage = `Error ${response.status}: ${response.statusText}`;
 		throw new Error(errorMessage);
 	}
+
 	return response.data;
 };
 

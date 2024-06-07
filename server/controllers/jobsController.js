@@ -1,19 +1,22 @@
-const jobs = require("../data/jobs.json");
+const Job = require("../models/Job");
 
-const getAllJobs = (req, res) => {
+const getAllJobs = async (req, res) => {
+	const jobs = await Job.find({});
 	res.send(jobs);
 };
 
-const getJobById = (req, res) => {
-	const job = jobs.find((job) => job.id === parseInt(req.params.jobId));
+const getJobById = async (req, res) => {
+	const jobId = parseInt(req.params.jobId);
+	const job = await Job.findOne({ id: jobId });
 	if (!job) {
 		return res.status(404).send("Job not found");
 	}
 	res.send({ job });
 };
 
-const getJobsByTitleOrDescription = (req, res) => {
+const getJobsByTitleOrDescription = async (req, res) => {
 	const searchTerm = req.params.searchTerm.toLowerCase();
+	const jobs = await Job.find({});
 	const matchingJobs = jobs.filter((job) => job.title.toLowerCase().includes(searchTerm) || job.description.toLowerCase().includes(searchTerm));
 	if (matchingJobs.length === 0) {
 		return res.status(404).send("No jobs found");
