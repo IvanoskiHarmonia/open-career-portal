@@ -1,8 +1,8 @@
 const Job = require("../models/Job");
 
 const getAllJobs = async (req, res) => {
-	const jobsDB = await Job.find({});
-	res.send(jobsDB);
+	const jobs = await Job.find({});
+	res.send(jobs);
 };
 
 const getJobById = async (req, res) => {
