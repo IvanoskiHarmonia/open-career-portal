@@ -37,7 +37,7 @@ const JobCard = React.memo(({ job }) => {
 				</div>
 				<hr />
 				<div className="clamp-2">
-					<p>{job.description}</p>
+					<p>{job.requirements && job.requirements[0]}</p>
 				</div>
 			</div>
 		</div>
