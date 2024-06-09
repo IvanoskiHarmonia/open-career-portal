@@ -2,14 +2,15 @@
 	"name": "careers-portal",
 	"version": "1.0.0",
 	"scripts": {
-		"start": "npm start --prefix server & npm start --prefix client",
+		"start": "node server/index.js",
 		"install:client": "npm install --prefix client",
 		"install:server": "npm install --prefix server",
 		"install:all": "npm install && npm install --prefix client && npm install --prefix server",
 		"test:client": "cd client && npx jest",
 		"client": "npm start --prefix client",
 		"server": "npm start --prefix server",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
 	"devDependencies": {
 		"concurrently": "^7.6.0"
