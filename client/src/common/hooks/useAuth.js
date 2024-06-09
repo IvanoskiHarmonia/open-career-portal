@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+
 export const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -15,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 	const validateSession = useCallback(async () => {
 		console.log("Validating session...");
 		try {
-			const response = await axios.get("http://localhost:8000/api/session/validate", { withCredentials: true });
+			const response = await axios.get(`${apiUrl}/api/session/validate`, { withCredentials: true });
 			if (response.data.isValidSession) {
 				console.log("Session is valid");
 				setIsAuthenticated(true);
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 	const handleLogout = useCallback(async () => {
 		console.log("Logging out...");
 		try {
-			await axios.post("http://localhost:8000/api/session/logout", {}, { withCredentials: true });
+			await axios.post(`${apiUrl}/api/session/logout`, {}, { withCredentials: true });
 			setIsAuthenticated(false);
 			setUserId(null);
 			localStorage.removeItem("userId");

@@ -6,6 +6,8 @@ import { useAuth } from "../../../common/hooks/useAuth";
 import { LogIn } from "react-feather";
 import LoginPlaceholder from "./components/LoginPlaceholder";
 
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+
 const Login = () => {
 	const { handleLogin, loading } = useAuth();
 	const navigate = useNavigate();
@@ -22,7 +24,7 @@ const Login = () => {
 				});
 
 				const loginResponse = await axios.post(
-					"http://localhost:8000/api/users/login",
+					`${apiUrl}/api/users/login`,
 					{
 						token: tokenResponse.access_token,
 						expiresAt: new Date().getTime() + tokenResponse.expires_in + 120 * 60 * 1000,

@@ -9,6 +9,8 @@ import { useAuth } from "../../../common/hooks/useAuth";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+
 function JobApplication() {
 	const [job, setJob] = useState({});
 	const { jobId } = useParams();
@@ -20,7 +22,7 @@ function JobApplication() {
 	useEffect(() => {
 		const checlIfUserApplied = async () => {
 			try {
-				const response = await axios.get("http://localhost:8000/api/user-applications/check-application/" + userId + "/" + jobId);
+				const response = await axios.get(`${apiUrl}/api/user-applications/check-application/` + userId + "/" + jobId);
 				if (response.status === 200) {
 					setHasApplied(true);
 				} else {

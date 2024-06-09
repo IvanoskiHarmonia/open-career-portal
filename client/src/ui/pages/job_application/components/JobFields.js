@@ -21,6 +21,8 @@ import { useAuth } from "../../../../common/hooks/useAuth";
 import { Send } from "react-feather";
 import ScrollSpyNav from "../small_blocks/ScrollSpyNav";
 
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+
 const JobFields = ({ job }) => {
 	const navigate = useNavigate();
 	const { userId } = useAuth();
@@ -33,7 +35,7 @@ const JobFields = ({ job }) => {
 	useEffect(() => {
 		const fetchUserDetails = async () => {
 			try {
-				const response = await axios.get("http://localhost:8000/api/user-applications/user-details/" + userId);
+				const response = await axios.get(`${apiUrl}/api/user-applications/user-details/` + userId);
 				if (response.status === 200) {
 					setInitialData(response.data);
 				} else {
@@ -65,7 +67,7 @@ const JobFields = ({ job }) => {
 		formData.append("createdAt", new Date().toISOString());
 
 		try {
-			const response = await axios.post("http://localhost:8000/api/user-applications/create-application", formData, {
+			const response = await axios.post(`${apiUrl}/api/user-applications/create-application`, formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},
