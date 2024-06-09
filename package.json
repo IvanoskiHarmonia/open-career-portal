@@ -10,7 +10,17 @@
 		"client": "npm start --prefix client",
 		"server": "npm start --prefix server",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm install --prefix server && npm run build --prefix client"
+	},
+	"dependencies": {
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"mongodb": "^6.6.2",
+		"mongoose": "^8.4.0",
+		"multer": "^1.4.5-lts.1",
+		"uuid": "^9.0.1"
 	},
 	"devDependencies": {
 		"concurrently": "^7.6.0"
