@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 				console.log("Session is valid");
 				setIsAuthenticated(true);
 				setUserId(response.data.userId);
-				localStorage.setItem("tokenExpiry", Date.now() + response.data.expiresIn * 1000);
+				localStorage.setItem("tokenExpiry", Date.now() + response.data.expiresIn * 1001);
 			} else {
 				console.log("Session is not valid");
 				setIsAuthenticated(false);
