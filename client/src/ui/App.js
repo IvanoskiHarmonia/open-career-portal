@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./modules/components/utils/ProtectedRoute";
 import Navbar from "./modules/components/card/Navbar";
 import Candidate from "./pages/candidate/Candidate";
+import TermsOfService from "./pages/static_pages/components/TermsOfService";
+import PrivacyPolicy from "./pages/static_pages/components/PrivacyPolicy";
 
 function App() {
 	return (
@@ -14,6 +16,8 @@ function App() {
 			<Navbar />
 			<Routes>
 				<Route path="/login" element={<Login />} />
+				<Route path="/terms-of-service" element={<TermsOfService />} />
+				<Route path="/privacy-policy" element={<PrivacyPolicy />} />
 				<Route
 					path="/"
 					element={

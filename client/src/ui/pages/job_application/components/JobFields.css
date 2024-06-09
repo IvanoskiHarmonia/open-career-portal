@@ -2,3 +2,16 @@
 	top: 20% !important;
 	z-index: 1020;
 }
+
+.check-box-container {
+	display: flex !important;
+	align-items: center !important;
+	flex-wrap: wrap !important;
+}
+.check-box-container label {
+	margin-right: 0.5rem !important;
+}
+
+.check-box-container a {
+	margin-left: 0.5rem !important;
+}

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
@@ -13,9 +13,15 @@ export const AuthProvider = ({ children }) => {
 	const [userId, setUserId] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const validateSession = useCallback(async () => {
 		console.log("Validating session...");
+		const publicPaths = ["/terms-of-service", "/privacy-policy"];
+		if (publicPaths.includes(location.pathname)) {
+			setLoading(false);
+			return;
+		}
 		try {
 			const response = await axios.get(`${apiUrl}/api/session/validate`, { withCredentials: true });
 			if (response.data.isValidSession) {
@@ -39,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 		} finally {
 			setLoading(false);
 		}
-	}, [navigate]);
+	}, [navigate, location.pathname]);
 
 	const handleLogout = useCallback(async () => {
 		console.log("Logging out...");
@@ -78,7 +84,6 @@ export const AuthProvider = ({ children }) => {
 
 		window.addEventListener("mousemove", resetIdleTimer);
 		window.addEventListener("keypress", resetIdleTimer);
-
 		resetIdleTimer();
 
 		return () => {

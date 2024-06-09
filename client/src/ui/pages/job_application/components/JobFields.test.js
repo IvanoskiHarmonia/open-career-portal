@@ -4,6 +4,7 @@ import JobFields from "./JobFields";
 import "@testing-library/jest-dom";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
+import { MemoryRouter } from "react-router-dom";
 
 global.fetch = jest.fn(() =>
 	Promise.resolve({
@@ -86,7 +87,11 @@ test("submits the form with entered data", async () => {
 		how_to_apply: "Send your resume and cover letter to hr@techinnovators.com",
 	};
 
-	render(<JobFields job={job} />);
+	render(
+		<MemoryRouter>
+			<JobFields job={job} />
+		</MemoryRouter>
+	);
 
 	const resumeInput = screen.getByLabelText(/resume \*/i);
 	fireEvent.change(resumeInput, { target: { files: [new File(["resume.pdf"], "resume.pdf", { type: "application/pdf" })] } });
@@ -135,9 +140,6 @@ test("submits the form with entered data", async () => {
 
 	const felonyRadio = screen.getByLabelText("No", { selector: "#no-felony" });
 	fireEvent.click(felonyRadio);
-
-	const felonyExplanationInput = screen.getByLabelText("If yes, please explain");
-	fireEvent.change(felonyExplanationInput, { target: { value: "N/A" } });
 
 	const backgroundCheckRadio = screen.getByLabelText("Yes", { selector: "#yes-backgroundCheck" });
 	fireEvent.click(backgroundCheckRadio);
@@ -250,7 +252,7 @@ test("submits the form with entered data", async () => {
 	fireEvent.change(todaysDateInput, { target: { value: "2022-10-01" } });
 
 	const signatureCheckbox = screen.getByRole("checkbox", {
-		name: "Checking the checkbox is equivalent to a handwritten signature.",
+		name: "By checking this box, you agree that this is equivalent to a handwritten signature and that you accept our Privacy Policy and Terms of Service.",
 	});
 
 	fireEvent.click(signatureCheckbox);

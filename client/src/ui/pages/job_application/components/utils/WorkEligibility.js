@@ -1,8 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Required from "../../small_blocks/Required";
 
 function WorkEligibility({ initialData }) {
+	const [isFelony, setIsFelony] = useState(false);
+
+	const handleFelonyChange = (e) => {
+		setIsFelony(e.target.value === "yes");
+	};
+
 	useEffect(() => {
 		if (initialData.length === 0) return;
 		document.getElementById("yes-usWorkEligibility").checked = initialData.usWorkEligibility === "yes";
@@ -71,22 +77,33 @@ function WorkEligibility({ initialData }) {
 					<label>Have you ever been convicted of a felony?</label>
 					<Required />
 					<div className="form-check">
-						<input type="radio" className="form-check-input" id="yes-felony" name="felony" value="yes" required />
+						<input
+							type="radio"
+							className="form-check-input"
+							id="yes-felony"
+							name="felony"
+							value="yes"
+							onChange={handleFelonyChange}
+							required
+						/>
 						<label className="form-check-label" htmlFor="yes-felony">
 							Yes
 						</label>
 					</div>
 					<div className="form-check">
-						<input type="radio" className="form-check-input" id="no-felony" name="felony" value="no" />
+						<input type="radio" className="form-check-input" id="no-felony" name="felony" value="no" onChange={handleFelonyChange} />
 						<label className="form-check-label" htmlFor="no-felony">
 							No
 						</label>
 					</div>
 				</div>
-				<div className="form-group">
-					<label htmlFor="felon-explanation">If yes, please explain</label>
-					<textarea id="felon-explanation" className="form-control"></textarea>
-				</div>
+				{isFelony && (
+					<div className="form-group">
+						<label htmlFor="felon-explanation">If yes, please explain</label>
+						<Required />
+						<textarea id="felon-explanation" className="form-control" required></textarea>
+					</div>
+				)}
 				<div className="form-group">
 					<label>Are you willing to undergo a background check?</label>
 					<Required />
