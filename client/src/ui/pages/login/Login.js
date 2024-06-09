@@ -6,13 +6,14 @@ import { useAuth } from "../../../common/hooks/useAuth";
 import { LogIn } from "react-feather";
 import LoginPlaceholder from "./components/LoginPlaceholder";
 
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+
 const Login = () => {
 	const { handleLogin, loading } = useAuth();
 	const navigate = useNavigate();
 
 	const login = useGoogleLogin({
-		clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-		auto_select: true,
+		clientId: process.env.REACT_APP_CLIENT_ID,
 		onSuccess: async (tokenResponse) => {
 			try {
 				const googleUserResponse = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
@@ -22,7 +23,7 @@ const Login = () => {
 				});
 
 				const loginResponse = await axios.post(
-					"http://localhost:8000/api/users/login",
+					`${apiUrl}/api/users/login`,
 					{
 						token: tokenResponse.access_token,
 						expiresAt: new Date().getTime() + tokenResponse.expires_in + 120 * 60 * 1000,
@@ -33,6 +34,7 @@ const Login = () => {
 
 				const userId = loginResponse.data.userId;
 				const redirectUrl = new URLSearchParams(window.location.search).get("redirect") || "/";
+
 				handleLogin(navigate, userId, tokenResponse.expires_in, redirectUrl);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);
@@ -55,7 +57,13 @@ const Login = () => {
 						<div className="card-body shadow">
 							<h2 className="card-title text-center mb-2">Login Page</h2>
 							<div className="d-flex justify-content-center">
-								<button onClick={() => login()} className="btn btn-primary d-flex align-items-center">
+								<button
+									onClick={() => {
+										login();
+										console.log("Login button clicked");
+									}}
+									className="btn btn-primary d-flex align-items-center"
+								>
 									Google
 									<LogIn size={20} className="ms-1" />
 								</button>
