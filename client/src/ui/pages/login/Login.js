@@ -12,8 +12,10 @@ const Login = () => {
 	const { handleLogin, loading } = useAuth();
 	const navigate = useNavigate();
 
+	console.log("About to login", apiUrl);
+
 	const login = useGoogleLogin({
-		clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+		clientId: process.env.REACT_APP_CLIENT_ID,
 		auto_select: true,
 		onSuccess: async (tokenResponse) => {
 			try {
@@ -35,6 +37,9 @@ const Login = () => {
 
 				const userId = loginResponse.data.userId;
 				const redirectUrl = new URLSearchParams(window.location.search).get("redirect") || "/";
+
+				console.log("Login Successful");
+
 				handleLogin(navigate, userId, tokenResponse.expires_in, redirectUrl);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);
