@@ -23,7 +23,7 @@ function Signature() {
 					<input id="signature-date" type="date" name="signatureDate" className="form-control" required />
 				</div>
 				<div className="form-group mt-3">
-					<label htmlFor="confirm-signature">
+					<label htmlFor="confirm-signature" style={{ display: "inline" }}>
 						<input
 							type="checkbox"
 							id="confirm-signature"
@@ -32,7 +32,7 @@ function Signature() {
 							required
 						/>{" "}
 						By checking this box, you agree that this is equivalent to a handwritten signature and that you accept our
-					</label>
+					</label>{" "}
 					<Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">
 						Privacy Policy
 					</Link>{" "}

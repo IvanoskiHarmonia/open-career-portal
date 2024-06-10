@@ -2,7 +2,7 @@ import { Degrees, ExperienceLevels, Locations } from "./constants/DropDownData";
 import { getJobByTitleOrDescription } from "../../../../../common/api/getJobs";
 import SearchDataList from "./datalists/SearchDataList";
 import DropDown from "./dropdowns/DropDown";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const SearchBar = ({ jobs, setJobs, setMessage }) => {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -12,10 +12,15 @@ const SearchBar = ({ jobs, setJobs, setMessage }) => {
 		remote: "Remote",
 		location: "Location",
 	});
+	const searchRef = useRef(null);
 
 	const handleSearch = (e) => {
 		const term = e.target.value;
 		setSearchTerm(term);
+		searchJobs(term);
+	};
+
+	const searchJobs = (term) => {
 		if (term === "") {
 			setJobs([]);
 			setMessage("");
@@ -32,6 +37,10 @@ const SearchBar = ({ jobs, setJobs, setMessage }) => {
 				console.error(error);
 				setMessage("No jobs found, here are some other jobs you might be interested in.");
 			});
+	};
+
+	const handleChange = (e) => {
+		searchRef.current = e.target;
 	};
 
 	const handleDropDown = (item, field) => {
@@ -98,8 +107,12 @@ const SearchBar = ({ jobs, setJobs, setMessage }) => {
 							handleSearch(e);
 						}
 					}}
+					onChange={handleChange}
 					placeholder="Software Developer, Marketing Manager, etc..."
 				/>
+				<button type="button" className="btn btn-outline-primary" onClick={() => searchJobs(searchRef.current.value)}>
+					Search
+				</button>
 				<SearchDataList />
 			</div>
 			<div className="input-group mb-2">
