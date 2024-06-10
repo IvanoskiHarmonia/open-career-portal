@@ -62,11 +62,9 @@ const Login = () => {
 										login();
 										console.log("Login button clicked");
 									}}
-									className="btn btn-outline-success d-flex align-items-center "
+									className="btn btn-outline-success d-flex align-items-center"
 								>
 									<IconBrandGoogle stroke={1} size="30" />
-									{/* Google */}
-									{/* <LogIn size={20} className="ms-1" /> */}
 								</button>
 							</div>
 						</div>
