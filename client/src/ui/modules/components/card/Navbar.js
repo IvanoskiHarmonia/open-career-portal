@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../../common/hooks/useAuth";
-import { LogOut, Moon, Sun } from "react-feather";
+import { LogOut, Moon, Sun, Home, List } from "react-feather";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Navbar = () => {
@@ -32,22 +32,32 @@ const Navbar = () => {
 					<div className="container">
 						<div className="d-flex justify-content-between align-items-center w-100">
 							<div className="d-flex">
-								<Link to="/" className="ms-3">
-									Home
-								</Link>
+								<OverlayTrigger placement="bottom" overlay={<Tooltip id="home-tooltip">Home</Tooltip>}>
+									<button className="btn btn-link text-decoration-none" aria-label="Home">
+										<Link to="/">
+											<Home />
+										</Link>
+									</button>
+								</OverlayTrigger>
 							</div>
 							<div className="d-flex align-items-center">
-								<Link to={`/user-applications/${userId}`} target="_blank" rel="noopener noreferrer" className="me-3">
-									Applications
-								</Link>
+								<OverlayTrigger placement="bottom" overlay={<Tooltip id="applications-tooltip">Applications</Tooltip>}>
+									<button className="btn btn-link text-decoration-none" aria-label="Applications">
+										<Link to={`/user-applications/${userId}`} target="_blank" rel="noopener noreferrer">
+											<List />
+										</Link>
+									</button>
+								</OverlayTrigger>
 								<OverlayTrigger placement="bottom" overlay={<Tooltip id="logout-tooltip">Click to logout</Tooltip>}>
 									<button className="btn btn-link text-decoration-none" onClick={handleLogout} aria-label="Logout">
 										<LogOut />
 									</button>
 								</OverlayTrigger>
-								<button className="btn btn-link text-decoration-none" onClick={toggleMode} aria-label="Toggle dark mode">
-									{darkMode ? <Moon /> : <Sun />}
-								</button>
+								<OverlayTrigger placement="bottom" overlay={<Tooltip id="mode-tooltip">Toggle mode</Tooltip>}>
+									<button className="btn btn-link text-decoration-none" onClick={toggleMode} aria-label="Toggle dark mode">
+										{darkMode ? <Moon /> : <Sun />}
+									</button>
+								</OverlayTrigger>
 							</div>
 						</div>
 					</div>

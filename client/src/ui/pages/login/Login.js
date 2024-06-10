@@ -3,7 +3,7 @@ import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../common/hooks/useAuth";
-import { LogIn } from "react-feather";
+import { IconBrandGoogle } from "@tabler/icons-react";
 import LoginPlaceholder from "./components/LoginPlaceholder";
 
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
@@ -55,17 +55,16 @@ const Login = () => {
 				<div className="col-8">
 					<div className="card my-5">
 						<div className="card-body shadow">
-							<h2 className="card-title text-center mb-2">Login Page</h2>
+							<h2 className="card-title text-center mb-2">Login</h2>
 							<div className="d-flex justify-content-center">
 								<button
 									onClick={() => {
 										login();
 										console.log("Login button clicked");
 									}}
-									className="btn btn-primary d-flex align-items-center"
+									className="btn btn-outline-success d-flex align-items-center"
 								>
-									Google
-									<LogIn size={20} className="ms-1" />
+									<IconBrandGoogle stroke={1} size="30" />
 								</button>
 							</div>
 						</div>

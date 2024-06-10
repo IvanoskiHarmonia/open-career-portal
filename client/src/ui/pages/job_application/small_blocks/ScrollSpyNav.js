@@ -15,7 +15,7 @@ const ScrollSpyNav = () => {
 				Job Description <FileText size={20} />
 			</button>
 			<Nav.Link href="#resume-coverletter">
-				Resume/Cover Letter <span className="badge bg-danger">2</span>
+				Resume/Cover Letter <span className="badge bg-danger">1</span>
 			</Nav.Link>
 			<Nav.Link href="#contact-info">
 				Contact Info <span className="badge bg-danger">9</span>

@@ -14,7 +14,8 @@ function InformationTruthfulness() {
 						aria-label="I certify that all the information provided is true"
 						required
 					/>{" "}
-					I certify that all the information provided in this application is true and complete to the best of my knowledge. <Required />
+					I certify that all the information provided in this application is true and complete to the best of my knowledge.
+					<Required />
 				</label>
 			</div>
 		</section>
