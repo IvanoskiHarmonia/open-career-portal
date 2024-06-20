@@ -1,5 +1,5 @@
 {
-	"name": "careers-portal",
+	"name": "open-careers-portal",
 	"version": "1.0.0",
 	"scripts": {
 		"start": "node server/index.js",
@@ -9,10 +9,14 @@
 		"test:client": "cd client && npx jest",
 		"client": "npm start --prefix client",
 		"server": "npm start --prefix server",
-		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"dev": "NODE_ENV=development npm-run-all -p start:mongo start:server start:client",
+		"start:mongo": "mongod --dbpath ~/data/db --config ~/mongodb.conf",
+		"start:server": "npm run server",
+		"start:client": "npm run client",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm install --prefix server && npm run build --prefix client"
 	},
 	"devDependencies": {
-		"concurrently": "^7.6.0"
+		"concurrently": "^7.6.0",
+		"npm-run-all": "^4.1.5"
 	}
 }
