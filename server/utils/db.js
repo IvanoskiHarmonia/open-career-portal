@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dbUrl = process.env.NODE_ENV === "production" ? process.env.MONGODB_CLOUD_URI : process.env.MONGODB_LOCAL_URI;
+const dbUrl = process.env.NODE_ENV === "development" ? process.env.MONGODB_LOCAL_URI : process.env.MONGODB_CLOUD_URI;
 
 const connectDB = async () => {
 	try {
