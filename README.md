@@ -34,7 +34,7 @@ cd open-career-portal
 
 A step by step series of examples that tell you how to get a development env running:
 
-1. **Set up both the server and the client**
+## **Set up both the server and the client**
 
 In the `root` directory, install dependencies for both the server and the client:
 
@@ -52,7 +52,11 @@ npm run install:client
 npm run install:server
 ```
 
-3. **Run the application**
+## Set up local MongoDB
+
+[Local installtaion](docs/INSTALL_LOCAL_MONGO.md)
+
+## **Run the application**
 
 In the root directory, run the following command:
 
@@ -60,7 +64,7 @@ In the root directory, run the following command:
 npm run dev
 ```
 
-## Running the tests
+### Running the tests
 
 Currently, the tests that are on the project do not cover the entire codebase. To run the tests, you can use the following command:
 
