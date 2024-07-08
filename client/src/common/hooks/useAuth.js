@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
 			window.removeEventListener("mousemove", resetIdleTimer);
 			window.removeEventListener("keypress", resetIdleTimer);
 		};
-	}, [handleLogout, validateSession, navigate, isAuthenticated]);
+	}, [handleLogout, validateSession]);
 
 	return (
 		<AuthContext.Provider value={{ isAuthenticated, userId, handleLogout, handleLogin, loading }}>{!loading && children}</AuthContext.Provider>
