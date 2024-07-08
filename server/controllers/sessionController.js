@@ -3,6 +3,10 @@ const User = require("../models/User");
 const validateSession = async (req, res) => {
 	const token = req.cookies.sessionToken;
 
+	if (process.env.NODE_ENV === "development") {
+		return res.send({ isValidSession: true, userId: "devUserId" });
+	}
+
 	if (!token) {
 		console.log("No token found in cookies");
 		return res.send({ isValidSession: false, message: "No token found in cookies" });

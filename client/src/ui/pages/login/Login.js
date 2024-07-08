@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import LoginPlaceholder from "./components/LoginPlaceholder";
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
 const Login = () => {
-	const { handleLogin, loading } = useAuth();
+	const { handleLogin, loading, isAuthenticated } = useAuth();
 	const navigate = useNavigate();
 
 	const login = useGoogleLogin({
@@ -45,8 +45,21 @@ const Login = () => {
 		},
 	});
 
+	useEffect(() => {
+		const env = process.env.REACT_APP_ENV;
+
+		if (env === "development" && !isAuthenticated) {
+			console.log("Logging in as devUserId");
+			handleLogin(navigate, "devUserId", 3600);
+		}
+	}, [isAuthenticated, handleLogin, navigate]);
+
 	if (loading) {
 		return <LoginPlaceholder />;
+	}
+
+	if (isAuthenticated) {
+		return null;
 	}
 
 	return (
