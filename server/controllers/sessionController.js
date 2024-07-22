@@ -3,8 +3,12 @@ const User = require("../models/User");
 const validateSession = async (req, res) => {
 	const token = req.cookies.sessionToken;
 
-	if (process.env.NODE_ENV === "development") {
-		return res.send({ isValidSession: true, userId: "devUserId" });
+	if (process.env.NODE_ENV === "development_user") {
+		return res.send({ isValidSession: true, userId: "devUserId", role: "user" });
+	}
+
+	if (process.env.NODE_ENV === "development_admin") {
+		return res.send({ isValidSession: true, userId: "devAdminId", role: "admin" });
 	}
 
 	if (!token) {
@@ -15,7 +19,7 @@ const validateSession = async (req, res) => {
 	try {
 		const user = await User.findOne({ token });
 		if (user && user.expiresAt > new Date().getTime()) {
-			return res.send({ isValidSession: true, userId: user.userId });
+			return res.send({ isValidSession: true, userId: user.userId, role: user.role });
 		} else {
 			console.log("Token expired or user not found");
 			return res.send({ isValidSession: false });

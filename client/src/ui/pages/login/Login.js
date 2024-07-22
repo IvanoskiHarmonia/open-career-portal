@@ -33,9 +33,10 @@ const Login = () => {
 				);
 
 				const userId = loginResponse.data.userId;
+				const role = loginResponse.data.role;
 				const redirectUrl = new URLSearchParams(window.location.search).get("redirect") || "/";
 
-				handleLogin(navigate, userId, tokenResponse.expires_in, redirectUrl);
+				handleLogin(navigate, userId, role, tokenResponse.expires_in, redirectUrl);
 			} catch (error) {
 				console.error("Failed to fetch user data or send to backend:", error);
 			}
@@ -48,9 +49,12 @@ const Login = () => {
 	useEffect(() => {
 		const env = process.env.REACT_APP_ENV;
 
-		if (env === "development" && !isAuthenticated) {
+		if (env === "development_user" && !isAuthenticated) {
 			console.log("Logging in as devUserId");
-			handleLogin(navigate, "devUserId", 3600);
+			handleLogin(navigate, "devUserId", "user", 3600);
+		} else if (env === "development_admin" && !isAuthenticated) {
+			console.log("Logging in as devAdminId");
+			handleLogin(navigate, "devAdminId", "admin", 3600);
 		}
 	}, [isAuthenticated, handleLogin, navigate]);
 
@@ -73,7 +77,6 @@ const Login = () => {
 								<button
 									onClick={() => {
 										login();
-										console.log("Login button clicked");
 									}}
 									className="btn btn-outline-success d-flex align-items-center"
 								>
