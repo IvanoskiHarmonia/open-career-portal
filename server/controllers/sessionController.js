@@ -1,7 +1,13 @@
 const User = require("../models/User");
+const ROLES = require("../utils/Roles");
 
 const validateSession = async (req, res) => {
 	const token = req.cookies.sessionToken;
+
+	if (token === "guest") {
+		const guestUserId = req.cookies.guestUserId;
+		return res.send({ isValidSession: true, userId: guestUserId, role: ROLES.GUEST });
+	}
 
 	if (process.env.NODE_ENV === "development_user") {
 		return res.send({ isValidSession: true, userId: "devUserId", role: "user" });
@@ -32,6 +38,10 @@ const validateSession = async (req, res) => {
 
 const logout = (req, res) => {
 	res.clearCookie("sessionToken");
+
+	if (req.cookies.guestUserId) {
+		res.clearCookie("guestUserId");
+	}
 
 	res.send({ message: "Logged out successfully!" });
 	console.log("User logged out");

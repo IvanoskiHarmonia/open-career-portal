@@ -49,7 +49,12 @@ const Navbar = () => {
 									</button>
 								</OverlayTrigger>
 								<OverlayTrigger placement="bottom" overlay={<Tooltip id="logout-tooltip">Click to logout</Tooltip>}>
-									<button className="btn btn-link text-decoration-none" onClick={handleLogout} aria-label="Logout">
+									<button
+										className="btn btn-link text-decoration-none"
+										onClick={handleLogout}
+										aria-label="Logout"
+										disabled={process.env.REACT_APP_ENV.includes("development")}
+									>
 										<LogOut />
 									</button>
 								</OverlayTrigger>

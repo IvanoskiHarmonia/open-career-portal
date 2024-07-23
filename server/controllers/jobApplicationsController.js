@@ -27,6 +27,9 @@ const getUserApplications = async (req, res) => {
 };
 
 const createJobApplication = async (req, res) => {
+	if (req.body.userId === "guest") {
+		return res.status(403).send({ message: "Guest users cannot apply for jobs" });
+	}
 	upload.fields([
 		{ name: "resume", maxCount: 1 },
 		{ name: "coverLetter", maxCount: 1 },

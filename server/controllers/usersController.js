@@ -5,6 +5,19 @@ const ROLES = require("../utils/Roles");
 const login = async (req, res) => {
 	const { email, token, expiresAt } = req.body;
 
+	if (email === "guest@guestlogin.com") {
+		console.log("Logging in as guest user");
+		const guestUserId = uuidv4() + "-guest";
+		const tokenExpiration = new Date().getTime() + 3600 * 1000;
+		res.cookie("sessionToken", "guest", { httpOnly: true, expires: new Date(tokenExpiration) });
+		res.cookie("guestUserId", guestUserId, { expires: new Date(tokenExpiration) });
+		return res.send({ message: "Guest user logged in successfully!", userId: guestUserId, role: ROLES.GUEST });
+	}
+
+	if (!email || !token || !expiresAt) {
+		return res.status(400).send({ message: "Missing required fields" });
+	}
+
 	try {
 		let user = await User.findOne({ email });
 		if (!user) {

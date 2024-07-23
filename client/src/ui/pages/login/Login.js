@@ -3,8 +3,9 @@ import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../common/hooks/useAuth";
-import { IconBrandGoogle } from "@tabler/icons-react";
+import { IconBrandGoogle, IconUserCircle } from "@tabler/icons-react";
 import LoginPlaceholder from "./components/LoginPlaceholder";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
@@ -46,6 +47,22 @@ const Login = () => {
 		},
 	});
 
+	const loginAsGuest = async () => {
+		const loginResponse = await axios.post(
+			`${apiUrl}/api/users/login`,
+			{
+				token: "guest",
+				expiresAt: new Date().getTime() + 3600 * 1000,
+				email: "guest@guestlogin.com",
+			},
+			{ withCredentials: true }
+		);
+
+		const guestUserId = loginResponse.data.userId;
+		const role = loginResponse.data.role;
+		handleLogin(navigate, guestUserId, role, loginResponse.expires_in, "/");
+	};
+
 	useEffect(() => {
 		const env = process.env.REACT_APP_ENV;
 
@@ -55,6 +72,10 @@ const Login = () => {
 		} else if (env === "development_admin" && !isAuthenticated) {
 			console.log("Logging in as devAdminId");
 			handleLogin(navigate, "devAdminId", "admin", 3600);
+		}
+
+		if (isAuthenticated) {
+			navigate("/");
 		}
 	}, [isAuthenticated, handleLogin, navigate]);
 
@@ -74,14 +95,16 @@ const Login = () => {
 						<div className="card-body shadow">
 							<h2 className="card-title text-center mb-2">Login</h2>
 							<div className="d-flex justify-content-center">
-								<button
-									onClick={() => {
-										login();
-									}}
-									className="btn btn-outline-success d-flex align-items-center"
-								>
-									<IconBrandGoogle stroke={1} size="30" />
-								</button>
+								<OverlayTrigger placement="bottom" overlay={<Tooltip id="google-login-tooltip">Google Login</Tooltip>}>
+									<button onClick={login} className="btn btn-outline-success d-flex align-items-center">
+										<IconBrandGoogle stroke={1} size="30" />
+									</button>
+								</OverlayTrigger>
+								<OverlayTrigger placement="bottom" overlay={<Tooltip id="guest-login-tooltip">Guest Login</Tooltip>}>
+									<button onClick={loginAsGuest} className="btn btn-outline-light d-flex align-items-center ms-2">
+										<IconUserCircle stroke={1} size="30" />
+									</button>
+								</OverlayTrigger>
 							</div>
 						</div>
 					</div>
