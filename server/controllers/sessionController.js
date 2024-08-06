@@ -1,10 +1,20 @@
 const User = require("../models/User");
+const ROLES = require("../utils/Roles");
 
 const validateSession = async (req, res) => {
 	const token = req.cookies.sessionToken;
 
-	if (process.env.NODE_ENV === "development") {
-		return res.send({ isValidSession: true, userId: "devUserId" });
+	if (token === "guest") {
+		const guestUserId = req.cookies.guestUserId;
+		return res.send({ isValidSession: true, userId: guestUserId, role: ROLES.GUEST });
+	}
+
+	if (process.env.NODE_ENV === "development_user") {
+		return res.send({ isValidSession: true, userId: "devUserId", role: "user" });
+	}
+
+	if (process.env.NODE_ENV === "development_admin") {
+		return res.send({ isValidSession: true, userId: "devAdminId", role: "admin" });
 	}
 
 	if (!token) {
@@ -15,7 +25,7 @@ const validateSession = async (req, res) => {
 	try {
 		const user = await User.findOne({ token });
 		if (user && user.expiresAt > new Date().getTime()) {
-			return res.send({ isValidSession: true, userId: user.userId });
+			return res.send({ isValidSession: true, userId: user.userId, role: user.role });
 		} else {
 			console.log("Token expired or user not found");
 			return res.send({ isValidSession: false });
@@ -28,6 +38,10 @@ const validateSession = async (req, res) => {
 
 const logout = (req, res) => {
 	res.clearCookie("sessionToken");
+
+	if (req.cookies.guestUserId) {
+		res.clearCookie("guestUserId");
+	}
 
 	res.send({ message: "Logged out successfully!" });
 	console.log("User logged out");

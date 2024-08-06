@@ -11,6 +11,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [userId, setUserId] = useState(null);
+	const [role, setRole] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -28,11 +29,13 @@ export const AuthProvider = ({ children }) => {
 				console.log("Session is valid");
 				setIsAuthenticated(true);
 				setUserId(response.data.userId);
+				setRole(response.data.role);
 				localStorage.setItem("tokenExpiry", Date.now() + response.data.expiresIn * 1001);
 			} else {
 				console.log("Session is not valid");
 				setIsAuthenticated(false);
 				setUserId(null);
+				setRole(null);
 				const redirectPath = window.location.pathname === "/login" ? "/" : window.location.pathname;
 				navigate(`/login?redirect=${encodeURIComponent(redirectPath)}`);
 			}
@@ -40,6 +43,7 @@ export const AuthProvider = ({ children }) => {
 			console.error("Failed to validate session:", error);
 			setIsAuthenticated(false);
 			setUserId(null);
+			setRole(null);
 			const redirectPath = window.location.pathname === "/login" ? "/" : window.location.pathname;
 			navigate(`/login?redirect=${encodeURIComponent(redirectPath)}`);
 		} finally {
@@ -53,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 			await axios.post(`${apiUrl}/api/session/logout`, {}, { withCredentials: true });
 			setIsAuthenticated(false);
 			setUserId(null);
-			localStorage.removeItem("userId");
+			setRole(null);
 			localStorage.removeItem("tokenExpiry");
 			navigate("/login");
 			console.log("Logout successful");
@@ -62,9 +66,10 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, [navigate]);
 
-	const handleLogin = (navigate, userId, expiresIn, redirectURL = "/") => {
+	const handleLogin = (navigate, userId, role, expiresIn, redirectURL = "/") => {
 		setIsAuthenticated(true);
 		setUserId(userId);
+		setRole(role);
 		localStorage.setItem("tokenExpiry", Date.now() + expiresIn * 1000);
 		console.log(`Navigating to ${redirectURL}`);
 		navigate(redirectURL);
@@ -94,6 +99,8 @@ export const AuthProvider = ({ children }) => {
 	}, [handleLogout, validateSession]);
 
 	return (
-		<AuthContext.Provider value={{ isAuthenticated, userId, handleLogout, handleLogin, loading }}>{!loading && children}</AuthContext.Provider>
+		<AuthContext.Provider value={{ isAuthenticated, userId, role, handleLogout, handleLogin, loading }}>
+			{!loading && children}
+		</AuthContext.Provider>
 	);
 };

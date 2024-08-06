@@ -10,6 +10,7 @@ import Candidate from "./pages/candidate/Candidate";
 import TermsOfService from "./pages/static_pages/components/TermsOfService";
 import PrivacyPolicy from "./pages/static_pages/components/PrivacyPolicy";
 import Footer from "./modules/components/card/Footer/Footer";
+import NotFound from "./modules/components/utils/NotFound";
 
 function App() {
 	return (
@@ -19,10 +20,11 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/terms-of-service" element={<TermsOfService />} />
 				<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+				<Route path="*" element={<NotFound />} />
 				<Route
 					path="/"
 					element={
-						<ProtectedRoute>
+						<ProtectedRoute accessRole={["user", "admin", "guest"]}>
 							<Careers />
 						</ProtectedRoute>
 					}
@@ -30,7 +32,7 @@ function App() {
 				<Route
 					path="/careers/:jobId"
 					element={
-						<ProtectedRoute>
+						<ProtectedRoute accessRole={["user", "admin", "guest"]}>
 							<JobDetailsScreen />
 						</ProtectedRoute>
 					}
@@ -38,7 +40,7 @@ function App() {
 				<Route
 					path="/careers/apply/:jobId"
 					element={
-						<ProtectedRoute>
+						<ProtectedRoute accessRole={["user", "admin", "guest"]}>
 							<JobApplication />
 						</ProtectedRoute>
 					}
@@ -46,8 +48,16 @@ function App() {
 				<Route
 					path="/user-applications/:userId"
 					element={
-						<ProtectedRoute>
+						<ProtectedRoute accessRole={["user", "admin", "guest"]}>
 							<Candidate />
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/admin"
+					element={
+						<ProtectedRoute accessRole={["admin"]}>
+							<p>Admin</p>
 						</ProtectedRoute>
 					}
 				/>

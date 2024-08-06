@@ -25,7 +25,7 @@ const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
 const JobFields = ({ job }) => {
 	const navigate = useNavigate();
-	const { userId } = useAuth();
+	const { userId, role } = useAuth();
 	const [initialData, setInitialData] = useState([]);
 
 	const employementHistoryRef = useRef(null);
@@ -123,9 +123,12 @@ const JobFields = ({ job }) => {
 
 					<Signature />
 
-					<button type="submit" className="btn btn-primary mt-4">
-						Submit Application <Send className="ms-1" />
-					</button>
+					{role !== "user" ||
+						(role !== "employee" && (
+							<button type="submit" className="btn btn-primary mt-4">
+								Submit Application <Send className="ms-1" />
+							</button>
+						))}
 				</form>
 			</div>
 		</>

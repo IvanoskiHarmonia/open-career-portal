@@ -2,11 +2,28 @@
 
 This project provides a robust web-based platform for companies to host their own career pages, allowing users to browse job listings and apply directly from the website.
 
+## Table of Contents
+
+-   [Features](#features)
+-   [Getting Started](#getting-started)
+-   [Prerequisites](#prerequisites)
+-   [Installing](#installing)
+    -   [Set up both the server and the client](#set-up-both-the-server-and-the-client)
+    -   [Running the tests](#running-the-tests)
+-   [Deployment](#deployment)
+-   [Built With](#built-with)
+-   [Contributing](#contributing)
+-   [License](#license)
+-   [Acknowledgments](#acknowledgments)
+
 ## Features
 
 -   Job listing with search functionality
 -   Individual job application pages
--   Responsive design
+-   User authentication (Google OAuth, Guest)
+-   Submitted Applications page
+-   Responsive design for mobile and desktop
+-   (RBAC) - Role-based access control (Admin, User, Guest)
 
 ## Getting Started
 
@@ -16,12 +33,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 🔴<span style="color:red">Tools you **MUST HAVE** to run this app.</span>🔴 Install the software and how to install them:
 
--   [Node.js](https://nodejs.org/en/download/) - Node version v22.2.0 - **Not LTS**, but the latest version.
+-   [Node.js](https://nodejs.org/en/download/) - Node version v22.2.0 - **LTS**.
 -   [Git](https://git-scm.com/downloads) - Version 2.42.1
--   [MongoDB](https://www.mongodb.com/try/download/community) - mongosh version 2.2.6
 -   [NPM](https://www.npmjs.com/get-npm) - npm version 10.7.0
--   [MongoDB Cloud](https://www.mongodb.com/lp/cloud/atlas/) - MongoDB Atlas register for free
--   [Google Cloud Platform](https://console.cloud.google.com/) - Google Cloud Platform register for free
+-   [MongoDB](https://www.mongodb.com/try/download/community) - mongosh version 2.2.6 - [Local installtaion](docs/INSTALL_LOCAL_MONGO.md)
+-   [MongoDB Cloud](https://www.mongodb.com/lp/cloud/atlas/) - MongoDB Atlas register for free account - **Optional**
 
 What things you need to install the software and how to install them:
 
@@ -34,7 +50,7 @@ cd open-career-portal
 
 A step by step series of examples that tell you how to get a development env running:
 
-## **Set up both the server and the client**
+#### **Set up both the server and the client**
 
 In the `root` directory, install dependencies for both the server and the client:
 
@@ -52,16 +68,30 @@ npm run install:client
 npm run install:server
 ```
 
-## Set up local MongoDB
+#### Set up local MongoDB
 
 [Local installtaion](docs/INSTALL_LOCAL_MONGO.md)
 
-## **Run the application**
+### **Run the application**
 
-In the root directory, run the following command:
+For testing production and development in general there's 3 ways to start the application:
+
+Production:
 
 ```bash
-npm run dev
+npm run prod
+```
+
+User development:
+
+```bash
+npm run dev:user
+```
+
+Admin development:
+
+```bash
+npm run dev:admin
 ```
 
 ### Running the tests
@@ -76,7 +106,7 @@ npm run test:client
 
 ## Deployment
 
-This project is not yet ready for deployment.
+This project is currently deployed on Heroku. The deployment process is done by Project Maintainers.
 
 ## Built With
 
@@ -95,4 +125,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 
 ## Acknowledgments
 
--   Hat tip to anyone whose code was used
+-   Starring this repository means a lot to us!
