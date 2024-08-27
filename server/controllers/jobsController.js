@@ -47,7 +47,7 @@ const createNewJob = async (req, res) => {
 	} = req.body;
 
 	const job = new Job({
-		id: Math.floor(Math.random() * 1000000),
+		id: Math.floor(Math.random() * 1000000000),
 		title,
 		company,
 		companyId,
@@ -131,4 +131,5 @@ module.exports = {
 	getJobById,
 	getJobsByTitleOrDescription,
 	createNewJob,
+	updateJob,
 };
