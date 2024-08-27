@@ -138,3 +138,6 @@ dist
 
 # MacOS files
 .DS_Store
+
+# Miscellaneous
+docs/Markdown_Issues.md

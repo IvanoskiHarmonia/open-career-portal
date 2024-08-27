@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+import { validateUserSession, logoutUser } from "../api/session";
 
 export const AuthContext = createContext();
 
@@ -24,13 +22,13 @@ export const AuthProvider = ({ children }) => {
 			return;
 		}
 		try {
-			const response = await axios.get(`${apiUrl}/api/session/validate`, { withCredentials: true });
-			if (response.data.isValidSession) {
+			const response = await validateUserSession();
+			if (response.isValidSession) {
 				console.log("Session is valid");
 				setIsAuthenticated(true);
-				setUserId(response.data.userId);
-				setRole(response.data.role);
-				localStorage.setItem("tokenExpiry", Date.now() + response.data.expiresIn * 1001);
+				setUserId(response.userId);
+				setRole(response.role);
+				localStorage.setItem("tokenExpiry", Date.now() + response.expiresIn * 1001);
 			} else {
 				console.log("Session is not valid");
 				setIsAuthenticated(false);
@@ -54,7 +52,7 @@ export const AuthProvider = ({ children }) => {
 	const handleLogout = useCallback(async () => {
 		console.log("Logging out...");
 		try {
-			await axios.post(`${apiUrl}/api/session/logout`, {}, { withCredentials: true });
+			await logoutUser();
 			setIsAuthenticated(false);
 			setUserId(null);
 			setRole(null);

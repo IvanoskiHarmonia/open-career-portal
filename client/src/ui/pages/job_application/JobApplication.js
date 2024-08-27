@@ -6,10 +6,8 @@ import StyleWrapper from "../../modules/components/wrappers/StyleWrapper";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../common/hooks/useAuth";
-import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
-
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+import { checkIfUserAppliedToJob } from "../../../common/api/jobsApplications";
 
 function JobApplication() {
 	const [job, setJob] = useState({});
@@ -22,11 +20,10 @@ function JobApplication() {
 	useEffect(() => {
 		const checlIfUserApplied = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/api/user-applications/check-application/` + userId + "/" + jobId);
-				if (response.status === 200) {
+				if (await checkIfUserAppliedToJob(userId, jobId)) {
 					setHasApplied(true);
 				} else {
-					console.error("Failed to check if user applied:", response.data);
+					console.error("User has not applied for this job.");
 				}
 			} catch (error) {
 				console.error("Failed to check if user applied:", error.response ? error.response.data : error.message);

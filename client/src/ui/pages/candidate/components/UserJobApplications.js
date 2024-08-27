@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useAuth } from "../../../../common/hooks/useAuth";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import UserJobApplicationsPlaceholder from "./UserJobApplicationsPlaceholder";
 import SpinnerOverlay from "../../../modules/components/loading/SpinnerOverlay";
-
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+import { getUserApplications } from "../../../../common/api/jobsApplications";
 
 const UserJobApplications = () => {
 	const { userId } = useAuth();
@@ -17,8 +15,8 @@ const UserJobApplications = () => {
 	useEffect(() => {
 		const fetchJobApplications = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/api/user-applications/user/${userId}`);
-				setJobApplications(response.data);
+				const response = await getUserApplications(userId);
+				setJobApplications(response);
 			} catch (error) {
 				console.error("Failed to fetch job applications:", error);
 			} finally {

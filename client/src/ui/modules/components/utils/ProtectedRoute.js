@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children, accessRole, ...rest }) => {
 				navigate("/");
 			}
 		}
-	}, [isAuthenticated, loading, location, navigate]);
+	}, [isAuthenticated, loading, location, navigate, accessRole, role]);
 
 	if (loading) return <div>Loading...</div>;
 

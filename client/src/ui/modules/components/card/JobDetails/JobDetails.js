@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowRight } from "react-feather";
 import JobApplicationDetails from "./JobApplicationDetails";
 import JobApplicationDetailsPlaceholder from "./JobApplicationDetailsPlaceholder";
 import { useAuth } from "../../../../../common/hooks/useAuth";
 import SpinnerOverlay from "../../loading/SpinnerOverlay";
+import { checkIfUserAppliedToJob } from "../../../../../common/api/jobsApplications";
+import { getJobById } from "../../../../../common/api/jobs";
 
 const JobDetails = ({ setJob, job, detailsScreen = false }) => {
 	const [loading, setLoading] = useState(true);
@@ -18,18 +19,16 @@ const JobDetails = ({ setJob, job, detailsScreen = false }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			if (detailsScreen) {
-				try {
-					const response = await axios.get(`/api/user-applications/check-application/${userId}/${jobId}`);
+				const response = await checkIfUserAppliedToJob(userId, jobId);
+				if (response) {
 					setDisableApplyButton(true);
-					setApplicationDetails(response.data);
-				} catch (error) {
-					console.error("Error fetching user application status:", error.response.data.message);
+					setApplicationDetails(response);
 				}
 			}
 
 			try {
-				const response = await axios.get(`/api/jobs/${jobId}`);
-				setJob(response.data.job);
+				const response = await getJobById(jobId);
+				setJob(response);
 			} catch (error) {
 				console.error("Error fetching job description:", error);
 			} finally {
@@ -57,7 +56,7 @@ const JobDetails = ({ setJob, job, detailsScreen = false }) => {
 
 	return (
 		<div className="col-lg-10 offset-lg-1">
-			{disableApplyButton && (
+			{disableApplyButton && applicationDetails && (
 				<div className="alert alert-info" role="alert">
 					You have already applied for this job on: <strong>{new Date(applicationDetails.createdAt).toDateString()}</strong>
 				</div>

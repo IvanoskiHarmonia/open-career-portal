@@ -7,8 +7,6 @@ import { IconBrandGoogle, IconUserCircle } from "@tabler/icons-react";
 import LoginPlaceholder from "./components/LoginPlaceholder";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
-
 const Login = () => {
 	const { handleLogin, loading, isAuthenticated } = useAuth();
 	const navigate = useNavigate();
@@ -24,7 +22,7 @@ const Login = () => {
 				});
 
 				const loginResponse = await axios.post(
-					`${apiUrl}/api/users/login`,
+					`/api/users/login`,
 					{
 						token: tokenResponse.access_token,
 						expiresAt: new Date().getTime() + tokenResponse.expires_in + 120 * 60 * 1000,
@@ -49,7 +47,7 @@ const Login = () => {
 
 	const loginAsGuest = async () => {
 		const loginResponse = await axios.post(
-			`${apiUrl}/api/users/login`,
+			`/api/users/login`,
 			{
 				token: "guest",
 				expiresAt: new Date().getTime() + 3600 * 1000,

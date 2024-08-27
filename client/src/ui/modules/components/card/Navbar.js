@@ -42,11 +42,11 @@ const Navbar = () => {
 							</div>
 							<div className="d-flex align-items-center">
 								<OverlayTrigger placement="bottom" overlay={<Tooltip id="applications-tooltip">Applications</Tooltip>}>
-									<button className="btn btn-link text-decoration-none" aria-label="Applications">
-										<Link to={`/user-applications/${userId}`} target="_blank" rel="noopener noreferrer">
+									<Link to={`/user-applications/${userId}`}>
+										<button className="btn btn-link text-decoration-none" aria-label="Applications">
 											<List />
-										</Link>
-									</button>
+										</button>
+									</Link>
 								</OverlayTrigger>
 								<OverlayTrigger placement="bottom" overlay={<Tooltip id="logout-tooltip">Click to logout</Tooltip>}>
 									<button

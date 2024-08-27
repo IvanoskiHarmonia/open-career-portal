@@ -1,11 +1,10 @@
 import { Degrees, ExperienceLevels, Locations } from "./constants/DropDownData";
-import { getJobByTitleOrDescription } from "../../../../../common/api/getJobs";
+import { getJobByTitleOrDescription } from "../../../../../common/api/jobs";
 import SearchDataList from "./datalists/SearchDataList";
 import DropDown from "./dropdowns/DropDown";
 import { useState, useRef } from "react";
 
 const SearchBar = ({ jobs, setJobs, setMessage }) => {
-	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedFilters, setSelectedFilters] = useState({
 		education: "Degree",
 		experience_level: "Experience Levels",
@@ -15,9 +14,7 @@ const SearchBar = ({ jobs, setJobs, setMessage }) => {
 	const searchRef = useRef(null);
 
 	const handleSearch = (e) => {
-		const term = e.target.value;
-		setSearchTerm(term);
-		searchJobs(term);
+		searchJobs(e.target.value);
 	};
 
 	const searchJobs = (term) => {

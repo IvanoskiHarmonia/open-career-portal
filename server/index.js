@@ -23,6 +23,7 @@ app.use("/api/jobs", require("./routes/jobs"));
 app.use("/api/user-applications", require("./routes/jobApplications"));
 app.use("/api/session", require("./routes/session"));
 app.use("/api/users", require("./routes/users"));
+app.use("/api/company", require("./routes/company"));
 
 app.use(express.static(path.join(__dirname, "../client/build")));
 

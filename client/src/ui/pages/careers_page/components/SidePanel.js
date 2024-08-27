@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 
-import { getJobs } from "../../../../common/api/getJobs";
+import { getAllJobs } from "../../../../common/api/jobs";
 import JobCard from "../../../modules/components/card/JobCard/JobCard";
 import "./SidePanel.css";
 import JobCardPlaceholder from "../../../modules/components/card/JobCard/JobCardPlaceholder";
@@ -11,7 +11,7 @@ const SidePanel = ({ jobs, setJobs, message }) => {
 		data: jobsObject,
 		isLoading,
 		error,
-	} = useQuery("jobs", getJobs, {
+	} = useQuery("jobs", getAllJobs, {
 		retry: 3,
 		retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 30000),
 	});

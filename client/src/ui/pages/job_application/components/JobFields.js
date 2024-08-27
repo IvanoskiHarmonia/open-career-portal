@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import {
 	Resume,
 	Opportunity,
@@ -20,8 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../common/hooks/useAuth";
 import { Send } from "react-feather";
 import ScrollSpyNav from "../small_blocks/ScrollSpyNav";
-
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
+import { createJobApplication, getUserDetailsFromPreviousApplications } from "../../../../common/api/jobsApplications";
 
 const JobFields = ({ job }) => {
 	const navigate = useNavigate();
@@ -35,7 +33,7 @@ const JobFields = ({ job }) => {
 	useEffect(() => {
 		const fetchUserDetails = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/api/user-applications/user-details/` + userId);
+				const response = await getUserDetailsFromPreviousApplications(userId);
 				if (response.status === 200) {
 					setInitialData(response.data);
 				} else {
@@ -66,19 +64,11 @@ const JobFields = ({ job }) => {
 		formData.append("references", references);
 		formData.append("createdAt", new Date().toISOString());
 
-		try {
-			const response = await axios.post(`${apiUrl}/api/user-applications/create-application`, formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
-			if (response.status === 201) {
-				navigate("/user-applications/" + userId);
-			} else {
-				console.error("Failed to save job application:", response.data);
-			}
-		} catch (error) {
-			console.error("Failed to save job application:", error.response ? error.response.data : error.message);
+		const response = await createJobApplication(formData);
+		if (response.status === 201) {
+			navigate("/user-applications/" + userId);
+		} else {
+			console.error("Failed to save job application");
 		}
 	};
 

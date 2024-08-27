@@ -4,6 +4,7 @@ const jobSchema = new mongoose.Schema({
 	id: Number,
 	title: String,
 	company: String,
+	companyId: { type: String, required: true },
 	description: String,
 	date_created: Date,
 	date_updated: Date,
@@ -26,7 +27,6 @@ const jobSchema = new mongoose.Schema({
 	how_to_apply: String,
 });
 
-// Create a model
 const Job = mongoose.model("Job", jobSchema);
 
 module.exports = Job;
